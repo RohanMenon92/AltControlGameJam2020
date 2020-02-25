@@ -4,23 +4,19 @@ using UnityEngine;
 using System;
 using System.IO.Ports;
 
-enum ProcessSignals { 
-    C1,
-    C2
-}
-
 public class InputListener : MonoBehaviour
 {
     public string comPort;
     public int baudRate;
     public int timeout;
-    public float pingPerFrames;
+    public float pingPerMilliseconds;
+    public GameManager gameManager;
 
     SerialPort stream;
     // Start is called before the first frame update
     void Start()
     {
-        stream = new SerialPort("COM5", baudRate);
+        stream = new SerialPort(comPort, baudRate);
         stream.ReadTimeout = 10000;
         stream.Open();
     }
@@ -33,8 +29,9 @@ public class InputListener : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(Time.frameCount % pingPerFrames == 0)
+        if(Time.realtimeSinceStartup % pingPerMilliseconds == 0)
         {
+            Debug.Log("Called");
             WriteToArduino();
             StartCoroutine
             (
@@ -47,53 +44,73 @@ public class InputListener : MonoBehaviour
         }
     }
 
-    void OnGetValue(ProcessSignals signal, float val)
+    void OnGetValue(GameConstants.ProcessSignals signal, float val)
     {
-        switch(signal)
+        Debug.Log(signal.ToString() + " " + val);
+        switch (signal)
         {
-            case ProcessSignals.C1:
-                Debug.Log(signal.ToString() + " " + val);
+            case GameConstants.ProcessSignals.P1:
+                gameManager.UpdateThrustInput(val);
                 // Call control 1 with val
                 break;
 
-            case ProcessSignals.C2:
-                Debug.Log(signal.ToString() + " " + val);
+            case GameConstants.ProcessSignals.P2:
+                gameManager.UpdateRudderAngle(val);
                 // Call control 1 with val
                 break;
 
-            //case ProcessSignals.C3:
-            //    Debug.Log(signal.ToString() + " " + val);
-            //    // Call control 1 with val
-            //    break;
+            case GameConstants.ProcessSignals.P3:
+                gameManager.UpdateShieldAngle(val);
+                // Call control 1 with val
+                break;
 
-            //case ProcessSignals.C4:
-            //    Debug.Log(signal.ToString() + " " + val);
-            //    // Call control 1 with val
-            //    break;
+            case GameConstants.ProcessSignals.B1:
+                gameManager.UpdateRechargeButton(val == 1.0f);
+                // Call control 1 with val
+                break;
 
-            //case ProcessSignals.C5:
-            //    Debug.Log(signal.ToString() + " " + val);
-            //    // Call control 1 with val
-            //    break;
+            case GameConstants.ProcessSignals.B2:
+                gameManager.UpdateFireButton(val == 1.0f);
+                // Call control 1 with val
+                break;
+
+            case GameConstants.ProcessSignals.B3:
+                gameManager.UpdateShieldButton(val == 1.0f);
+                // Call control 1 with val
+                break;
+
+                //case ProcessSignals.C3:
+                //    Debug.Log(signal.ToString() + " " + val);
+                //    // Call control 1 with val
+                //    break;
+
+                //case ProcessSignals.C4:
+                //    Debug.Log(signal.ToString() + " " + val);
+                //    // Call control 1 with val
+                //    break;
+
+                //case ProcessSignals.C5:
+                //    Debug.Log(signal.ToString() + " " + val);
+                //    // Call control 1 with val
+                //    break;
 
         }
     }
 
     public void ProcessInput(string input)
     {
-        input = input.TrimEnd('}').TrimStart('{');
         string[] sentValues = input.Split('&');
         int i = 0;
         foreach (string val in sentValues)
         {
             if(val != "")
             {
-                OnGetValue((ProcessSignals)i, float.Parse(val));
+                OnGetValue((GameConstants.ProcessSignals)i, float.Parse(val));
                 i++;
             }
         }
 
-        var controlValues = Enum.GetValues(typeof(ProcessSignals));
+        var controlValues = Enum.GetValues(typeof(GameConstants.ProcessSignals));
     }
 
     public void WriteToArduino()
