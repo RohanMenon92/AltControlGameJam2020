@@ -24,6 +24,9 @@ public class GameConstants
     public static int NormalBulletPoolSize = 100;
     public static int ShotgunBulletPoolSize = 50;
     public static int LaserBulletPoolSize = 10;
+    public static float maxHealth = 100;
+    public static float maxEnergy = 100;
+
     // Start is called before the first frame update
 
 }
