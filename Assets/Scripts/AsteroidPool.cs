@@ -9,6 +9,7 @@ public class AsteroidPool : MonoBehaviour
     public int numOfAsteroids;
     public float spawnTime;
 
+
     public List<Asteroid> asteroidPool;
     void Start()
     {
@@ -24,5 +25,10 @@ public class AsteroidPool : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void spawnNewAsteroid()
+    {
+
     }
 }

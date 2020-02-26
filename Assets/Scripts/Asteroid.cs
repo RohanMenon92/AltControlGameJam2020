@@ -15,4 +15,9 @@ public class Asteroid : MonoBehaviour
     {
         
     }
+
+    public void OnHit()
+    {
+
+    }
 }
