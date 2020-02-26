@@ -36,6 +36,11 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            FireCannons();
+        }
+
         // 359 degrees because we want to limit rotation parameters to the potentiometer
         // Rotate Ship
         transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, currRudderAngle * 359, 0f), Time.deltaTime);
@@ -70,10 +75,46 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyShip"))
         {
+            // Ramming logic
+        }
+        // HitLogic
+        LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
+        ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
+        BulletScript normalBullet = collision.gameObject.GetComponent<BulletScript>();
 
+        if (laserBullet != null && laserBullet.isEnemyShot)
+        {
+            HitByLaser(laserBullet.damage);
+            laserBullet.OnHit();
+        }
+        else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
+        {
+            HitByShotgun(shotgunBullet.damage);
+            shotgunBullet.OnHit();
+        }
+        else if (normalBullet != null && normalBullet.isEnemyShot)
+        {
+            HitByBullet(normalBullet.damage);
+            normalBullet.OnHit();
         }
     }
 
+    private void HitByBullet(float damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HitByShotgun(float damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HitByLaser(float damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    // BUTTON PRESSES
     internal void OnShield()
     {
         throw new NotImplementedException();
@@ -86,6 +127,6 @@ public class PlayerScript : MonoBehaviour
 
     internal void OnFire()
     {
-        throw new NotImplementedException();
+        FireCannons();
     }
 }

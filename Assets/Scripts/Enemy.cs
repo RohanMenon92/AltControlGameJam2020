@@ -32,32 +32,39 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<LaserBulletScript>() != null)
+        LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
+        ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
+        BulletScript normalBullet = collision.gameObject.GetComponent<BulletScript>();
+
+        if (laserBullet != null && !laserBullet.isEnemyShot)
         {
-            HitByLaser();
+            HitByLaser(laserBullet.damage);
+            laserBullet.OnHit();
         }
-        if (collision.gameObject.GetComponent<ShotgunBulletScript>() != null)
+        else if (shotgunBullet != null && !shotgunBullet.isEnemyShot)
         {
-            HitByShotgun();
+            HitByShotgun(shotgunBullet.damage);
+            shotgunBullet.OnHit();
         }
-        if (collision.gameObject.GetComponent<BulletScript>() != null)
+        else if (normalBullet != null && !normalBullet.isEnemyShot)
         {
-            HitByBullet();
+            HitByBullet(normalBullet.damage);
+            normalBullet.OnHit();
         }
 
     }
 
-    void HitByLaser()
+    void HitByLaser(float damage)
     {
 
     }
 
-    void HitByShotgun()
+    void HitByShotgun(float damage)
     {
 
     }
 
-    void HitByBullet()
+    void HitByBullet(float damage)
     {
 
     }

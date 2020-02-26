@@ -68,19 +68,19 @@ public class GameManager : MonoBehaviour
     }
 
     // Returning Normal Bullet to pool
-    public void ReturnBulletToPool(GameObject bulletToStore)
+    public void ReturnBulletToPool(GameObject bulletToStore, GameConstants.GunTypes bulletType)
     {
-        if(bulletToStore.GetComponent<BulletScript>() != null)
+        if(bulletType == GameConstants.GunTypes.MachineGun)
         {
             // Return to normal bullet pool
             bulletToStore.transform.SetParent(unusedBulletPool);
         }
-        else if (bulletToStore.GetComponent<ShotgunBulletScript>() != null)
+        else if (bulletType == GameConstants.GunTypes.ShotGun)
         {
             // Return to shotgun bullet pool
             bulletToStore.transform.SetParent(unusedShotgunBulletPool);
         }
-        else if (bulletToStore.GetComponent<LaserBulletScript>() != null)
+        else if (bulletType == GameConstants.GunTypes.LaserGun)
         {
             // Return to laser bullet pool
             bulletToStore.transform.SetParent(unusedLaserBulletPool);

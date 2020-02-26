@@ -1,48 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3031276405219244168
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3031276405219244169}
-  - component: {fileID: 3031276405219244182}
-  m_Layer: 0
-  m_Name: GunPort1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3031276405219244169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031276405219244168}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.123, y: 0, z: 0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4595426708502807517}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3031276405219244182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031276405219244168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25aba3092d757784b92d8942d9d32862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3031276405639178031
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,8 +53,10 @@ MonoBehaviour:
   shipSpeed: 2
   shipShield: {fileID: 4595426708502807517}
   gunPorts:
-  - {fileID: 3031276405219244182}
-  - {fileID: 3031276407168163963}
+  - {fileID: 5807523699933695308}
+  - {fileID: 7208927294323122479}
+  health: 0
+  energy: 0
 --- !u!54 &3031276405639178026
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -297,49 +256,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
---- !u!1 &3031276407168163965
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3031276407168163962}
-  - component: {fileID: 3031276407168163963}
-  m_Layer: 0
-  m_Name: GunPort2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3031276407168163962
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031276407168163965}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.123, y: 0, z: 0.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4595426708502807517}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3031276407168163963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3031276407168163965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25aba3092d757784b92d8942d9d32862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &751472242950134416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,3 +337,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 751472242950134416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5807523699933695308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6554351605665109980, guid: f705ddca3d72c4b48971ced20fe59aaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 751472242950134416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25aba3092d757784b92d8942d9d32862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7208927294323122479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7955192215790468031, guid: f705ddca3d72c4b48971ced20fe59aaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 751472242950134416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25aba3092d757784b92d8942d9d32862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

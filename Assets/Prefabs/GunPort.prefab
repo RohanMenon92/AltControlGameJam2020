@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1204421978744333728
+--- !u!1 &382819334340714614
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2595431803396503420}
-  - component: {fileID: 9194528160171010899}
+  - component: {fileID: 382819334340714615}
+  - component: {fileID: 382819334340714600}
   m_Layer: 0
-  m_Name: LaserBullet
-  m_TagString: Bullet
+  m_Name: GunPort1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2595431803396503420
+--- !u!4 &382819334340714615
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204421978744333728}
+  m_GameObject: {fileID: 382819334340714614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: -0.123, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9194528160171010899
+--- !u!114 &382819334340714600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204421978744333728}
+  m_GameObject: {fileID: 382819334340714614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb33fb50b8fe0a44d9d3a1660df1511a, type: 3}
+  m_Script: {fileID: 11500000, guid: 25aba3092d757784b92d8942d9d32862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemyShot: 0
-  damage: 20
-  bulletSpeed: 1
+  gunType: 0
