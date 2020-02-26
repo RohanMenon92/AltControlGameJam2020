@@ -441,6 +441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 0
   speed: 5
+  gunPorts:
+  - {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d, type: 3}
 --- !u!136 &6463494492804788816
 CapsuleCollider:
   m_ObjectHideFlags: 0

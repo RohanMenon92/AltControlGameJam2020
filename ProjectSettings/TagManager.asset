@@ -8,6 +8,7 @@ TagManager:
   - EnemyShip
   - Asteroid
   - Volume
+  - Bullet
   layers:
   - Default
   - TransparentFX
