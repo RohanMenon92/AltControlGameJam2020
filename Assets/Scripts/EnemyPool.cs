@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyPool : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs;
+    public Transform player;
     public int numOfEnemies;
     public float spawnTime;
     public float radius;
@@ -12,9 +13,10 @@ public class EnemyPool : MonoBehaviour
     public List<GameObject> enemyPool;
     void Start()
     {
+        player = player.GetComponent<Transform>();
         for (int i = 0; i < numOfEnemies; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 1)], transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 2)], transform);
             enemyPool.Add(newEnemy);
             newEnemy.SetActive(false);
         }
@@ -35,17 +37,18 @@ public class EnemyPool : MonoBehaviour
         // If all enemies are inactive
         if (allInactive)
         {
-            int randPosition = Random.Range(0, 6);
+            int randPosition = Random.Range(numOfEnemies, numOfEnemies*2);
             for (int i = 0; i < numOfEnemies; i++)
             {
-                float angle = i * Mathf.PI * 2 / numOfEnemies*randPosition;
+                float angle = i * Mathf.PI * 2 / randPosition;
                 float x = Mathf.Cos(angle) * radius;
                 float z = Mathf.Sin(angle) * radius;
-                Vector3 pos = transform.position + new Vector3(x, 0, z);
+                Vector3 pos = player.position + new Vector3(x, 0, z);
                 float angleDegrees = -angle * Mathf.Rad2Deg;
                 Quaternion rot = Quaternion.Euler(0, angleDegrees, 0);
                 enemyPool[i].transform.position = pos;
                 enemyPool[i].transform.rotation = rot;
+                enemyPool[i].transform.Rotate(0, -90, 0);
                 enemyPool[i].SetActive(true);
             }
         }
