@@ -20,7 +20,7 @@ public class GunPort : MonoBehaviour
         
     }
 
-    public void Fire()
+    public void Fire(bool isEnemy)
     {
         GameObject newBullet = gameManager.GetBullet(gunType, transform);
         switch(gunType) {

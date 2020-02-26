@@ -6,7 +6,9 @@ public class Enemy : MonoBehaviour
 {
     PlayerScript player;
     public float enemyHealth;
-    public float speed; 
+    public float speed;
+
+    public List<GunPort> gunPorts;
 
     private void Start()
     {
@@ -20,9 +22,10 @@ public class Enemy : MonoBehaviour
 
     public void Move()
     {
+        transform.LookAt(player.transform.position);
         if (Vector3.Distance(player.transform.position, transform.position) > 15f)
         {
-            transform.LookAt(player.transform.position);
+           
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
@@ -57,5 +60,13 @@ public class Enemy : MonoBehaviour
     void HitByBullet()
     {
 
+    }
+
+    void FireCannons()
+    {
+        foreach (GunPort gun in gunPorts)
+        {
+            gun.Fire(true);
+        }
     }
 }
