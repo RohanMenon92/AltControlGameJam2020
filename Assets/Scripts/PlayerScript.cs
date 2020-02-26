@@ -23,11 +23,14 @@ public class PlayerScript : MonoBehaviour
 
     public List<GunPort> gunPorts;
 
+    public float health, energy;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = GameConstants.maxHealth;
+        energy = GameConstants.maxEnergy;
     }
 
     // Update is called once per frame
