@@ -402,9 +402,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1430558448647887449}
+  - component: {fileID: 7758667827482718249}
+  - component: {fileID: 6463494492804788816}
   m_Layer: 0
   m_Name: Alitheia
-  m_TagString: Untagged
+  m_TagString: EnemyShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,6 +426,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7758667827482718249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702446253115025482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eea6dcc6ed98254e8368ae8115f3828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &6463494492804788816
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702446253115025482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 241.33725
+  m_Height: 498.03687
+  m_Direction: 2
+  m_Center: {x: -0.20730591, y: 0, z: 1.0646362}
 --- !u!1 &3021207407812931833
 GameObject:
   m_ObjectHideFlags: 0
