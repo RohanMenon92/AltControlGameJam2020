@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public Transform unusedShotgunBulletPool;
     public Transform unusedLaserBulletPool;
 
+    public Transform worldBullets;
+
+
     // public player
     PlayerScript player;
 
@@ -61,8 +64,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        bulletObject.transform.SetParent(gunPort);
-        bulletObject.transform.localPosition = Vector3.zero;
+        bulletObject.transform.SetParent(worldBullets);
+        bulletObject.transform.position = gunPort.transform.position;
         // Return bullet and let GunPort handle how to fire and set initial velocities
         return bulletObject;
     }
