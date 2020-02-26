@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject shotgunBulletPrefab;
+    public GameObject bulletPrefab;
+    public GameObject laserBulletPrefab;
+
+    public Transform unusedBulletPool;
+    public Transform unusedShotgunBulletPool;
+    public Transform unusedLaserBulletPool;
 
     // public player
-    public PlayerScript player;
+    PlayerScript player;
 
     bool isRechargePressed;
     bool isFiring;
@@ -16,7 +23,71 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Instantiate bullet pools in start
+        for (int i = 0; i <= GameConstants.NormalBulletPoolSize; i++)
+        {
+            GameObject newBullet = Instantiate(bulletPrefab, unusedBulletPool);
+            newBullet.SetActive(false);
+        }
+        for (int i = 0; i <= GameConstants.ShotgunBulletPoolSize; i++)
+        {
+            GameObject newBullet = Instantiate(shotgunBulletPrefab, unusedShotgunBulletPool);
+            newBullet.SetActive(false);
+        }
+        for (int i = 0; i <= GameConstants.LaserBulletPoolSize; i++)
+        {
+            GameObject newBullet = Instantiate(laserBulletPrefab, unusedLaserBulletPool);
+            newBullet.SetActive(false);
+        }
+
+        player = FindObjectOfType<PlayerScript>();
+    }
+
+    public GameObject GetBullet(GameConstants.GunTypes gunType, Transform gunPort)
+    {
+        GameObject bulletObject = null;
+        // Get Bullet From pool and return it
+        switch (gunType)
+        {
+            // Get First Child, set parent to gunport (to remove from respective pool)
+            case GameConstants.GunTypes.MachineGun:
+                bulletObject = unusedBulletPool.GetComponentInChildren<BulletScript>(true).gameObject;
+                break;
+            case GameConstants.GunTypes.ShotGun:
+                bulletObject = unusedShotgunBulletPool.GetComponentInChildren<ShotgunBulletScript>(true).gameObject;
+                break;
+            case GameConstants.GunTypes.LaserGun:
+                bulletObject = unusedShotgunBulletPool.GetComponentInChildren<LaserBulletScript>(true).gameObject;
+                break;
+        }
+
+        bulletObject.transform.SetParent(gunPort);
+        bulletObject.transform.localPosition = Vector3.zero;
+        // Return bullet and let GunPort handle how to fire and set initial velocities
+        return bulletObject;
+    }
+
+    // Returning Normal Bullet to pool
+    public void ReturnBulletToPool(GameObject bulletToStore)
+    {
+        if(bulletToStore.GetComponent<BulletScript>() != null)
+        {
+            // Return to normal bullet pool
+            bulletToStore.transform.SetParent(unusedBulletPool);
+        }
+        else if (bulletToStore.GetComponent<ShotgunBulletScript>() != null)
+        {
+            // Return to shotgun bullet pool
+            bulletToStore.transform.SetParent(unusedShotgunBulletPool);
+        }
+        else if (bulletToStore.GetComponent<LaserBulletScript>() != null)
+        {
+            // Return to laser bullet pool
+            bulletToStore.transform.SetParent(unusedLaserBulletPool);
+        }
+        bulletToStore.gameObject.SetActive(false);
+        bulletToStore.transform.localScale = Vector3.one;
+        bulletToStore.transform.position = Vector3.zero;
     }
 
     // Update is called once per frame

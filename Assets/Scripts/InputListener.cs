@@ -10,12 +10,14 @@ public class InputListener : MonoBehaviour
     public int baudRate;
     public int timeout;
     public float pingPerFrames;
-    public GameManager gameManager;
+    
+    GameManager gameManager;
 
     SerialPort stream;
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         stream = new SerialPort(comPort, baudRate);
         stream.ReadTimeout = 10000;
         stream.Open();
@@ -50,42 +52,42 @@ public class InputListener : MonoBehaviour
         //}
     }
 
-    void OnGetValue(GameConstants.ProcessSignals signal, float val)
+    void OnGetValue(GameConstants.InputSignals signal, float val)
     {
         Debug.Log(signal.ToString() + " " + val);
         switch (signal)
         {
-            case GameConstants.ProcessSignals.P1:
+            case GameConstants.InputSignals.P1:
                 gameManager.UpdateThrustInput(val);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.P2:
+            case GameConstants.InputSignals.P2:
                 gameManager.UpdateRudderAngle(val);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.P3:
+            case GameConstants.InputSignals.P3:
                 gameManager.UpdateAimAngle(val);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.P4:
+            case GameConstants.InputSignals.P4:
                 gameManager.UpdatePreciseAimAngle(val);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.B1:
+            case GameConstants.InputSignals.B1:
                 gameManager.UpdateRechargeButton(val == 1.0f);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.B2:
+            case GameConstants.InputSignals.B2:
                 gameManager.UpdateFireButton(val == 1.0f);
                 // Call control 1 with val
                 break;
 
-            case GameConstants.ProcessSignals.B3:
+            case GameConstants.InputSignals.B3:
                 gameManager.UpdateShieldButton(val == 1.0f);
                 // Call control 1 with val
                 break;
@@ -116,12 +118,12 @@ public class InputListener : MonoBehaviour
         {
             if(val != "")
             {
-                OnGetValue((GameConstants.ProcessSignals)i, float.Parse(val));
+                OnGetValue((GameConstants.InputSignals)i, float.Parse(val));
                 i++;
             }
         }
 
-        var controlValues = Enum.GetValues(typeof(GameConstants.ProcessSignals));
+        var controlValues = Enum.GetValues(typeof(GameConstants.InputSignals));
     }
 
     public void RequestArduino()

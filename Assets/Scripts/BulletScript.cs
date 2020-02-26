@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunPort : MonoBehaviour
+public class BulletScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class GunPort : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void Fire()
-    {
-
     }
 }

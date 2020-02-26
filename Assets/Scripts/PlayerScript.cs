@@ -33,11 +33,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 359 degrees because we want to limit rotation parameters to the potentiometer
         // Rotate Ship
-        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, currRudderAngle * 358, 0f), Time.deltaTime);
+        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, currRudderAngle * 359, 0f), Time.deltaTime);
 
         // Rotate Ship by rate
-        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 358, 0f), Time.deltaTime);
+        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 359, 0f), Time.deltaTime);
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
