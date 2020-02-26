@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
     void Start()
     {
         
@@ -18,6 +18,15 @@ public class Asteroid : MonoBehaviour
 
     public void OnHit()
     {
+        // play explosion animation
+        
+    }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+
+        }
     }
 }
