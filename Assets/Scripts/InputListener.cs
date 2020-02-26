@@ -9,7 +9,7 @@ public class InputListener : MonoBehaviour
     public string comPort;
     public int baudRate;
     public int timeout;
-    public float pingPerMilliseconds;
+    public float pingPerFrames;
     public GameManager gameManager;
 
     SerialPort stream;
@@ -24,15 +24,11 @@ public class InputListener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if(Time.realtimeSinceStartup % pingPerMilliseconds == 0)
+        if(Time.frameCount % pingPerFrames == 0)
         {
-            Debug.Log("Called");
-            WriteToArduino();
+            // Ask for data
+            RequestArduino();
+            // Wait for recieveing data asynchronously
             StartCoroutine
             (
                 AsynchronousReadFromArduino
@@ -42,6 +38,16 @@ public class InputListener : MonoBehaviour
                 )
             );
         }
+    }
+
+    void FixedUpdate()
+    {
+        //Debug.Log(Time.realtimeSinceStartup % pingPerMilliseconds);
+        //if(Time.realtimeSinceStartup % pingPerMilliseconds == 0)
+        //{
+        //    Debug.Log("WriteToArduino");
+
+        //}
     }
 
     void OnGetValue(GameConstants.ProcessSignals signal, float val)
@@ -60,7 +66,12 @@ public class InputListener : MonoBehaviour
                 break;
 
             case GameConstants.ProcessSignals.P3:
-                gameManager.UpdateShieldAngle(val);
+                gameManager.UpdateAimAngle(val);
+                // Call control 1 with val
+                break;
+
+            case GameConstants.ProcessSignals.P4:
+                gameManager.UpdatePreciseAimAngle(val);
                 // Call control 1 with val
                 break;
 
@@ -113,7 +124,7 @@ public class InputListener : MonoBehaviour
         var controlValues = Enum.GetValues(typeof(GameConstants.ProcessSignals));
     }
 
-    public void WriteToArduino()
+    public void RequestArduino()
     {
         stream.Write("a");
         stream.BaseStream.Flush();

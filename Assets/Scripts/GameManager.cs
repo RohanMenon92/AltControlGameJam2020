@@ -12,8 +12,12 @@ public class GameManager : MonoBehaviour
     public float currRudderAngle;
 
     [Range(-0.5f, 0.5f)]
-    public float currShieldAngle;
+    public float currAimAngle;
 
+    [Range(-0.5f, 0.5f)]
+    public float currPreciseAimAngle;
+
+    public float shipSpeed;
 
     bool isRechargePressed;
     bool isFiring;
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
 //        ship.localEulerAngles = new Vector3(0f, ship.localEulerAngles.y + currRudderAngle * 200 * Time.deltaTime, 0f);
         ship.localEulerAngles = new Vector3(0f, currRudderAngle * 360, 0f);
 
-        shipShield.localEulerAngles = new Vector3(0f, currShieldAngle * 360, 0f);
+        shipShield.localEulerAngles = new Vector3(0f, currAimAngle * 360, 0f);
 
 
         if (currThrust > 0)
@@ -52,8 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        ship.GetComponent<Rigidbody>().AddForce(ship.forward * currThrust * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        ship.GetComponentInParent<Rigidbody>().AddForce(ship.forward * currThrust * shipSpeed, ForceMode.VelocityChange);
     }
 
     internal void UpdateThrustInput(float val)
@@ -66,61 +69,64 @@ public class GameManager : MonoBehaviour
         currRudderAngle = val - 0.5f;
     }
 
-    internal void UpdateShieldAngle(float val)
+    internal void UpdateAimAngle(float val)
     {
-        currShieldAngle = val;
+        currAimAngle = val - 0.5f;
+    }
+
+    internal void UpdatePreciseAimAngle(float val)
+    {
+        currPreciseAimAngle = val - 0.5f;
     }
 
     internal void UpdateRechargeButton(bool val)
     {
-        if(isRechargePressed && !val)
+        if (isRechargePressed != val)
         {
-            //OnRechargeUp();
-        } else if(!isRechargePressed && val)
-        {
-            OnRechargeActivate();
+            if (!isRechargePressed)
+            {
+                OnRechargeActivate();
+            }
         }
         isRechargePressed = val;
     }
 
     private void OnRechargeActivate()
     {
-        throw new NotImplementedException();
+        Debug.Log("RECHARGE ACTIVATED!!");
     }
 
     internal void UpdateFireButton(bool val)
     {
-        if (isFiring && !val)
+        if (isFiring != val)
         {
-            //OnFireUp();
+            if(!isFiring)
+            {
+                OnFireActivate();
+            }
         }
-        else if (!isFiring && val)
-        {
-            OnFireActivate();
-        }
-        isRechargePressed = val;
+        isFiring = val;
     }
 
     private void OnFireActivate()
     {
-        throw new NotImplementedException();
+        Debug.Log("FIRE ACTIVATED");
     }
 
     internal void UpdateShieldButton(bool val)
     {
-        if (isShielding && !val)
+        if (isShielding != val)
         {
-            //OnFireUp();
-        }
-        else if (!isShielding && val)
-        {
-            OnShieldActivate();
+            if (!isShielding)
+            {
+                OnShieldActivate();
+            }
         }
         isShielding = val;
     }
 
     private void OnShieldActivate()
     {
-        throw new NotImplementedException();
+        Debug.Log("SHIELD ACTIVATED");
     }
 }

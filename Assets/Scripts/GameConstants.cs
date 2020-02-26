@@ -9,6 +9,7 @@ public class GameConstants
         P1,
         P2,
         P3,
+        P4,
         B1,
         B2,
         B3
