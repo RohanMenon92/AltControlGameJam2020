@@ -63,6 +63,14 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyShip"))
+        {
+
+        }
+    }
+
     internal void OnShield()
     {
         throw new NotImplementedException();

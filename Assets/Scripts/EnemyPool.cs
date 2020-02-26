@@ -16,7 +16,7 @@ public class EnemyPool : MonoBehaviour
         player = player.GetComponent<Transform>();
         for (int i = 0; i < numOfEnemies; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefabs[Random.Range(0, 2)], transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[i%2], transform);
             enemyPool.Add(newEnemy);
             newEnemy.SetActive(false);
         }
