@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
+        player = FindObjectOfType<PlayerScript>();
     }
 
     private void Update()
