@@ -9,7 +9,9 @@ public class BulletScript : MonoBehaviour
     public bool isEnemyShot;
     public float damage;
     public float bulletSpeed;
+    public float aliveForSeconds = 2f;
 
+    float timeAlive;
     GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -17,10 +19,18 @@ public class BulletScript : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();   
     }
 
+    void CheckDeath(float time)
+    {
+        timeAlive += time;
+        if(timeAlive > aliveForSeconds)
+        {
+            ReturnBulletToPool();
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-
+        CheckDeath(Time.deltaTime);
     }
 
     void ReturnBulletToPool()

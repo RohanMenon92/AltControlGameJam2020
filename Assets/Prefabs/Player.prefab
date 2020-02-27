@@ -51,7 +51,7 @@ MonoBehaviour:
   currRudderAngle: 0
   currAimAngle: 0
   currPreciseAimAngle: 0
-  shipSpeed: 2
+  shipSpeed: 0.25
   shipShield: {fileID: 4595426708502807517}
   gunPorts:
   - {fileID: 5807523699933695308}

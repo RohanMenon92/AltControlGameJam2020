@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0048042717, g: 0.002133995, b: 0.006783073, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -657,7 +657,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 3.0092666e-36, y: 1.009742e-28, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -925,6 +925,7 @@ MonoBehaviour:
   unusedBulletPool: {fileID: 1337067247}
   unusedShotgunBulletPool: {fileID: 69533604}
   unusedLaserBulletPool: {fileID: 701120708}
+  worldBullets: {fileID: 0}
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0
@@ -1203,16 +1204,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
+    - target: {fileID: 857293083214174357, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
-      propertyPath: m_Name
-      value: Player
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
+    - target: {fileID: 3031276405639178028, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+      propertyPath: ship
+      value: 
+      objectReference: {fileID: 5006512736905357680}
     - target: {fileID: 3031276405639178029, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1268,20 +1269,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3031276405639178028, guid: ca461f98536c70243bd998cce66dd2cf,
+    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
-      propertyPath: ship
-      value: 
-      objectReference: {fileID: 5006512736905357680}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 5807523699933695308, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
       propertyPath: firePerSeconds
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7208927294323122479, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
       propertyPath: firePerSeconds
-      value: 2
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca461f98536c70243bd998cce66dd2cf, type: 3}
@@ -1408,12 +1414,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7026991617526232588, guid: 8f3e25e183838944db87964bae0630b7,
+    - target: {fileID: 7026991617518261313, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7026991617518261313, guid: 8f3e25e183838944db87964bae0630b7,
+    - target: {fileID: 7026991617526232588, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_FillAmount
       value: 1
