@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
@@ -38,12 +38,12 @@ public class Enemy : MonoBehaviour
 
         if (laserBullet != null && !laserBullet.isEnemyShot)
         {
-            HitByLaser(laserBullet.damage);
+            HitByBullet(laserBullet.damage);
             laserBullet.OnHit();
         }
         else if (shotgunBullet != null && !shotgunBullet.isEnemyShot)
         {
-            HitByShotgun(shotgunBullet.damage);
+            HitByBullet(shotgunBullet.damage);
             shotgunBullet.OnHit();
         }
         else if (normalBullet != null && !normalBullet.isEnemyShot)
@@ -51,22 +51,11 @@ public class Enemy : MonoBehaviour
             HitByBullet(normalBullet.damage);
             normalBullet.OnHit();
         }
-
-    }
-
-    void HitByLaser(float damage)
-    {
-
-    }
-
-    void HitByShotgun(float damage)
-    {
-
     }
 
     void HitByBullet(float damage)
     {
-
+        enemyHealth -= damage;
     }
 
     void FireCannons()
