@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.VFX;
 
 public class PlayerScript : MonoBehaviour
 {
-    [Range(-0.5f, 0.5f)]
+    [Range(0.0f, 1.0f)]
     public float currThrust;
 
     [Range(-0.5f, 0.5f)]
@@ -25,6 +26,7 @@ public class PlayerScript : MonoBehaviour
 
     public float health, energy;
 
+    public VisualEffect engineEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -43,10 +45,10 @@ public class PlayerScript : MonoBehaviour
 
         // 359 degrees because we want to limit rotation parameters to the potentiometer
         // Rotate Ship
-        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, currRudderAngle * 359, 0f), Time.deltaTime);
+        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, transform.localEulerAngles.y + (GameConstants.RotateRudderRate * currRudderAngle), 0f), Time.deltaTime);
 
         // Rotate Ship by rate
-        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 359, 0f), Time.deltaTime);
+        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
@@ -58,11 +60,19 @@ public class PlayerScript : MonoBehaviour
         Vector3 Lerped = new Vector3(0, yLerp, 0);
         return Lerped;
     }
-
     private void FixedUpdate()
     {
+        PerformThrust();
+    }
+
+    void PerformThrust()
+    {
+        engineEffect.SetFloat("EngineThrust", currThrust);
+        energy -= currThrust * GameConstants.EnergyConsumptionThrust;
         GetComponent<Rigidbody>().AddForce(transform.forward * currThrust * shipSpeed, ForceMode.VelocityChange);
     }
+
+
     void FireCannons()
     {
         foreach(GunPort gun in gunPorts)

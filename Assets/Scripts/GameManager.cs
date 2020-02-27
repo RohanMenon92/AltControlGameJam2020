@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     internal void UpdateThrustInput(float val)
     {
-        player.currThrust = val - 0.5f;
+        player.currThrust = val;
     }
 
     internal void UpdateRudderAngle(float val)

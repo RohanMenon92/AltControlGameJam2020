@@ -26,6 +26,10 @@ public class GameConstants
     public static int LaserBulletPoolSize = 10;
     public static float maxHealth = 100;
     public static float maxEnergy = 100;
+    internal static float EnergyConsumptionThrust = 0.5f;
+
+    public static float RotateRudderRate = 30f;
+    public static float RotateAimRate = 30f;
 
     // Start is called before the first frame update
 
