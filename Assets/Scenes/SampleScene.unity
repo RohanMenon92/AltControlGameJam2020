@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 0
   speed: 0
+  shootingRange: 0
   gunPorts: []
 --- !u!4 &16045655
 Transform:
@@ -657,7 +658,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.152e-42, z: 4.5919e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0.1484375, z: 0.02734375, w: -0.03125}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -926,6 +927,7 @@ MonoBehaviour:
   unusedShotgunBulletPool: {fileID: 69533604}
   unusedLaserBulletPool: {fileID: 701120708}
   worldBullets: {fileID: 1445374187}
+  score: 0
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0
@@ -1440,6 +1442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026991616467329339, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7026991616467329343, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
