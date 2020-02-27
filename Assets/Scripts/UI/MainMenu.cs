@@ -10,8 +10,16 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsPanel;
     public GameObject mainPanel;
     public Image[] helpScreens = new Image[5];
-    public int currentHelpScreen = -1; 
+    public Text highScore;
+    public int currentHelpScreen = -1;
 
+    void Start()
+    {
+        string newText = "High Score: " + PlayerPrefs.GetInt(GameConstants.HighScorePlayerPref).ToString();
+        highScore.text = newText;
+        
+           
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(1);
