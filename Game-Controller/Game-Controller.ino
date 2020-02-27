@@ -9,13 +9,15 @@
 
 // ---- DEFINES ----------------------------------------------
     char incomingByte;                  // for incoming serial data from host
-    int  Potentiometers[] = {0,1,2,3};      // Set the analog pins for the potentiometers
+    int  Potentiometers[] = {0,1,2};      // Set the analog pins for the potentiometers
     int  Buttons[] = {2,9,12};       // Set the digital pins for the buttons
+    int  LinearPots[] = {3};       // Set the digital pins for the buttons
 	  bool DebugMode = false;              // Enable or disable the debug mode
 
     int  TotalPots = (sizeof(Potentiometers) / sizeof(Potentiometers[0]));   // Calculate total Potentiometers
-    int  TotalButs = (sizeof(Buttons) / sizeof(Buttons[0]));   		      	 // Calculate total Buttons
-    int  Total = TotalPots + TotalButs;                               	     // Calculate total inputs
+    int  TotalButs = (sizeof(Buttons) / sizeof(Buttons[0]));                // Calculate total Buttons
+    int  TotalLPots = (sizeof(LinearPots) / sizeof(LinearPots[0]));                // Calculate total Buttons
+    int  Total = TotalPots + TotalButs + TotalLPots;                               	     // Calculate total inputs
 	
 
 // ---- DEFINES ----------------------------------------------
@@ -27,9 +29,11 @@ void setup()	{
 	  Serial.begin(115200);      			 // Set the serial baudrate (115200 is the typical USB v2.0 speed)
     
     for (int i=0; i<TotalButs; i++) {
-      pinMode(Buttons[i], INPUT_PULLUP);	// Set the pins for the buttons as input with pullup properties 
+      pinMode(Buttons[i], INPUT_PULLUP);  // Set the pins for the buttons as input with pullup properties 
     }
-
+    for (int i=0; i<TotalLPots; i++) {
+      pinMode(LinearPots[i], INPUT_PULLUP);  // Set the pins for the buttons as input with pullup properties 
+    }
     delay(500);								// Wait for 500ms to boot up
     Serial.println("Booted");				// Print the startup message
     delay(2000);              				// Wait for 2 seconds before start streaming
@@ -79,15 +83,16 @@ void loop() {
 // 		Iterate through total inputs   
 		for(int i = 0; i< Total; i++) {
 			
-			bool isPot = i < TotalPots;                                                                  // is input a potentiometer?
+      bool isPot = i < TotalPots;                
+      bool isBot = i < TotalPots + TotalButs;                                                                  // is input a potentiometer?
 			
 //			Debug Mode
 //			Prints [PTMTR] or [BUTTON] to identify what is what
 			if (DebugMode) {
-				lineToSend += isPot ? "[PTMTR]" : "[BUTTON]";                                              // Debug just to see values
+				lineToSend += isPot ? "[PTMTR]" :  isBot ? "[BUTTON]" : "[LinPOTS]" ;                                              // Debug just to see values
 			}
 
-			lineToSend += isPot ? Potentiometer(Potentiometers[i]) : Button(Buttons[i-TotalPots]);       // Add Button input or Potentiometer input based on {isPot} being a potentiometer 
+			lineToSend += isPot ? Potentiometer(Potentiometers[i]) : isBot ? Button(Buttons[i-TotalPots]) : LinearPot(LinearPots[i- TotalPots - TotalButs]);       // Add Button input or Potentiometer input based on {isPot} being a potentiometer 
 			lineToSend += (i == Total - 1) ? "":"&";                                                     // Add Seperator after checking if its the last one 
 		} 
 		
@@ -95,13 +100,21 @@ void loop() {
 	}
 
 
-//	function Potentiometer
-	float Potentiometer(int value) {
-	  
-//		Read the analog pin, devide by 1023 and return the value
-		int val = analogRead(value);
-		return (val - 1.0f)/1022;
-	}
+//  function Potentiometer
+  float Potentiometer(int value) {
+    
+//    Read the analog pin, devide by 1023 and return the value
+    int val = analogRead(value);
+    return (val - 1.0f)/1022;
+  }
+
+// function Lever
+  float LinearPot(int value) {
+    
+//    Read the analog pin, devide by 1023 and return the value
+    float val = (540 - analogRead(value))/(float)540;
+    return val > 0 ? val : 0;
+  }
 
 
 //	function Button

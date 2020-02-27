@@ -11,6 +11,7 @@ public class LaserBulletScript : MonoBehaviour
     public float damage;
     public float bulletSpeed = 0;
     public float aliveForSeconds = 0.25f;
+    public float beamLength = 50;
 
     float timeAlive;
     GameManager gameManager;
@@ -18,6 +19,7 @@ public class LaserBulletScript : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        transform.GetComponentInChildren<LineRenderer>().transform.localScale = new Vector3(0f, 0f, beamLength);
     }
 
     void OnEnable()

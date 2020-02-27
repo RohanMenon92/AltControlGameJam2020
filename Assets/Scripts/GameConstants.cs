@@ -6,13 +6,13 @@ public class GameConstants
 {
     public enum InputSignals
     {
-        P1,
         P2,
         P3,
         P4,
         B1,
         B2,
-        B3
+        B3,
+        P1
     }
     public enum GunTypes
     {

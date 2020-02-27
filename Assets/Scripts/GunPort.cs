@@ -61,7 +61,7 @@ public class GunPort : MonoBehaviour
                     LaserBulletScript newLaserBullet = gameManager.GetBullet(gunType, transform).GetComponent<LaserBulletScript>();
                     newLaserBullet.transform.position = transform.position + transform.forward;
                     newLaserBullet.transform.SetParent(transform);
-                    newLaserBullet.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + Random.Range(-5f, 5f), transform.eulerAngles.z);
+                    newLaserBullet.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y /* + Random.Range(-5f, 5f) */, transform.eulerAngles.z);
                     newLaserBullet.isEnemyShot = isEnemy;
 
                     newLaserBullet.gameObject.SetActive(true);
