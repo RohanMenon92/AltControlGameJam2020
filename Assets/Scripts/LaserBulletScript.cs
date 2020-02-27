@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class LaserBulletScript : MonoBehaviour
     public bool isEnemyShot;
     public float damage;
     public float bulletSpeed = 0;
+    public float aliveForSeconds = 0.25f;
 
+    float timeAlive;
     GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -17,10 +20,24 @@ public class LaserBulletScript : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    void OnEnable()
+    {
+        timeAlive = 0;
+    }
+
+    void CheckDeath(float time)
+    {
+        timeAlive += time;
+        if (timeAlive > aliveForSeconds)
+        {
+            ReturnBulletToPool();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        CheckDeath(Time.deltaTime);
     }
 
     void ReturnBulletToPool()
@@ -36,6 +53,9 @@ public class LaserBulletScript : MonoBehaviour
 
     internal void FireLaser()
     {
-        Debug.Log("FIRE LAAAAAAAAAZZZZZZZZZZZZZUUUUUUUUURRRRRRRRRRRRR");
+        this.GetComponentInChildren<LineRenderer>().material.SetFloat("NoiseAmount", 0f);
+        this.GetComponentInChildren<LineRenderer>().material.SetFloat("NoiseScale", 0f);
+        this.GetComponentInChildren<LineRenderer>().material.DOFloat(0.8f, "NoiseAmount", aliveForSeconds);
+        this.GetComponentInChildren<LineRenderer>().material.DOFloat(0.8f, "NoiseScale", aliveForSeconds);
     }
 }

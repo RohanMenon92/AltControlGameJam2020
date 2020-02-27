@@ -6,24 +6,23 @@ using UnityEngine.Experimental.VFX;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Slider Parameters")]
     [Range(0.0f, 1.0f)]
     public float currThrust;
-
     [Range(-0.5f, 0.5f)]
     public float currRudderAngle;
-
     [Range(-0.5f, 0.5f)]
     public float currAimAngle;
-
     [Range(-0.5f, 0.5f)]
     public float currPreciseAimAngle;
 
+    [Header("Movement Parameters")]
     public float shipSpeed;
-
     public Transform shipShield;
 
-    public List<GunPort> gunPorts;
 
+    [Header("Game Play")]
+    public List<GunPort> gunPorts;
     public float health, energy;
 
     public VisualEffect engineEffect;
@@ -41,6 +40,11 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             FireCannons();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            OnRecharge();
         }
 
         // 359 degrees because we want to limit rotation parameters to the potentiometer
@@ -87,6 +91,8 @@ public class PlayerScript : MonoBehaviour
         {
             // Ramming logic
         }
+
+
         // HitLogic
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
@@ -94,34 +100,24 @@ public class PlayerScript : MonoBehaviour
 
         if (laserBullet != null && laserBullet.isEnemyShot)
         {
-            HitByLaser(laserBullet.damage);
+            TakeDamage(laserBullet.damage);
             laserBullet.OnHit();
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
-            HitByShotgun(shotgunBullet.damage);
+            TakeDamage(shotgunBullet.damage);
             shotgunBullet.OnHit();
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
         {
-            HitByBullet(normalBullet.damage);
+            TakeDamage(normalBullet.damage);
             normalBullet.OnHit();
         }
     }
 
-    private void HitByBullet(float damage)
+    private void TakeDamage(float damage)
     {
-        throw new NotImplementedException();
-    }
-
-    private void HitByShotgun(float damage)
-    {
-        throw new NotImplementedException();
-    }
-
-    private void HitByLaser(float damage)
-    {
-        throw new NotImplementedException();
+        health -= damage;
     }
 
     // BUTTON PRESSES
@@ -132,7 +128,7 @@ public class PlayerScript : MonoBehaviour
 
     internal void OnRecharge()
     {
-        throw new NotImplementedException();
+        energy += GameConstants.RechargeGain;
     }
 
     internal void OnFire()

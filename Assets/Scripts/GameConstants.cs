@@ -30,6 +30,7 @@ public class GameConstants
 
     public static float RotateRudderRate = 30f;
     public static float RotateAimRate = 30f;
+    internal static float RechargeGain = 5f;
 
     // Start is called before the first frame update
 

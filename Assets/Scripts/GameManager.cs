@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
                 bulletObject = unusedShotgunBulletPool.GetComponentInChildren<ShotgunBulletScript>(true).gameObject;
                 break;
             case GameConstants.GunTypes.LaserGun:
-                bulletObject = unusedShotgunBulletPool.GetComponentInChildren<LaserBulletScript>(true).gameObject;
+                bulletObject = unusedLaserBulletPool.GetComponentInChildren<LaserBulletScript>(true).gameObject;
                 break;
         }
 

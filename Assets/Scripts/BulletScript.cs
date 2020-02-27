@@ -11,12 +11,19 @@ public class BulletScript : MonoBehaviour
     public float bulletSpeed;
     public float aliveForSeconds = 2f;
 
+
     float timeAlive;
     GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();   
+        timeAlive = 0;
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
+    void OnEnable()
+    {
+        timeAlive = 0;
     }
 
     void CheckDeath(float time)

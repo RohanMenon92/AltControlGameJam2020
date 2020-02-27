@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEnemyShot: 0
   damage: 20
-  bulletSpeed: 20
+  bulletSpeed: 50
+  aliveForSeconds: 2
 --- !u!54 &-851135976005799343
 Rigidbody:
   m_ObjectHideFlags: 0

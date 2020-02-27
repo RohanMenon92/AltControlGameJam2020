@@ -9,7 +9,7 @@ public class ShotgunBulletScript : MonoBehaviour
     public bool isEnemyShot;
     public float damage;
     public float bulletSpeed;
-    public float aliveForSeconds = 0.5f;
+    public float aliveForSeconds = 1f;
 
     float timeAlive;
     GameManager gameManager;
@@ -17,6 +17,12 @@ public class ShotgunBulletScript : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+    }
+
+
+    void OnEnable()
+    {
+        timeAlive = 0;
     }
     void CheckDeath(float time)
     {
@@ -41,6 +47,7 @@ public class ShotgunBulletScript : MonoBehaviour
 
     internal void OnHit()
     {
+        gameObject.SetActive(false);
         ReturnBulletToPool();
     }
 
