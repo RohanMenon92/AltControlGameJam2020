@@ -32,6 +32,7 @@ public class Asteroid : MonoBehaviour
         
         particle.Play();
         StartCoroutine(waitForAnimation());
+        GetComponent<MeshCollider>().enabled = false;
 
     }
 

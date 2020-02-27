@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7663991739306287812}
   - component: {fileID: 3341299590235195351}
   - component: {fileID: 3132814543960709109}
-  - component: {fileID: 7789647695466957217}
   - component: {fileID: -2650780719794484495}
   - component: {fileID: -5410180135996932306}
   - component: {fileID: 3406050347133886852}
   - component: {fileID: 6711408941227371442}
+  - component: {fileID: 8573981061825419986}
   m_Layer: 0
   m_Name: Asteroid2
   m_TagString: Asteroid
@@ -83,20 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7789647695466957217
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2190432479805666411}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 85
-  m_Height: 300
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-2650780719794484495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4849,3 +4835,17 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!64 &8573981061825419986
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2190432479805666411}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8411264719490064891, guid: f8872d2af006f954da0877c460fc051d, type: 3}
