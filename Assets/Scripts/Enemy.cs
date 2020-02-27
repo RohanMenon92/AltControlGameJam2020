@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
     {
         foreach (GunPort gun in gunPorts)
         {
-            gun.Fire(true);
+            gun.Fire(true, transform);
         }
     }
 }

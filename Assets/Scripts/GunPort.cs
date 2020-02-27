@@ -23,7 +23,7 @@ public class GunPort : MonoBehaviour
         
     }
 
-    public void Fire(bool isEnemy)
+    public void Fire(bool isEnemy, Transform firedShip)
     {
         // Check if it can fire
         if(canFire)
@@ -35,6 +35,7 @@ public class GunPort : MonoBehaviour
                     newBullet.transform.position = transform.position + transform.forward;
                     newBullet.transform.rotation = transform.rotation;
                     newBullet.isEnemyShot = isEnemy;
+                    newBullet.GetComponent<Rigidbody>().velocity = firedShip.GetComponent<Rigidbody>().velocity;
                     newBullet.gameObject.SetActive(true);
                     newBullet.FireBullet();
                     // Set transform and set initial velocity of rigidbody component
@@ -47,6 +48,8 @@ public class GunPort : MonoBehaviour
                         newShoutgunBullet.transform.position = transform.position + transform.forward;
                         newShoutgunBullet.transform.eulerAngles =  new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + Random.Range(-10f, 10f), transform.eulerAngles.z);
                         newShoutgunBullet.isEnemyShot = isEnemy;
+                        // Set bullet velocity to ship velocity
+                        newShoutgunBullet.GetComponent<Rigidbody>().velocity = firedShip.GetComponent<Rigidbody>().velocity;
                         newShoutgunBullet.gameObject.SetActive(true);
                         newShoutgunBullet.FireShotgun();
                     }

@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
     {
         foreach(GunPort gun in gunPorts)
         {
-            gun.Fire(false);
+            gun.Fire(false, transform);
         }
     }
 
