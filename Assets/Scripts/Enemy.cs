@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     PlayerScript player;
     public float enemyHealth;
+    float currentHealth;
     public float speed;
     public float shootingRange;
 
@@ -14,12 +15,15 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerScript>();
+
+        currentHealth = enemyHealth;
     }
 
     private void Update()
     {
         Move();
         FireCannons();
+        Die();
     }
 
     public void Move()
@@ -29,6 +33,15 @@ public class Enemy : MonoBehaviour
         {
            
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+    }
+
+    void Die()
+    {
+        if (currentHealth <= 0)
+        {
+            currentHealth = enemyHealth;
+            gameObject.SetActive(false);
         }
     }
 
@@ -57,16 +70,22 @@ public class Enemy : MonoBehaviour
 
     void HitByBullet(float damage)
     {
-        enemyHealth -= damage;
+        currentHealth -= damage;
+        Debug.Log("'BOUTTA DEAL " + damage + " TO THIS SPACESHIP");
+        Debug.Log("CURRENT HEALTH: "+currentHealth);
+        Debug.Log("OUCH!");
     }
 
     void FireCannons()
     {
         if (Vector3.Distance(player.transform.position, transform.position) <= shootingRange+3)
         {
+            float spread = Random.Range(-10f, 10f);
             foreach (GunPort gun in gunPorts)
             {
+                transform.Rotate(0f, spread, 0f);
                 gun.Fire(true, transform);
+                transform.Rotate(0f, -spread, 0f);
             }
         }
     }

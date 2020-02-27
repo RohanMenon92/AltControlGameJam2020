@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eea6dcc6ed98254e8368ae8115f3828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: 0
+  enemyHealth: 80
   speed: 6
   shootingRange: 25
   gunPorts:
@@ -2458,6 +2458,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 523363423744557026}
     m_Modifications:
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: firePerSeconds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: gunType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2511,21 +2526,6 @@ PrefabInstance:
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
-      objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: firePerSeconds
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: gunType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
