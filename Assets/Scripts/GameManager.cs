@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     bool isFiring;
     bool isShielding;
 
+    public int score = 0;      // for the title to have the high score 
+
     // Start is called before the first frame update
     void Start()
     {
