@@ -64,6 +64,7 @@ public class AsteroidPool : MonoBehaviour
         asteroid.transform.position = newPosition;
         asteroid.GetComponent<ParticleSystem>().Stop();
         asteroid.GetComponent<MeshRenderer>().enabled = true;
+        asteroid.GetComponent<MeshCollider>().enabled = true;
         asteroid.GetComponent<Rigidbody>().velocity = Vector3.zero;
         asteroid.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-maxInitialForce, maxInitialForce), 0, Random.Range(-maxInitialForce, maxInitialForce)));
 
