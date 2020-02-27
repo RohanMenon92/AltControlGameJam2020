@@ -657,7 +657,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.1953125, y: 0.06640625, z: 0.0546875, w: -0.06640625}
+  m_BoundingSphereOverride: {x: 4.484e-42, y: 7.17e-43, z: 3.59e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1362,10 +1362,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
+    - target: {fileID: 857293083214174357, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
-      propertyPath: m_Name
-      value: Player
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3031276405639178029, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
@@ -1422,10 +1422,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 857293083214174357, guid: ca461f98536c70243bd998cce66dd2cf,
+    - target: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca461f98536c70243bd998cce66dd2cf, type: 3}
@@ -1546,12 +1546,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7026991617526232588, guid: 8f3e25e183838944db87964bae0630b7,
+    - target: {fileID: 7026991617518261313, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7026991617518261313, guid: 8f3e25e183838944db87964bae0630b7,
+    - target: {fileID: 7026991617526232588, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_FillAmount
       value: 1
