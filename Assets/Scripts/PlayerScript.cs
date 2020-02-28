@@ -37,14 +37,62 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             FireCannons();
         }
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnShield();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
             OnRecharge();
+        }
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            if (currThrust < 1.0f)
+            {
+                currThrust += 0.001f;
+            }
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            if (currThrust > 0.0f)
+            {
+                currThrust -= 0.001f;
+            }
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            if (currRudderAngle > -0.5f)
+            {
+                currRudderAngle -= 0.001f;
+            }
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (currAimAngle > -0.5f)
+            {
+                currAimAngle -= 0.001f;
+            }
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (currRudderAngle < 0.5f)
+            {
+                currRudderAngle += 0.001f;
+            }
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (currRudderAngle > -0.5f)
+            {
+                currRudderAngle -= 0.001f;
+            }
         }
 
         // 359 degrees because we want to limit rotation parameters to the potentiometer

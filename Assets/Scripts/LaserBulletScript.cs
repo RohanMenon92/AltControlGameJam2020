@@ -23,8 +23,8 @@ public class LaserBulletScript : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         lineRenderer = this.GetComponentInChildren<LineRenderer>();
         lineRenderer.transform.localScale = new Vector3(0f, 0f, beamLength);
-        lineRenderer.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, beamLength / 2);
-        lineRenderer.GetComponent<BoxCollider>().size = new Vector3(0f, 0f, beamLength);
+        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, beamLength / 2);
+        this.GetComponent<BoxCollider>().size = new Vector3(0f, 0f, beamLength);
     }
 
     void OnEnable()
