@@ -356,26 +356,6 @@ Transform:
   m_Father: {fileID: 391578228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &373027770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3031276405639178031, guid: ca461f98536c70243bd998cce66dd2cf,
-    type: 3}
-  m_PrefabInstance: {fileID: 3031276406556459462}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &373027771
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373027770}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &391578227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,46 +1801,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709018332838274241, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.104
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709018332838274241, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1041
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709018332838274241, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.002
-      objectReference: {fileID: 0}
-    - target: {fileID: 5807523699933695308, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: gunType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5807523699933695315, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0884
-      objectReference: {fileID: 0}
-    - target: {fileID: 7208927294323122479, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: gunType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7208927294323122480, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.089
-      objectReference: {fileID: 0}
-    - target: {fileID: 8028780253447219382, guid: ca461f98536c70243bd998cce66dd2cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca461f98536c70243bd998cce66dd2cf, type: 3}
