@@ -91,8 +91,10 @@ public class PlayerScript : MonoBehaviour
         {
             // Ramming logic
         }
+    }
 
-
+    private void OnTriggerEnter(Collider collision)
+    {
         // HitLogic
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();

@@ -8,6 +8,7 @@ public class Asteroid : MonoBehaviour
     private ParticleSystem particle;
     private MeshRenderer renderer;
     private AsteroidPool pool;
+
     void Start()
     {
         particle = GetComponent<ParticleSystem>();
@@ -49,10 +50,31 @@ public class Asteroid : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        LaserBulletScript laserBullet = other.gameObject.GetComponent<LaserBulletScript>();
+        ShotgunBulletScript shotgunBullet = other.gameObject.GetComponent<ShotgunBulletScript>();
+        BulletScript normalBullet = other.gameObject.GetComponent<BulletScript>();
+
+        if (laserBullet != null && !laserBullet.isEnemyShot)
         {
-            OnHit();
-            other.gameObject.GetComponent<BulletScript>().OnHit();
+            HitByBullet(laserBullet.damage);
+            laserBullet.OnHit();
         }
+        else if (shotgunBullet != null && !shotgunBullet.isEnemyShot)
+        {
+            HitByBullet(shotgunBullet.damage);
+            shotgunBullet.OnHit();
+        }
+        else if (normalBullet != null && !normalBullet.isEnemyShot)
+        {
+            HitByBullet(normalBullet.damage);
+            normalBullet.OnHit();
+        }
+    }
+
+
+    void HitByBullet(float damage)
+    {
+        // Use damage to reduce health here
+        OnHit();
     }
 }
