@@ -7,14 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShipLow_Splash
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _EMISSIVE_COLOR_MAP _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+  m_Name: ShipLow_Wings
+  m_Shader: {fileID: -6465566751694194690, guid: 19a0384cb4c287e4994723b97e5e6fa4,
+    type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -29,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 11e83b0a37693f0458a2c08c50c7d067, type: 3}
+        m_Texture: {fileID: 2800000, guid: b1a603172e3afcd41b0a46f4fa6cf28a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -41,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 255269c77cbf40b4cbbae22d5c74b1b5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 989412809ee704044921ae3e5178549e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -69,11 +71,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: fce2dbb28ccc8974ba2820421fbbd6e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 534f86e5d4265c843b41a9502c3d4548, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
-        m_Texture: {fileID: 2800000, guid: fce2dbb28ccc8974ba2820421fbbd6e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 534f86e5d4265c843b41a9502c3d4548, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -89,19 +91,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 11e83b0a37693f0458a2c08c50c7d067, type: 3}
+        m_Texture: {fileID: 2800000, guid: b1a603172e3afcd41b0a46f4fa6cf28a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 31ce8b2b35e641c47af2a8453efc841b, type: 3}
+        m_Texture: {fileID: 2800000, guid: a8be4226373ec18428d295bd3c4670b2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 9a8aee49620c45f4fb41eee0b98fa473, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4fed0967d81e3604f8fdc3d829baea22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 255269c77cbf40b4cbbae22d5c74b1b5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 989412809ee704044921ae3e5178549e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -109,11 +111,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 9a8aee49620c45f4fb41eee0b98fa473, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4fed0967d81e3604f8fdc3d829baea22, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_25BD4CAE_Texture_1:
+        m_Texture: {fileID: 2800000, guid: fdd3a82cc58ec364999b34d4c6cd477c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5DC14F70_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 0bc4b638069c9d64481ff89c484f252c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5E001BEF_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 16cbe68f57a0dbf42ba638f7b17462c0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_65B12571_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 77206e66dc02ec546bf7da9376d3cd98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -141,6 +159,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_DD5C6AC0: 5
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -227,6 +246,8 @@ Material:
     - _Parallax: 0.02
     - _ReceivesSSR: 1
     - _RefractionModel: 0
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -272,6 +293,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_AA291C9A: {r: 1, g: 0.6470588, b: 0.14509797, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

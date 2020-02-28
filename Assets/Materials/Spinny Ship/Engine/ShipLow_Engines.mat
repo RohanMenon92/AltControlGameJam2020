@@ -7,14 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShipLow_Pod
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+  m_Name: ShipLow_Engines
+  m_Shader: {fileID: -6465566751694194690, guid: dbc72a9ef23dec444b0260594974bffc,
+    type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -29,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 63a30aba0a5abfe4b80ba47fcf40e07c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 63176c9033ecf8a45b36bcb46f4efed7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -41,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 5f4a619483a3f68418c26983dd23cfff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 76a50c6dc9f20874e87b94e4cd30c6c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -89,19 +91,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 63a30aba0a5abfe4b80ba47fcf40e07c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 63176c9033ecf8a45b36bcb46f4efed7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 34ef34723070af641a1dd7d7802afb4f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 34a799888366a3945a51fc9f23d71551, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 955c98bba5f9a584f81277dd8bdf8276, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b5d64c1789f96c4193352379935a4ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 5f4a619483a3f68418c26983dd23cfff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 76a50c6dc9f20874e87b94e4cd30c6c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -109,11 +111,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 955c98bba5f9a584f81277dd8bdf8276, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b5d64c1789f96c4193352379935a4ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_37960D3D_Texture_1:
+        m_Texture: {fileID: 2800000, guid: c90ad2d576c1e6c429d1c43936e176b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_696C9533_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ba2388859ca9b9642be745c1975e27e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_A5B78871_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 34a799888366a3945a51fc9f23d71551, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_FDB02366_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 8b9f5a04c9305ee42885f46fa5809d14, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -141,6 +159,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_D4374635: 5
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -227,6 +246,8 @@ Material:
     - _Parallax: 0.02
     - _ReceivesSSR: 1
     - _RefractionModel: 0
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -272,6 +293,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_4B7E6441: {r: 1, g: 0.6156863, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -7,14 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShipLow_Engines
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
-  m_LightmapFlags: 4
+  m_Name: ShipLow_Guns
+  m_Shader: {fileID: -6465566751694194690, guid: a30461aaa2ebadb478dea1d6c1b05f82,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -29,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 63176c9033ecf8a45b36bcb46f4efed7, type: 3}
+        m_Texture: {fileID: 2800000, guid: a29f5059eea263a4f851cbbb770e48a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -41,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 76a50c6dc9f20874e87b94e4cd30c6c3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4c6853caa3ae2cd4f83544000fd1ac7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
@@ -69,11 +71,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0474566c8f5483d4f90aa8d091a02f9a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0474566c8f5483d4f90aa8d091a02f9a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -89,19 +91,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 63176c9033ecf8a45b36bcb46f4efed7, type: 3}
+        m_Texture: {fileID: 2800000, guid: a29f5059eea263a4f851cbbb770e48a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 34a799888366a3945a51fc9f23d71551, type: 3}
+        m_Texture: {fileID: 2800000, guid: c5577be20c5651a448df338c7c847f55, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 5b5d64c1789f96c4193352379935a4ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 37a8cb448c40a30448b1bc7729cc9b3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 76a50c6dc9f20874e87b94e4cd30c6c3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4c6853caa3ae2cd4f83544000fd1ac7e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -109,11 +111,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 5b5d64c1789f96c4193352379935a4ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 37a8cb448c40a30448b1bc7729cc9b3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_C9BE5D6E_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2044bc3904766694ea4f11bcbd8fcb40, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_CFAD00DA_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 748840228d035e34cb819d52ec2f4953, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_E7D5F10_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 5c1dc4e78eba21c4da1928b9e8d1a40d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -141,6 +155,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_E8F54009: 5
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -227,6 +242,8 @@ Material:
     - _Parallax: 0.02
     - _ReceivesSSR: 1
     - _RefractionModel: 0
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
@@ -272,13 +289,14 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_642411D3: {r: 1, g: 0.6627451, b: 0.11372546, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
