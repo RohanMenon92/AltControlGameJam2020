@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3031276405639178029}
   - component: {fileID: 3031276405639178028}
   - component: {fileID: 3031276405639178026}
+  - component: {fileID: 6371049633553196897}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -72,8 +73,22 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!136 &6371049633553196897
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3031276405639178031}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3031276406974393527
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,11 +391,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: JamShip
       objectReference: {fileID: 0}
-    - target: {fileID: 6554351605665109980, guid: f705ddca3d72c4b48971ced20fe59aaa,
-        type: 3}
-      propertyPath: firePerSeconds
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 7279559844724453926, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -435,6 +445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554351605665109980, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: firePerSeconds
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7955192215790468031, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
