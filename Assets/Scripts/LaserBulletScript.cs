@@ -15,11 +15,16 @@ public class LaserBulletScript : MonoBehaviour
 
     float timeAlive;
     GameManager gameManager;
+    LineRenderer lineRenderer;
+    Sequence beamTween;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        transform.GetComponentInChildren<LineRenderer>().transform.localScale = new Vector3(0f, 0f, beamLength);
+        lineRenderer = this.GetComponentInChildren<LineRenderer>();
+        lineRenderer.transform.localScale = new Vector3(0f, 0f, beamLength);
+        lineRenderer.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, beamLength / 2);
+        lineRenderer.GetComponent<BoxCollider>().size = new Vector3(0f, 0f, beamLength);
     }
 
     void OnEnable()
@@ -55,9 +60,16 @@ public class LaserBulletScript : MonoBehaviour
 
     internal void FireLaser()
     {
-        this.GetComponentInChildren<LineRenderer>().material.SetFloat("NoiseAmount", 0f);
-        this.GetComponentInChildren<LineRenderer>().material.SetFloat("NoiseScale", 0f);
-        this.GetComponentInChildren<LineRenderer>().material.DOFloat(0.8f, "NoiseAmount", aliveForSeconds);
-        this.GetComponentInChildren<LineRenderer>().material.DOFloat(0.8f, "NoiseScale", aliveForSeconds);
+        if(lineRenderer != null)
+        {
+            beamTween = DOTween.Sequence();
+            lineRenderer.material.SetFloat("NoiseAmount", 1f);
+            lineRenderer.material.SetFloat("NoiseScale", 1f);
+            beamTween.Insert(0f, lineRenderer.material.DOFloat(0.1f, "NoiseAmount", aliveForSeconds / 0.75f));
+            beamTween.Insert(0f, lineRenderer.material.DOFloat(0.2f, "NoiseScale", aliveForSeconds / 0.75f));
+            beamTween.Insert(aliveForSeconds / 0.75f, lineRenderer.material.DOFloat(0.0f, "NoiseAmount", aliveForSeconds / 0.25f));
+            beamTween.Insert(aliveForSeconds / 0.75f, lineRenderer.material.DOFloat(0.0f, "NoiseScale", aliveForSeconds / 0.25f));
+            beamTween.Play();
+        }
     }
 }
