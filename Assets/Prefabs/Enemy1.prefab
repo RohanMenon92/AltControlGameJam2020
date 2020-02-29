@@ -525,7 +525,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9a146821c3126c14589abc9a9d309206, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1015,6 +1015,7 @@ MonoBehaviour:
   enemyHealth: 80
   speed: 6
   shootingRange: 25
+  scoreReward: 1150
   gunPorts:
   - {fileID: 1377467500843564963}
 --- !u!136 &7908721983049183619
@@ -2458,11 +2459,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 523363423744557026}
     m_Modifications:
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
-      objectReference: {fileID: 0}
     - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: firePerSeconds
@@ -2472,6 +2468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gunType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
       objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}

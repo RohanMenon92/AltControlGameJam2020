@@ -8,6 +8,8 @@ public class Asteroid : MonoBehaviour
     private ParticleSystem particle;
     private MeshRenderer renderer;
     private AsteroidPool pool;
+    public int scoreReward = 350;
+    private bool accountedFor = false;
 
     void Start()
     {
@@ -30,10 +32,18 @@ public class Asteroid : MonoBehaviour
     public void OnHit()
     {
         // play explosion animation
-        
+
         particle.Play();
         StartCoroutine(waitForAnimation());
         GetComponent<MeshCollider>().enabled = false;
+        // added for a possibility to count asteroid score
+        /*if (!accountedFor)
+        {
+            FindObjectOfType<GameManager>().score += scoreReward;
+            accountedFor = true;
+        }*/
+        
+        
 
     }
 
