@@ -10,7 +10,7 @@ public class InputListener : MonoBehaviour
     public int baudRate;
     public int timeout;
     public float pingPerFrames;
-    
+
     GameManager gameManager;
 
     SerialPort stream;
