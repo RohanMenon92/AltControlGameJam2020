@@ -8,7 +8,7 @@ public class UIGame : MonoBehaviour
     PlayerScript player;
     public Image healthImage;
     public Image energyImage;
-    public Text score;
+    public Text scoreBoard;
     private GameManager currentManager;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class UIGame : MonoBehaviour
     void Update()
     {
         string newText = "Score: " + currentManager.score;
+        scoreBoard.text = newText;
         healthImage.fillAmount = player.health / GameConstants.maxHealth;
         energyImage.fillAmount = player.energy / GameConstants.maxEnergy;
     }

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     float currentHealth;
     public float speed;
     public float shootingRange;
+    public int scoreReward = 500;
 
     public List<GunPort> gunPorts;
 
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = enemyHealth;
             gameObject.SetActive(false);
+            FindObjectOfType<GameManager>().score += scoreReward;
         }
     }
 

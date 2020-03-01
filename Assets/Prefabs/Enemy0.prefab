@@ -443,6 +443,7 @@ MonoBehaviour:
   enemyHealth: 120
   speed: 5
   shootingRange: 25
+  scoreReward: 2000
   gunPorts:
   - {fileID: 4966043768852812704}
 --- !u!136 &6463494492804788816
@@ -1115,15 +1116,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7162697027564279496}
     m_Modifications:
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
-      objectReference: {fileID: 0}
     - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: firePerSeconds
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
       objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}

@@ -23,11 +23,15 @@ public class GameManager : MonoBehaviour
     bool isFiring;
     bool isShielding;
 
-    public int score = 0;      // for the title to have the high score 
+    public int score = 0;      // for the title to have the high score
+    public int scorePerSecond = 10;
+    private float elapsedTime = 0; // used for score bit every second
 
     // Start is called before the first frame update
     void Start()
     {
+        // reset score
+        score = 0;
         // Instantiate bullet pools in start
         for (int i = 0; i <= GameConstants.NormalBulletPoolSize; i++)
         {
@@ -97,9 +101,13 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {      
-
-
+    {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= 1)
+        {
+            score += scorePerSecond;
+            elapsedTime = 0;
+        }
     }
 
     internal void UpdateThrustInput(float val)
