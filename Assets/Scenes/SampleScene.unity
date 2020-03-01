@@ -1020,6 +1020,7 @@ MonoBehaviour:
   unusedLaserBulletPool: {fileID: 701120708}
   worldBullets: {fileID: 1445374187}
   score: 0
+  scorePerSecond: 10
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0

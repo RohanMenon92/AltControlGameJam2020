@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 601518485002218664}
   - component: {fileID: 601518485002218667}
   - component: {fileID: 601518485002218666}
+  - component: {fileID: 9001303383446075556}
   m_Layer: 0
   m_Name: ShieldSphere
   m_TagString: Untagged
@@ -78,3 +79,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &9001303383446075556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601518485002218679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e606f8b1fb924e04da7c60516368bb1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

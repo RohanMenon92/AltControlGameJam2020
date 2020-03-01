@@ -30,8 +30,8 @@ Transform:
   m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8028780253447219382}
   - {fileID: 3031276406974393522}
+  - {fileID: 8028780253447219382}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,7 +120,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3031276405639178029}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!20 &3031276406974393525
 Camera:
@@ -391,6 +391,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: JamShip
       objectReference: {fileID: 0}
+    - target: {fileID: 6554351605665109980, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: firePerSeconds
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877701066419030976, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7279559844724453926, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -429,7 +439,7 @@ PrefabInstance:
     - target: {fileID: 7279559844724453926, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7279559844724453926, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
@@ -446,15 +456,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6554351605665109980, guid: f705ddca3d72c4b48971ced20fe59aaa,
-        type: 3}
-      propertyPath: firePerSeconds
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 7955192215790468031, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
       propertyPath: firePerSeconds
-      value: 0.2
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7955192215790468031, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: gunType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f705ddca3d72c4b48971ced20fe59aaa, type: 3}
