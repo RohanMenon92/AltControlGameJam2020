@@ -75,14 +75,14 @@ public class PlayerScript : MonoBehaviour
         {
             if (currThrust < 1.0f)
             {
-                currThrust += 0.001f;
+                currThrust += 0.01f;
             }
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             if (currThrust > 0.0f)
             {
-                currThrust -= 0.001f;
+                currThrust -= 0.01f;
             }
         }
         if (Input.GetKey(KeyCode.A))
