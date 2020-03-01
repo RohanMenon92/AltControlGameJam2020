@@ -195,7 +195,7 @@ public class PlayerScript : MonoBehaviour
         {
             if(isShielding)
             {
-                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, laserBullet.damage);
+                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, laserBullet.damage);
             }
             else
             {
@@ -207,7 +207,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (isShielding)
             {
-                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, shotgunBullet.damage);
+                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, shotgunBullet.damage);
             }
             else
             {
@@ -219,7 +219,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (isShielding)
             {
-                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, normalBullet.damage);
+                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, normalBullet.damage);
             } else
             {
                 TakeDamage(normalBullet.damage);
