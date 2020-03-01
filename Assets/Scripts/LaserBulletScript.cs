@@ -40,7 +40,10 @@ public class LaserBulletScript : MonoBehaviour
 
     private void OnDisable()
     {
-        lineRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+        if (lineRenderer != null)
+        {
+            lineRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
         this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, 0f);
         this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
     }
