@@ -71,9 +71,9 @@ public class Enemy : MonoBehaviour
     void HitByBullet(float damage)
     {
         currentHealth -= damage;
-        Debug.Log("'BOUTTA DEAL " + damage + " TO THIS SPACESHIP");
-        Debug.Log("CURRENT HEALTH: "+currentHealth);
-        Debug.Log("OUCH!");
+        //Debug.Log("'BOUTTA DEAL " + damage + " TO THIS SPACESHIP");
+        //Debug.Log("CURRENT HEALTH: "+currentHealth);
+        //Debug.Log("OUCH!");
     }
 
     void FireCannons()

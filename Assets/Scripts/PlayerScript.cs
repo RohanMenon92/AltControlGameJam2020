@@ -27,15 +27,25 @@ public class PlayerScript : MonoBehaviour
 
     public VisualEffect engineEffect;
 
+    ShieldScript shieldScript;
+    AdaptiveShieldScript adaptiveShield;
+    private bool isShielding;
+
     // Start is called before the first frame update
     void Start()
     {
+        shieldScript = GetComponentInChildren<ShieldScript>();
+        adaptiveShield = GetComponentInChildren<AdaptiveShieldScript>();
+
         health = GameConstants.maxHealth;
         energy = GameConstants.maxEnergy;
+
+        // Make this a function too?
+        adaptiveShield.shieldOn = false;
+        shieldScript.TurnOffShield();
     }
 
-    // Update is called once per frame
-    void Update()
+    void TakeInput()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -44,7 +54,11 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            OnShield();
+            ShieldOn();
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            ShieldOff();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -73,13 +87,6 @@ public class PlayerScript : MonoBehaviour
                 currRudderAngle -= 0.001f;
             }
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (currAimAngle > -0.5f)
-            {
-                currAimAngle -= 0.001f;
-            }
-        }
         if (Input.GetKey(KeyCode.D))
         {
             if (currRudderAngle < 0.5f)
@@ -89,18 +96,18 @@ public class PlayerScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (currRudderAngle > -0.5f)
+            if (currAimAngle < 0.5f)
             {
-                currRudderAngle -= 0.001f;
+                currAimAngle += 0.001f;
             }
         }
-
-        // 359 degrees because we want to limit rotation parameters to the potentiometer
-        // Rotate Ship
-        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, transform.localEulerAngles.y + (GameConstants.RotateRudderRate * currRudderAngle), 0f), Time.deltaTime);
-
-        // Rotate Ship by rate
-        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (currAimAngle > -0.5f)
+            {
+                currAimAngle -= 0.001f;
+            }
+        }
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
@@ -112,6 +119,35 @@ public class PlayerScript : MonoBehaviour
         Vector3 Lerped = new Vector3(0, yLerp, 0);
         return Lerped;
     }
+
+    void CheckShield()
+    {
+        if(isShielding)
+        {
+            if(energy > 0f)
+            {
+                energy -= GameConstants.ShieldEnergyUsage;
+            } else
+            {
+                ShieldOff();
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        TakeInput();
+        CheckShield();
+
+        // 359 degrees because we want to limit rotation parameters to the potentiometer
+        // Rotate Ship
+        transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, transform.localEulerAngles.y + (GameConstants.RotateRudderRate * currRudderAngle), 0f), Time.deltaTime);
+
+        // Rotate Ship by rate
+        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
+    }
+
     private void FixedUpdate()
     {
         PerformThrust();
@@ -119,9 +155,16 @@ public class PlayerScript : MonoBehaviour
 
     void PerformThrust()
     {
-        engineEffect.SetFloat("EngineThrust", currThrust);
-        energy -= currThrust * GameConstants.EnergyConsumptionThrust;
-        GetComponent<Rigidbody>().AddForce(transform.forward * currThrust * shipSpeed, ForceMode.VelocityChange);
+        if(energy > 0f)
+        {
+            energy -= currThrust * GameConstants.EnergyConsumptionThrust;
+            engineEffect.SetFloat("EngineThrust", currThrust);
+            engineEffect.SetFloat("RudderAngle", currRudderAngle);
+            GetComponent<Rigidbody>().AddForce(transform.forward * currThrust * shipSpeed, ForceMode.VelocityChange);
+        } else
+        {
+            engineEffect.SetFloat("EngineThrust", 0f);
+        }
     }
 
 
@@ -150,17 +193,37 @@ public class PlayerScript : MonoBehaviour
 
         if (laserBullet != null && laserBullet.isEnemyShot)
         {
-            TakeDamage(laserBullet.damage);
+            if(isShielding)
+            {
+                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, laserBullet.damage);
+            }
+            else
+            {
+                TakeDamage(laserBullet.damage);
+            }
             laserBullet.OnHit();
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
-            TakeDamage(shotgunBullet.damage);
+            if (isShielding)
+            {
+                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, shotgunBullet.damage);
+            }
+            else
+            {
+                TakeDamage(shotgunBullet.damage);
+            }
             shotgunBullet.OnHit();
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
         {
-            TakeDamage(normalBullet.damage);
+            if (isShielding)
+            {
+                adaptiveShield.OnHit((collision.transform.position - transform.position).normalized, normalBullet.damage);
+            } else
+            {
+                TakeDamage(normalBullet.damage);
+            }
             normalBullet.OnHit();
         }
     }
@@ -170,10 +233,31 @@ public class PlayerScript : MonoBehaviour
         health -= damage;
     }
 
-    // BUTTON PRESSES
-    internal void OnShield()
+    public void ToggleShield(bool shieldOn)
     {
-        throw new NotImplementedException();
+        isShielding = shieldOn;
+        if (isShielding)
+        {
+            shieldScript.TurnOnShield();
+        } else
+        {
+            shieldScript.TurnOffShield();
+        }
+        
+        adaptiveShield.shieldOn = isShielding;
+    }
+
+    // BUTTON PRESSES
+    public void ShieldOn()
+    {
+        if(energy > 0f)
+        {
+            ToggleShield(true);
+        }
+    }
+    public void ShieldOff()
+    {
+        ToggleShield(false);
     }
 
     internal void OnRecharge()

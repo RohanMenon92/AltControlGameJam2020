@@ -163,13 +163,21 @@ public class GameManager : MonoBehaviour
             if (!isShielding)
             {
                 OnShieldActivate();
+            } else
+            {
+                OnShieldDeactivate();
             }
         }
         isShielding = val;
     }
 
+    private void OnShieldDeactivate()
+    {
+        player.ShieldOff();
+    }
+
     private void OnShieldActivate()
     {
-        player.OnShield();
+        player.ShieldOn();
     }
 }

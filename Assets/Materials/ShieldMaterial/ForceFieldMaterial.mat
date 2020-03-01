@@ -111,9 +111,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_12DFC281: 0.569
     - Vector1_4C1AE234: 0.2
-    - Vector1_7620319E: -0.36
-    - Vector1_CF9FF41A: 1.57
+    - Vector1_7620319E: -1
+    - Vector1_CF9FF41A: 1
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -234,7 +235,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_C2FCA5A1: {r: 0, g: 6.342616, b: 27.53272, a: 0.19607843}
+    - Color_C2FCA5A1: {r: 0, g: 8.531137, b: 27.53272, a: 0.19607843}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

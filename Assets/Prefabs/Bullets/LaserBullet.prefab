@@ -48,7 +48,7 @@ MonoBehaviour:
   isEnemyShot: 0
   damage: 20
   bulletSpeed: 0
-  aliveForSeconds: 0.5
+  aliveForSeconds: 1
   beamLength: 50
 --- !u!65 &471804662
 BoxCollider:
