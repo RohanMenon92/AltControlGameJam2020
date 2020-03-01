@@ -11,7 +11,6 @@ public class BulletScript : MonoBehaviour
     public float bulletSpeed;
     public float aliveForSeconds = 2f;
 
-
     float timeAlive;
     GameManager gameManager;
     // Start is called before the first frame update
@@ -52,10 +51,14 @@ public class BulletScript : MonoBehaviour
     }
 
     // Called when player refelects a shot
-    internal void OnShield(Vector3 impactPoint)
+    internal void OnShield(Vector3 normalVector)
     {
-        isEnemyShot = false;
-        this.GetComponent<Rigidbody>().velocity = (transform.position - impactPoint).normalized * bulletSpeed;
+        // When HitByShield, reverseBullet according to normal Vector
+        isEnemyShot = !isEnemyShot;
+        timeAlive = 0;
+
+        Vector3 newVelocity = Vector3.Reflect(this.GetComponent<Rigidbody>().velocity, normalVector);
+        this.GetComponent<Rigidbody>().velocity = new Vector3(newVelocity.x, 0f, newVelocity.z);
     }
 
     internal void FireBullet()

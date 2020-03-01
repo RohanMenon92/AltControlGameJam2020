@@ -29,7 +29,10 @@ public class PlayerScript : MonoBehaviour
 
     ShieldScript shieldScript;
     AdaptiveShieldScript adaptiveShield;
-    private bool isShielding;
+    
+    bool isShielding;
+    Collider selfCollider;
+    private bool is3D = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +45,8 @@ public class PlayerScript : MonoBehaviour
 
         // Make this a function too?
         adaptiveShield.shieldOn = false;
+        selfCollider = GetComponent<Collider>();
+
         shieldScript.TurnOffShield();
     }
 
@@ -186,45 +191,60 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        // TODO: Create COmmon BulletClass
         // HitLogic
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
         BulletScript normalBullet = collision.gameObject.GetComponent<BulletScript>();
 
+        // Convert BoundsToLocalSpace
+        Vector3 collisionNormal = transform.InverseTransformDirection(collision.ClosestPoint(transform.position) - transform.position).normalized;
+
+        if (!is3D)
+        {
+            // Convert to 2D tangent system
+            collisionNormal = new Vector3(collisionNormal.x, 0f, collisionNormal.z);
+        }
+
         if (laserBullet != null && laserBullet.isEnemyShot)
         {
             if(isShielding)
             {
-                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, laserBullet.damage);
+                // Calculate Normal Differently for laser beam
+                adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
+                collisionNormal = transform.InverseTransformDirection(selfCollider.ClosestPoint(collision.transform.position) - transform.position).normalized;
+                laserBullet.OnShield(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
             }
             else
             {
                 TakeDamage(laserBullet.damage);
+                laserBullet.OnHit();
             }
-            laserBullet.OnHit();
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
             if (isShielding)
             {
-                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, shotgunBullet.damage);
+                adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
+                shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
             }
             else
             {
                 TakeDamage(shotgunBullet.damage);
+                shotgunBullet.OnHit();
             }
-            shotgunBullet.OnHit();
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
         {
             if (isShielding)
             {
-                adaptiveShield.OnHit(collision.ClosestPointOnBounds(collision.transform.position).normalized, normalBullet.damage);
+                adaptiveShield.OnHit(collisionNormal, normalBullet.damage);
+                normalBullet.OnShield(transform.TransformDirection(collisionNormal));
             } else
             {
                 TakeDamage(normalBullet.damage);
+                normalBullet.OnHit();
             }
-            normalBullet.OnHit();
         }
     }
 

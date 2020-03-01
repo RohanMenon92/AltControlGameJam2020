@@ -23,7 +23,7 @@ public class GameConstants
 
     public static int NormalBulletPoolSize = 100;
     public static int ShotgunBulletPoolSize = 50;
-    public static int LaserBulletPoolSize = 10;
+    public static int LaserBulletPoolSize = 50;
     public static float maxHealth = 300;
     public static float maxEnergy = 300;
     internal static float EnergyConsumptionThrust = 0.5f;

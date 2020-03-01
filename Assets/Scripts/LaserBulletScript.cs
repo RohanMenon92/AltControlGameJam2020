@@ -22,19 +22,27 @@ public class LaserBulletScript : MonoBehaviour
     Sequence beamTween;
     string shaderNoiseAmount = "Vector1_AE1B794B";
     string shaderFadeAmount = "Vector1_7E907178";
+
+    Transform endPoint;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         lineRenderer = this.GetComponentInChildren<LineRenderer>();
-        lineRenderer.transform.localScale = new Vector3(0f, 0f, beamLength);
-        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, beamLength / 2);
-        this.GetComponent<BoxCollider>().size = new Vector3(0f, 0f, beamLength);
+
+        endPoint = lineRenderer.transform.GetChild(0);
     }
 
     void OnEnable()
     {
         timeAlive = 0;
+    }
+
+    private void OnDisable()
+    {
+        lineRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, 0f);
+        this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
     }
 
     void CheckDeath(float time)
@@ -67,15 +75,13 @@ public class LaserBulletScript : MonoBehaviour
                 currBeamLength = objectDist;
             }
         }
-
     }
 
     void UpdateBeamLength()
     {
-        lineRenderer.transform.localScale = new Vector3(0f, 0f, currBeamLength);
-        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (currBeamLength / 2) + 0.5f);
-        this.GetComponent<BoxCollider>().size = new Vector3(0f, 0f, currBeamLength + 1);
-
+        lineRenderer.transform.localScale = new Vector3(1f, 1f, currBeamLength);
+        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (currBeamLength / 2) - 5f);
+        this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, currBeamLength + 5);
 
         // Reset beamLength for next Calculation
         currBeamLength = beamLength;
@@ -100,13 +106,37 @@ public class LaserBulletScript : MonoBehaviour
 
     internal void OnHit()
     {
+        // Create Particle Effect for hit
         //ReturnBulletToPool();
+    }
+
+    public void OnShield(Vector3 normalVector, Vector3 startPoint)
+    {
+        // Create new Laser Bullet at Reflection Point
+        GameObject reflectedObject = gameManager.GetBullet(GameConstants.GunTypes.LaserGun, endPoint);
+
+        LaserBulletScript reflectedLaser = reflectedObject.GetComponent<LaserBulletScript>();
+        // Set same time as current laser
+        reflectedLaser.isEnemyShot = !isEnemyShot;
+
+        reflectedLaser.transform.position = startPoint;
+        reflectedLaser.transform.forward = Vector3.Reflect(endPoint.forward, normalVector);
+
+        reflectedObject.SetActive(true);
+        reflectedLaser.FireLaser();
+        reflectedLaser.timeAlive = timeAlive;
+        // TO DO  DO LASER REFLECTION BASED ON OBJECT CREATION
     }
 
     internal void FireLaser()
     {
+        timeAlive = 0;
         if(lineRenderer != null)
         {
+            lineRenderer.transform.localScale = new Vector3(1f, 1f, beamLength);
+            this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (beamLength / 2) - 5);
+            this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, beamLength);
+
             currBeamLength = beamLength;
 
             beamTween = DOTween.Sequence();
