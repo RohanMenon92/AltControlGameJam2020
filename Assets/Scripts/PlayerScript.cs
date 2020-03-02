@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     [Header("Game Play")]
     public List<GunPort> gunPorts;
     public float health, energy;
+    public bool turretSpecificRotate = false;
 
     public VisualEffect engineEffect;
 
@@ -148,13 +149,25 @@ public class PlayerScript : MonoBehaviour
     {
         TakeInput();
         CheckShield();
+        DoShipRotations();
+    }
 
+    private void DoShipRotations()
+    {
         // 359 degrees because we want to limit rotation parameters to the potentiometer
         // Rotate Ship
         transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, transform.localEulerAngles.y + (GameConstants.RotateRudderRate * currRudderAngle), 0f), Time.deltaTime);
 
-        // Rotate Ship by rate
-        shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
+        if (turretSpecificRotate)
+        {
+            // Rotate Ship to specific amount
+            shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 359, 0f), Time.deltaTime);
+        }
+        else
+        {
+            // Rotate Ship by rate
+            shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
