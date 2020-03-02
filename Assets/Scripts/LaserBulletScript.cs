@@ -13,7 +13,7 @@ public class LaserBulletScript : MonoBehaviour
     public float aliveForSeconds = 0.25f;
     public float beamLength = 50;
 
-    float currBeamLength;
+    float currBeamLength = 50;
     float closestObjectDistance;
 
     float timeAlive;
@@ -24,6 +24,12 @@ public class LaserBulletScript : MonoBehaviour
     string shaderFadeAmount = "Vector1_7E907178";
 
     Transform endPoint;
+
+    LaserBulletScript reflectedLaser;
+    private float beamcollisionLength = 50f;
+    private bool isColliding = false;
+    private bool is3d = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +42,12 @@ public class LaserBulletScript : MonoBehaviour
     void OnEnable()
     {
         timeAlive = 0;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // On exit from collider, reset is Colliding
+        isColliding = false;
     }
 
     private void OnDisable()
@@ -57,52 +69,61 @@ public class LaserBulletScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    public void CheckBeamCollisionStay(Vector3 hitPoint, Vector3 normal)
     {
-        bool isValidHit = false;
-        // Set Closest Object and apply to beam length
-        if(!isEnemyShot)
+        float distanceToBeam = Vector3.Distance(hitPoint, transform.position) + 5f;
+        if (distanceToBeam < currBeamLength)
         {
-            isValidHit = other.tag == "Asteroid" || other.tag == "EnemyShip";
-        } else
-        {
-            isValidHit = other.tag == "Asteroid" || other.tag == "Player";
-        }
-
-
-        if (isValidHit)
-        {
-            float objectDist = Vector3.Distance(transform.position, other.transform.position);
-            if (objectDist < currBeamLength)
+            beamcollisionLength = distanceToBeam;
+            if (reflectedLaser != null)
             {
-                currBeamLength = objectDist;
+                Vector3 reflectionAngle = Vector3.Reflect(endPoint.forward, normal);
+                if(!is3d)
+                {
+                    reflectionAngle = new Vector3(reflectionAngle.x, 0f, reflectionAngle.z);
+                }
+                reflectedLaser.transform.forward = reflectionAngle;
+                reflectedLaser.transform.position = hitPoint + reflectedLaser.transform.forward;
             }
         }
+
+
+        isColliding = true;
     }
 
     void UpdateBeamLength()
     {
+        // Hold down position of beam
+        if (!isColliding)
+        {
+            currBeamLength = beamLength;
+        } else
+        {
+            currBeamLength = beamcollisionLength;
+        }
+
         lineRenderer.transform.localScale = new Vector3(1f, 1f, currBeamLength);
         this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (currBeamLength / 2) - 5f);
         this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, currBeamLength + 5);
-
-        // Reset beamLength for next Calculation
-        currBeamLength = beamLength;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateBeamLength();
         CheckDeath(Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
-        UpdateBeamLength();
     }
 
     void ReturnBulletToPool()
     {
+        if(reflectedLaser!=null)
+        {
+            reflectedLaser.ReturnBulletToPool();
+        }
         // Return Bullet
         gameManager.ReturnBulletToPool(gameObject, GameConstants.GunTypes.LaserGun);
     }
@@ -113,12 +134,12 @@ public class LaserBulletScript : MonoBehaviour
         //ReturnBulletToPool();
     }
 
-    public void OnShield(Vector3 normalVector, Vector3 startPoint)
+    public void OnShieldEnter(Vector3 normalVector, Vector3 startPoint)
     {
         // Create new Laser Bullet at Reflection Point
         GameObject reflectedObject = gameManager.GetBullet(GameConstants.GunTypes.LaserGun, endPoint);
 
-        LaserBulletScript reflectedLaser = reflectedObject.GetComponent<LaserBulletScript>();
+        reflectedLaser = reflectedObject.GetComponent<LaserBulletScript>();
         // Set same time as current laser
         reflectedLaser.isEnemyShot = !isEnemyShot;
 
@@ -127,32 +148,31 @@ public class LaserBulletScript : MonoBehaviour
 
         reflectedObject.SetActive(true);
         reflectedLaser.FireLaser();
-        reflectedLaser.timeAlive = timeAlive;
         // TO DO  DO LASER REFLECTION BASED ON OBJECT CREATION
     }
 
     internal void FireLaser()
     {
         timeAlive = 0;
-        if(lineRenderer != null)
-        {
-            lineRenderer.transform.localScale = new Vector3(1f, 1f, beamLength);
-            this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (beamLength / 2) - 5);
-            this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, beamLength);
+        lineRenderer = this.GetComponentInChildren<LineRenderer>();
 
-            currBeamLength = beamLength;
+        lineRenderer.transform.localScale = new Vector3(1f, 1f, beamLength);
+        this.GetComponent<BoxCollider>().center = new Vector3(0f, 0f, (beamLength / 2) - 5);
+        this.GetComponent<BoxCollider>().size = new Vector3(1f, 1f, beamLength);
 
-            beamTween = DOTween.Sequence();
-            lineRenderer.material.SetFloat(shaderNoiseAmount, 1f);
-            lineRenderer.material.SetFloat(shaderFadeAmount, 0f);
+        currBeamLength = beamLength;
+        UpdateBeamLength();
 
-            beamTween.Insert(0f, lineRenderer.material.DOFloat(0.1f, shaderNoiseAmount, aliveForSeconds * 0.75f));
-            beamTween.Insert(0f, lineRenderer.material.DOFloat(10f, shaderFadeAmount, aliveForSeconds * 0.5f));
+        beamTween = DOTween.Sequence();
+        lineRenderer.material.SetFloat(shaderNoiseAmount, 1f);
+        lineRenderer.material.SetFloat(shaderFadeAmount, 0f);
+
+        beamTween.Insert(0f, lineRenderer.material.DOFloat(0.1f, shaderNoiseAmount, aliveForSeconds * 0.75f));
+        beamTween.Insert(0f, lineRenderer.material.DOFloat(10f, shaderFadeAmount, aliveForSeconds * 0.5f));
             
-            beamTween.Insert(aliveForSeconds * 0.8f, lineRenderer.material.DOFloat(1.0f, shaderNoiseAmount, aliveForSeconds * 0.2f));
-            beamTween.Insert(aliveForSeconds * 0.8f, lineRenderer.material.DOFloat(0.0f, shaderFadeAmount, aliveForSeconds * 0.2f));
+        beamTween.Insert(aliveForSeconds * 0.8f, lineRenderer.material.DOFloat(1.0f, shaderNoiseAmount, aliveForSeconds * 0.2f));
+        beamTween.Insert(aliveForSeconds * 0.8f, lineRenderer.material.DOFloat(0.0f, shaderFadeAmount, aliveForSeconds * 0.2f));
             
-            beamTween.Play();
-        }
+        beamTween.Play();
     }
 }

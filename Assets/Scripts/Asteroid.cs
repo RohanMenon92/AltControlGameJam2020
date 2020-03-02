@@ -58,6 +58,20 @@ public class Asteroid : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnTriggerStay(Collider collision)
+    {
+        // Check Laser CollisionFOrBullet
+        LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
+
+        if (laserBullet != null)
+        {
+            Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+            Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
+
+            laserBullet.CheckBeamCollisionStay(collisionPoint, collisionNormal);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         LaserBulletScript laserBullet = other.gameObject.GetComponent<LaserBulletScript>();

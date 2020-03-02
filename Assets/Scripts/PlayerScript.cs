@@ -175,9 +175,12 @@ public class PlayerScript : MonoBehaviour
 
     void FireCannons()
     {
-        foreach(GunPort gun in gunPorts)
+        if(energy > 0f)
         {
-            gun.Fire(false, transform);
+            foreach (GunPort gun in gunPorts)
+            {
+                gun.Fire(false, transform);
+            }
         }
     }
 
@@ -186,6 +189,20 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyShip"))
         {
             // Ramming logic
+        }
+    }
+
+    private void OnTriggerStay(Collider collision)
+    {
+        // Check Laser CollisionFOrBullet
+        LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
+
+        if (laserBullet != null && laserBullet.isEnemyShot)
+        {
+            Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+            Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
+
+            laserBullet.CheckBeamCollisionStay(collisionPoint, collision.ClosestPoint(transform.position));
         }
     }
 
@@ -198,7 +215,8 @@ public class PlayerScript : MonoBehaviour
         BulletScript normalBullet = collision.gameObject.GetComponent<BulletScript>();
 
         // Convert BoundsToLocalSpace
-        Vector3 collisionNormal = transform.InverseTransformDirection(collision.ClosestPoint(transform.position) - transform.position).normalized;
+        Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+        Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
 
         if (!is3D)
         {
@@ -211,9 +229,9 @@ public class PlayerScript : MonoBehaviour
             if(isShielding)
             {
                 // Calculate Normal Differently for laser beam
-                adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
                 collisionNormal = transform.InverseTransformDirection(selfCollider.ClosestPoint(collision.transform.position) - transform.position).normalized;
-                laserBullet.OnShield(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
+                adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
+                laserBullet.OnShieldEnter(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
             }
             else
             {

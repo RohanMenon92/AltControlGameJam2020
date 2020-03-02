@@ -29,18 +29,24 @@ public class AdaptiveShieldScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DecayShieldOverTime();
+    }
+
+    void DecayShieldOverTime()
+    {
         float fadeAmount = shieldMaterial.GetFloat(shaderFadeAmount);
+        float sphereRadius = shieldMaterial.GetFloat(shaderSphereRadius);
         if (fadeAmount > 0f)
         {
             if (shieldOn)
             {
                 shieldMaterial.SetFloat(shaderFadeAmount, fadeAmount - adaptiveShieldDecay);
+                shieldMaterial.SetFloat(shaderSphereRadius, sphereRadius - adaptiveShieldDecay/5);
             }
             else
             {
                 shieldMaterial.SetFloat(shaderFadeAmount, fadeAmount - 0.1f);
             }
-
         }
     }
 
@@ -59,11 +65,11 @@ public class AdaptiveShieldScript : MonoBehaviour
             {
                 normalizedHit = new Vector3(normalizedHit.x, 0f, normalizedHit.z);
             }
-            hitShowSequence.Insert(0f, shieldMaterial.DOVector(normalizedHit, shaderSphereHitNormalized, adaptiveShieldMoveTime));
+            hitShowSequence.Insert(0f, shieldMaterial.DOVector(normalizedHit, shaderSphereHitNormalized, adaptiveShieldMoveTime).SetEase(Ease.InOutBack));
             shieldMaterial.SetFloat(shaderSphereRadius, 0f);
             shieldMaterial.SetFloat(shaderFadeAmount, 1f);
-            hitShowSequence.Insert(0f, shieldMaterial.DOFloat(0.75f, shaderSphereRadius, adaptiveShieldMoveTime));
-            hitShowSequence.Insert(0f, shieldMaterial.DOFloat(1.4f, shaderFadeAmount, adaptiveShieldMoveTime));
+            hitShowSequence.Insert(0.1f, shieldMaterial.DOFloat(0.75f, shaderSphereRadius, adaptiveShieldMoveTime));
+            hitShowSequence.Insert(0.1f, shieldMaterial.DOFloat(1.1f, shaderFadeAmount, adaptiveShieldMoveTime).SetEase(Ease.InOutBack));
         }
     }
 }

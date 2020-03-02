@@ -404,8 +404,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1430558448647887449}
   - component: {fileID: 7758667827482718249}
-  - component: {fileID: 6463494492804788816}
   - component: {fileID: 3915880204673931006}
+  - component: {fileID: 6594902704491680057}
   m_Layer: 0
   m_Name: Enemy0
   m_TagString: EnemyShip
@@ -446,20 +446,6 @@ MonoBehaviour:
   scoreReward: 2000
   gunPorts:
   - {fileID: 4966043768852812704}
---- !u!136 &6463494492804788816
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2702446253115025482}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 167.52
-  m_Height: 498.03687
-  m_Direction: 2
-  m_Center: {x: -0.20730591, y: 0, z: 1.0646362}
 --- !u!54 &3915880204673931006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -476,6 +462,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!64 &6594902704491680057
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702446253115025482}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -1222556520555800222, guid: 4be74aa0b0ff06d47977e7089a513901, type: 3}
 --- !u!1 &3021207407812931833
 GameObject:
   m_ObjectHideFlags: 0
