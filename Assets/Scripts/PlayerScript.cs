@@ -80,7 +80,11 @@ public class PlayerScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            if (currThrust > 0.0f)
+            if (currThrust - 0.01f < 0f)
+            {
+                currThrust = 0f;
+            }
+            else if (currThrust > 0.0f)
             {
                 currThrust -= 0.01f;
             }
@@ -300,7 +304,14 @@ public class PlayerScript : MonoBehaviour
 
     internal void OnRecharge()
     {
-        energy += GameConstants.RechargeGain;
+        if (energy + GameConstants.RechargeGain > GameConstants.maxEnergy)
+        {
+            energy = GameConstants.maxEnergy;
+        }
+        else
+        {
+            energy += GameConstants.RechargeGain;
+        }
     }
 
     internal void OnFire()
