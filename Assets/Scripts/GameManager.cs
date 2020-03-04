@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerScript>();
     }
 
+    public void GameOver()
+    {
+
+    }
+
     public GameObject GetBullet(GameConstants.GunTypes gunType, Transform gunPort)
     {
         GameObject bulletObject = null;
