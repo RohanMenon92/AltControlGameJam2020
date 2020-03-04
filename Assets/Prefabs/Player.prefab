@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 7208927294323122479}
   health: 0
   energy: 0
+  turretSpecificRotate: 0
   engineEffect: {fileID: 1008872983579618293}
 --- !u!54 &3031276405639178026
 Rigidbody:
@@ -386,6 +387,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3031276405639178029}
     m_Modifications:
+    - target: {fileID: 2304450148031086787, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304450148031086787, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304450148031086787, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304450148031086787, guid: f705ddca3d72c4b48971ced20fe59aaa,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6007072672333774901, guid: f705ddca3d72c4b48971ced20fe59aaa,
         type: 3}
       propertyPath: m_Name

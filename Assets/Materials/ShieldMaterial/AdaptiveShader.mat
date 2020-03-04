@@ -236,7 +236,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_C2FCA5A1: {r: 0, g: 5.992157, b: 0.53333336, a: 0.26666668}
+    - Color_C2FCA5A1: {r: 5.0529275, g: 1.0052356, b: 15.999998, a: 0.26666668}
     - Vector3_3535B637: {r: 0.37, g: 0.28, b: 0.42, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
