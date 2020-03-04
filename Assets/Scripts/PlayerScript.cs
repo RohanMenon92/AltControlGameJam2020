@@ -38,16 +38,23 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shieldScript = GetComponentInChildren<ShieldScript>();
-        adaptiveShield = GetComponentInChildren<AdaptiveShieldScript>();
-
         health = GameConstants.maxHealth;
         energy = GameConstants.maxEnergy;
 
-        // Make this a function too?
-        adaptiveShield.shieldOn = false;
-        selfCollider = GetComponent<Collider>();
+        InitializeShieldColliders();
 
+        selfCollider = GetComponent<Collider>();
+    }
+
+    void InitializeShieldColliders()
+    {
+        shieldScript = GetComponentInChildren<ShieldScript>(true);
+        adaptiveShield = GetComponentInChildren<AdaptiveShieldScript>(true);
+
+        shieldScript.gameObject.SetActive(true);
+        adaptiveShield.gameObject.SetActive(true);
+
+        adaptiveShield.shieldOn = false;
         shieldScript.TurnOffShield();
     }
 
@@ -241,9 +248,12 @@ public class PlayerScript : MonoBehaviour
             collisionNormal = new Vector3(collisionNormal.x, 0f, collisionNormal.z);
         }
 
+        // Check if the shot is from the front within a threshold 1.7f is north east to north west
+        bool isFrontShot = (shipShield.forward - collision.transform.forward).magnitude > GameConstants.ShieldFrontThreshold;
+
         if (laserBullet != null && laserBullet.isEnemyShot)
         {
-            if(isShielding)
+            if(isShielding && !isFrontShot)
             {
                 // Calculate Normal Differently for laser beam
                 collisionNormal = transform.InverseTransformDirection(selfCollider.ClosestPoint(collision.transform.position) - transform.position).normalized;
@@ -258,7 +268,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
-            if (isShielding)
+            if (isShielding && !isFrontShot)
             {
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
@@ -271,7 +281,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
         {
-            if (isShielding)
+            if (isShielding && !isFrontShot)
             {
                 adaptiveShield.OnHit(collisionNormal, normalBullet.damage);
                 normalBullet.OnShield(transform.TransformDirection(collisionNormal));
@@ -329,6 +339,9 @@ public class PlayerScript : MonoBehaviour
 
     internal void OnFire()
     {
-        FireCannons();
+        if(!isShielding)
+        {
+            FireCannons();
+        }
     }
 }

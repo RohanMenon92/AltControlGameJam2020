@@ -24,6 +24,7 @@ public class GameConstants
     public static int NormalBulletPoolSize = 100;
     public static int ShotgunBulletPoolSize = 50;
     public static int LaserBulletPoolSize = 50;
+    public static int EffectsPoolSize = 50;
     public static float maxHealth = 300;
     public static float maxEnergy = 300;
     internal static float EnergyConsumptionThrust = 0.5f;
@@ -35,6 +36,7 @@ public class GameConstants
 
     internal static float ShieldAppearTime = 0.75f;
     public static float ShieldEnergyUsage = 0.2f;
+    internal static float ShieldFrontThreshold = 1.7f;
 
     // Start is called before the first frame update
 

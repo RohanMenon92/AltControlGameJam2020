@@ -9,9 +9,19 @@ public class GameManager : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject laserBulletPrefab;
 
+    public GameObject shieldHitPrefab;
+    public GameObject bulletHitPrefab;
+    public GameObject damageSmokePrefab;
+    public GameObject explodeEffectPrefab;
+
     public Transform unusedBulletPool;
     public Transform unusedShotgunBulletPool;
     public Transform unusedLaserBulletPool;
+
+    public Transform shieldEffectsPool;
+    public Transform bulletHitEffectPool;
+    public Transform smokeEffectPool;
+    public Transform explodeEffectPool;
 
     public Transform worldBullets;
 
@@ -47,6 +57,28 @@ public class GameManager : MonoBehaviour
         {
             GameObject newBullet = Instantiate(laserBulletPrefab, unusedLaserBulletPool);
             newBullet.SetActive(false);
+        }
+
+
+        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        {
+            GameObject newShieldhit = Instantiate(shieldHitPrefab, shieldEffectsPool);
+            newShieldhit.SetActive(false);
+        }
+        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        {
+            GameObject newBulletHit = Instantiate(bulletHitPrefab, bulletHitEffectPool);
+            newBulletHit.SetActive(false);
+        }
+        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        {
+            GameObject smokeEffect = Instantiate(damageSmokePrefab, smokeEffectPool);
+            smokeEffect.SetActive(false);
+        }
+        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        {
+            GameObject explodeEffect = Instantiate(explodeEffectPrefab, explodeEffectPool);
+            explodeEffect.SetActive(false);
         }
 
         player = FindObjectOfType<PlayerScript>();
