@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameConstants
 {
+    // Input Interface
     public enum InputSignals
     {
         P2,
@@ -14,30 +15,49 @@ public class GameConstants
         B3,
         P1
     }
+
     public enum GunTypes
     {
         MachineGun,
         ShotGun,
         LaserGun
     }
-
+    
+    // Normal Bullet Pooling Size
     public static int NormalBulletPoolSize = 100;
+    // Shotgun Bullet pooling size
     public static int ShotgunBulletPoolSize = 50;
+    // Laser bullet pooling size
     public static int LaserBulletPoolSize = 50;
+    // Effects pooling size
     public static int EffectsPoolSize = 50;
+
+    // Maximum health
     public static float maxHealth = 300;
+    // Maximum energy
     public static float maxEnergy = 300;
+
+    // Thrust consumes energy (is multiplied by rate of thrust)
     internal static float EnergyConsumptionThrust = 0.5f;
 
+    // Speed at which rudder turns ship
     public static float RotateRudderRate = 90f;
+
+    // Speed at which rotate aiming works
     public static float RotateAimRate = 120f;
-    internal static float RechargeGain = 30f;
-    internal static string HighScorePlayerPref = "HighScore";
+    
+    
+    public static string HighScorePlayerPref = "HighScore";
 
-    internal static float ShieldAppearTime = 0.75f;
+    // Amount of recharge gained when pressing Recharge
+    public static float RechargeGain = 30f;
+    // Energy that shield uses
     public static float ShieldEnergyUsage = 0.2f;
-    internal static float ShieldFrontThreshold = 1.7f;
 
-    // Start is called before the first frame update
-
+    // Fade In time for shield (still refelects bullets as soon as it is pressed)
+    public static float ShieldAppearTime = 0.75f;
+    // Area in front where shield is not active
+    public static float ShieldFrontThreshold = 1.7f;
+    // Number of waves to win
+    public static int WaveWinCondition = 5;
 }

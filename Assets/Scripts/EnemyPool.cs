@@ -37,6 +37,7 @@ public class EnemyPool : MonoBehaviour
         // If all enemies are inactive
         if (allInactive)
         {
+            FindObjectOfType<GameManager>().IncrementWaves();
             int randPosition = Random.Range(numOfEnemies, numOfEnemies*2);
             for (int i = 0; i < numOfEnemies; i++)
             {

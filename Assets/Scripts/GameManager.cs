@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;      // for the title to have the high score
     public int scorePerSecond = 10;
+    public int currentWave;
+
     private float elapsedTime = 0; // used for score bit every second
 
     // Start is called before the first frame update
@@ -84,9 +86,23 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerScript>();
     }
 
+    public void IncrementWaves()
+    {
+        currentWave++;
+        if(currentWave > GameConstants.WaveWinCondition)
+        {
+            HasWon();
+        }
+    }
+
+    public void HasWon()
+    {
+        // Call Win Screen Here
+    }
+
     public void GameOver()
     {
-
+        // Call GameOver Screen Here
     }
 
     public GameObject GetBullet(GameConstants.GunTypes gunType, Transform gunPort)

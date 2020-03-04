@@ -154,6 +154,10 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(health<0)
+        {
+            FindObjectOfType<GameManager>().GameOver();
+        }
         TakeInput();
         CheckShield();
         DoShipRotations();
