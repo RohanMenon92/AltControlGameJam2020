@@ -33,11 +33,11 @@ public class UIGame : MonoBehaviour
         string newText;
         if (newHighScore)
         {
-           newText = "!!! NEW High Score: " + currentManager.score + " !!!";
+           newText = "!!! NEW High Score: " + currentManager.GetScore() + " !!!";
         }
         else
         {
-           newText = "Game Score: " + currentManager.score;
+           newText = "Game Score: " + currentManager.GetScore();
         }
 
         gameOverScore.text = newText;
