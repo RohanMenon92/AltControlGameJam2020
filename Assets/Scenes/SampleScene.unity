@@ -709,6 +709,7 @@ MonoBehaviour:
   baudRate: 115200
   timeout: 100
   pingPerFrames: 10
+  hasError: 0
 --- !u!4 &1129421500
 Transform:
   m_ObjectHideFlags: 0
@@ -805,9 +806,9 @@ MonoBehaviour:
   explodeEffectsPool: {fileID: 1450831731}
   worldBullets: {fileID: 1445374187}
   worldEffects: {fileID: 61384809}
-  score: 0
   scorePerSecond: 10
   currentWave: 0
+  hasFinished: 0
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0
@@ -1476,6 +1477,7 @@ MonoBehaviour:
   - {fileID: 3537583667342675441, guid: 84ae7ab3bb3e9364fb181f3ea823e6ad, type: 3}
   player: {fileID: 905252355}
   numOfEnemies: 5
+  numOfEnemiesInPool: 100
   spawnTime: 0
   radius: 80
   hardModeWave: 3
@@ -1484,6 +1486,7 @@ MonoBehaviour:
   minFirePerSecondsInHardMode: 0.5
   maxFirePerSecondsInHardMode: 5
   enemyPool: []
+  activeEnemy: []
 --- !u!4 &1753131437
 Transform:
   m_ObjectHideFlags: 0
