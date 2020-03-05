@@ -205,7 +205,7 @@ public class PlayerScript : MonoBehaviour
 
     void FireCannons()
     {
-        if(energy > 0f)
+        if (energy > 0f && !isShielding)
         {
             foreach (GunPort gun in gunPorts)
             {
@@ -305,8 +305,10 @@ public class PlayerScript : MonoBehaviour
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
+            Debug.Log("Checking Shotun Shield");
             if (isShielding && !IsFrontShot(collision.transform))
             {
+                Debug.Log("Checking Shotun Shield");
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
@@ -380,9 +382,6 @@ public class PlayerScript : MonoBehaviour
 
     internal void OnFire()
     {
-        if(!isShielding)
-        {
-            FireCannons();
-        }
+        FireCannons();
     }
 }
