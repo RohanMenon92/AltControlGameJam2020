@@ -14,19 +14,28 @@ public class InputListener : MonoBehaviour
     GameManager gameManager;
 
     SerialPort stream;
+
+    public bool hasError = false;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         stream = new SerialPort(comPort, baudRate);
         stream.ReadTimeout = 10000;
-        stream.Open();
+        try
+        {
+            stream.Open();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.frameCount % pingPerFrames == 0)
+        if(Time.frameCount % pingPerFrames == 0 && !hasError)
         {
             // Ask for data
             RequestArduino();
@@ -128,8 +137,15 @@ public class InputListener : MonoBehaviour
 
     public void RequestArduino()
     {
-        stream.Write("a");
-        stream.BaseStream.Flush();
+        try
+        {
+            stream.Write("a");
+            stream.BaseStream.Flush();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
     }
 
     public IEnumerator AsynchronousReadFromArduino(Action<string> callback, Action fail = null, float timeout = float.PositiveInfinity)

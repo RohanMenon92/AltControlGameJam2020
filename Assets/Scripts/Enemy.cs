@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
             gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
+            GetComponentInParent<EnemyPool>().activeEnemy.Remove(gameObject);
         }
     }
 
