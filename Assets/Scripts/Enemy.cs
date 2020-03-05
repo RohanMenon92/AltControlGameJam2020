@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float shootingRange;
     public int scoreReward = 500;
+    Rigidbody rb;
 
     public List<GunPort> gunPorts;
 
@@ -18,7 +19,7 @@ public class Enemy : MonoBehaviour
     {
         player = FindObjectOfType<PlayerScript>();
         gameManager = FindObjectOfType<GameManager>();
-
+        rb = GetComponent<Rigidbody>();
         currentHealth = enemyHealth;
     }
 
@@ -37,10 +38,16 @@ public class Enemy : MonoBehaviour
     public void Move()
     {
         transform.LookAt(player.transform.position);
-        if (Vector3.Distance(player.transform.position, transform.position) > shootingRange)
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (distance > shootingRange && distance < shootingRange * 3)
         {
-           
+            rb.isKinematic = false;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        if (distance >= shootingRange * 3)
+        {
+            rb.isKinematic = true;
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * 5 * Time.deltaTime);
         }
     }
 
