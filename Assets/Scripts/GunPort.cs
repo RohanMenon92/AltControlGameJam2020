@@ -6,8 +6,9 @@ public class GunPort : MonoBehaviour
 {
     public GameConstants.GunTypes gunType = GameConstants.GunTypes.MachineGun;
     // Start is called before the first frame update
-
     GameManager gameManager;
+    public AudioClip laserSound;
+    AudioSource musicPlayer;
 
     public float firePerSeconds;
     bool canFire = true;
@@ -15,6 +16,7 @@ public class GunPort : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        musicPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +40,11 @@ public class GunPort : MonoBehaviour
                     newBullet.GetComponent<Rigidbody>().velocity = firedShip.GetComponent<Rigidbody>().velocity;
                     newBullet.gameObject.SetActive(true);
                     newBullet.FireBullet();
+                    musicPlayer.clip = laserSound;
+                    if (!musicPlayer.isPlaying) 
+                    {
+                        musicPlayer.Play();
+                    }
                     // Set transform and set initial velocity of rigidbody component
                     break;
                 case GameConstants.GunTypes.ShotGun:
@@ -52,6 +59,11 @@ public class GunPort : MonoBehaviour
                         newShoutgunBullet.GetComponent<Rigidbody>().velocity = firedShip.GetComponent<Rigidbody>().velocity;
                         newShoutgunBullet.gameObject.SetActive(true);
                         newShoutgunBullet.FireShotgun();
+                    }
+                    musicPlayer.clip = laserSound;
+                    if (!musicPlayer.isPlaying)
+                    {
+                        musicPlayer.Play();
                     }
                     // Get 5-10 ShotGun Bullets from GameManager.ShotGunBulletPool
                     // Give random spread to rotation/initial position
@@ -68,7 +80,11 @@ public class GunPort : MonoBehaviour
 
                     newLaserBullet.gameObject.SetActive(true);
                     newLaserBullet.FireLaser();
-
+                    musicPlayer.clip = laserSound;
+                    if (!musicPlayer.isPlaying)
+                    {
+                        musicPlayer.Play();
+                    }
                     break;
             }
             // Cannot fire and start Coroutine to be able to fire next

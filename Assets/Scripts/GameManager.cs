@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     public Transform worldBullets;
     public Transform worldEffects;
 
-
     // public player
     PlayerScript player;
 
