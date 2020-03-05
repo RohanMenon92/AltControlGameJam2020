@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIGame : MonoBehaviour
@@ -10,6 +11,9 @@ public class UIGame : MonoBehaviour
     public Image energyImage;
     public Text scoreBoard;
     private GameManager currentManager;
+    public GameObject gameplayScreen;
+    public GameObject gameOverScreen;
+    public Text gameOverScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +28,24 @@ public class UIGame : MonoBehaviour
         scoreBoard.text = newText;
         healthImage.fillAmount = player.health / GameConstants.maxHealth;
         energyImage.fillAmount = player.energy / GameConstants.maxEnergy;
+    }
+    public void gameOver(bool newHighScore) {
+        string newText;
+        if (newHighScore)
+        {
+           newText = "!!! NEW High Score: " + currentManager.score + " !!!";
+        }
+        else
+        {
+           newText = "Game Score: " + currentManager.score;
+        }
+
+        gameOverScore.text = newText;
+        gameplayScreen.SetActive(false);
+        gameOverScreen.SetActive(true);
+    }
+
+    public void restart() {
+        SceneManager.LoadScene(0);
     }
 }

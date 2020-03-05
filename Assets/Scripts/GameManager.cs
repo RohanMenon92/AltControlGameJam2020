@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     bool isRechargePressed;
     bool isFiring;
     bool isShielding;
+   
 
     int score = 0;      // for the title to have the high score
     public int scorePerSecond = 10;
@@ -119,10 +120,15 @@ public class GameManager : MonoBehaviour
         if(PlayerPrefs.GetInt(GameConstants.HighScorePlayerPref) < score)
         {
             PlayerPrefs.SetInt(GameConstants.HighScorePlayerPref, score);
+            FindObjectOfType<UIGame>().gameOver(true);
+            return;
         }
-        // Call GameOver Screen Here
-    }
+        FindObjectOfType<UIGame>().gameOver(false);
+        return;
 
+    }
+    
+    
     public GameObject BeginEffect(GameConstants.EffectTypes effectType, Vector3 position, Vector3 lookAt)
     {
         GameObject effectObject = null;
