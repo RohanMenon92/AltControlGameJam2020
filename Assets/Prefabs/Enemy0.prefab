@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 120
-  speed: 5
+  speed: 7
   shootingRange: 25
   scoreReward: 2000
   gunPorts:

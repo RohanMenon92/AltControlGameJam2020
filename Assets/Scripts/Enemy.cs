@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
         transform.LookAt(player.transform.position);
         if (Vector3.Distance(player.transform.position, transform.position) > shootingRange)
         {
-           
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
     }
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = enemyHealth;
             gameObject.SetActive(false);
-            gameManager.score += scoreReward;
+            gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
         }
     }

@@ -54,7 +54,7 @@ public class InputListener : MonoBehaviour
 
     void OnGetValue(GameConstants.InputSignals signal, float val)
     {
-        Debug.Log(signal.ToString() + " " + val);
+        //Debug.Log(signal.ToString() + " " + val);
         switch (signal)
         {
             case GameConstants.InputSignals.P1:
