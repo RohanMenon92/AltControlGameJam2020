@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if(PlayerPrefs.GetInt(GameConstants.HighScorePlayerPref) < score)
+        {
+            PlayerPrefs.SetInt(GameConstants.HighScorePlayerPref, score);
+        }
         // Call GameOver Screen Here
     }
 
