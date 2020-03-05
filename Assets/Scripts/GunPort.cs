@@ -83,4 +83,10 @@ public class GunPort : MonoBehaviour
         yield return new WaitForSeconds(firePerSeconds);
         canFire = true;
     }
+
+    public void resetCanFireOnRespawn()
+    {
+        StopCoroutine(ResetCanFire());
+        canFire = true;
+    }
 }

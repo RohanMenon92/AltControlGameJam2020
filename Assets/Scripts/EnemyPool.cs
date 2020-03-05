@@ -10,6 +10,13 @@ public class EnemyPool : MonoBehaviour
     public float spawnTime;
     public float radius;
 
+    public int hardModeWave;
+    public float minFirePerSeconds;
+    public float maxFirePerSeconds;
+
+    public float minFirePerSecondsInHardMode;
+    public float maxFirePerSecondsInHardMode;
+
     public List<GameObject> enemyPool;
     void Start()
     {
@@ -51,7 +58,26 @@ public class EnemyPool : MonoBehaviour
                 enemyPool[i].transform.rotation = rot;
                 enemyPool[i].transform.Rotate(0, -90, 0);
                 enemyPool[i].SetActive(true);
+                randomGunPortParams(enemyPool[i].GetComponent<Enemy>().gunPorts);
             }
+        }
+    }
+
+    void randomGunPortParams(List<GunPort> gunPorts)
+    {
+        foreach (GunPort gun in gunPorts)
+        {
+            if (FindObjectOfType<GameManager>().currentWave >= hardModeWave)
+            {
+                gun.firePerSeconds = Random.Range(minFirePerSecondsInHardMode, maxFirePerSecondsInHardMode);
+                gun.gunType = (GameConstants.GunTypes)Random.Range(0, 3);
+            }
+            else
+            {
+                gun.firePerSeconds = Random.Range(minFirePerSeconds, maxFirePerSeconds);
+                gun.gunType = (GameConstants.GunTypes)Random.Range(0, 2);
+            }
+            gun.resetCanFireOnRespawn();
         }
     }
 }

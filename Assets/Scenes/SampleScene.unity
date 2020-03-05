@@ -1093,6 +1093,7 @@ MonoBehaviour:
   worldBullets: {fileID: 1445374187}
   score: 0
   scorePerSecond: 10
+  currentWave: 0
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0
@@ -1762,6 +1763,11 @@ MonoBehaviour:
   numOfEnemies: 5
   spawnTime: 0
   radius: 80
+  hardModeWave: 3
+  minFirePerSeconds: 1
+  maxFirePerSeconds: 6
+  minFirePerSecondsInHardMode: 0.5
+  maxFirePerSecondsInHardMode: 5
   enemyPool: []
 --- !u!4 &1753131437
 Transform:

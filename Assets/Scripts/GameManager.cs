@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
     public void IncrementWaves()
     {
         // Code for setting win condition from GameConstants
-        //currentWave++;
+        currentWave++;
         //if(currentWave > GameConstants.WaveWinCondition)
         //{
         //    HasWon();

@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 7758667827482718249}
   - component: {fileID: 3915880204673931006}
   - component: {fileID: 6594902704491680057}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy0
   m_TagString: EnemyShip
   m_Icon: {fileID: 0}
