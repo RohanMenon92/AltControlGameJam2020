@@ -36,7 +36,7 @@ public class Asteroid : MonoBehaviour
         // added for a possibility to count asteroid score
         if (renderer.isVisible)
         {
-            FindObjectOfType<GameManager>().score += scoreReward;
+            FindObjectOfType<GameManager>().IncrementScore(scoreReward);
         }
     }
 

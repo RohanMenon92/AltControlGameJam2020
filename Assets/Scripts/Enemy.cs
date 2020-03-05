@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = enemyHealth;
             gameObject.SetActive(false);
-            gameManager.score += scoreReward;
+            gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
         }
     }

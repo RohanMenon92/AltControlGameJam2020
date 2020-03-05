@@ -24,7 +24,7 @@ public class UIGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string newText = "Score: " + currentManager.score;
+        string newText = "Score: " + currentManager.GetScore();
         scoreBoard.text = newText;
         healthImage.fillAmount = player.health / GameConstants.maxHealth;
         energyImage.fillAmount = player.energy / GameConstants.maxEnergy;

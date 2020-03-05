@@ -35,11 +35,22 @@ public class GameManager : MonoBehaviour
     bool isShielding;
    
 
-    public int score = 0;      // for the title to have the high score
+    int score = 0;      // for the title to have the high score
     public int scorePerSecond = 10;
     public int currentWave;
+    public bool hasFinished = false;
 
     private float elapsedTime = 0; // used for score bit every second
+
+    public void IncrementScore(int scoreVal)
+    {
+        score += scoreVal;
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        hasFinished = true;
         if(PlayerPrefs.GetInt(GameConstants.HighScorePlayerPref) < score)
         {
             PlayerPrefs.SetInt(GameConstants.HighScorePlayerPref, score);
@@ -249,24 +261,24 @@ public class GameManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= 1)
         {
-            score += scorePerSecond;
+            IncrementScore(scorePerSecond);
             elapsedTime = 0;
         }
     }
 
     internal void UpdateThrustInput(float val)
     {
-        player.currThrust = val;
+        player.currThrust = 1 - val;
     }
 
     internal void UpdateRudderAngle(float val)
     {
-        player.currRudderAngle = val - 0.5f;
+        player.currRudderAngle = -(val - 0.5f);
     }
 
     internal void UpdateAimAngle(float val)
     {
-        player.currAimAngle = val - 0.5f;
+        player.currAimAngle = -(val - 0.5f);
     }
 
     internal void UpdatePreciseAimAngle(float val)
