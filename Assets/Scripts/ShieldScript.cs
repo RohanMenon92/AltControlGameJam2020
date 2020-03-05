@@ -23,6 +23,10 @@ public class ShieldScript : MonoBehaviour
 
     public void TurnOnShield()
     {
+        if (shieldMaterial == null)
+        {
+            shieldMaterial = this.GetComponent<MeshRenderer>().material;
+        }
         shieldMaterial.SetFloat(shaderFadeParam, 0f);
         shieldMaterial.DOFloat(1f, shaderFadeParam, GameConstants.ShieldAppearTime).SetEase(Ease.OutBack);
         shieldOn = true;
@@ -30,11 +34,12 @@ public class ShieldScript : MonoBehaviour
 
     public void TurnOffShield()
     {
-        if(shieldMaterial != null)
+        if(shieldMaterial == null)
         {
-            shieldOn = false;
-            shieldMaterial.DOFloat(0f, shaderFadeParam, GameConstants.ShieldAppearTime).SetEase(Ease.OutBack);
+            shieldMaterial = this.GetComponent<MeshRenderer>().material;
         }
+        shieldOn = false;
+        shieldMaterial.DOFloat(0f, shaderFadeParam, GameConstants.ShieldAppearTime).SetEase(Ease.OutBack);
     }
 
     public void LowPowerShield()

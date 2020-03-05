@@ -13,9 +13,11 @@ public class Enemy : MonoBehaviour
 
     public List<GunPort> gunPorts;
 
+    GameManager gameManager;
     private void Start()
     {
         player = FindObjectOfType<PlayerScript>();
+        gameManager = FindObjectOfType<GameManager>();
 
         currentHealth = enemyHealth;
     }
@@ -43,7 +45,8 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = enemyHealth;
             gameObject.SetActive(false);
-            FindObjectOfType<GameManager>().score += scoreReward;
+            gameManager.score += scoreReward;
+            gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
         }
     }
 
@@ -57,6 +60,12 @@ public class Enemy : MonoBehaviour
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
 
+            if (Time.frameCount % GameConstants.BeamDamageRate == 0)
+            {
+                gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
+                HitByBullet(laserBullet.damagePerSecond);
+            }
+
             laserBullet.CheckBeamCollisionStay(collisionPoint, collisionNormal);
         }
     }
@@ -66,6 +75,11 @@ public class Enemy : MonoBehaviour
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();
         BulletScript normalBullet = collision.gameObject.GetComponent<BulletScript>();
+
+        Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+        Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
+
+        gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
 
         if (laserBullet != null && !laserBullet.isEnemyShot)
         {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4527870216833998091}
   - component: {fileID: 3375001426355401704}
   - component: {fileID: 7047955444766513493}
+  - component: {fileID: -1790623667455553430}
   m_Layer: 0
   m_Name: ShipExplode
   m_TagString: Untagged
@@ -105,3 +106,15 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-1790623667455553430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6260552258778910920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442195175e3e29c47ac85d77c47231a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

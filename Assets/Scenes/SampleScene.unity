@@ -168,6 +168,36 @@ Transform:
   m_Father: {fileID: 188891838}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &61384808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61384809}
+  m_Layer: 0
+  m_Name: WorldEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &61384809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61384808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1222307427}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &69533603
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,17 +630,17 @@ PrefabInstance:
     - target: {fileID: 3964670396778502356, guid: 2456799c18e40f842a2d3ca1cab263d5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 226
+      value: 282
       objectReference: {fileID: 0}
     - target: {fileID: 3964670396778502356, guid: 2456799c18e40f842a2d3ca1cab263d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -192
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3964670396778502356, guid: 2456799c18e40f842a2d3ca1cab263d5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -240
+      value: -311
       objectReference: {fileID: 0}
     - target: {fileID: 3964670396778502356, guid: 2456799c18e40f842a2d3ca1cab263d5,
         type: 3}
@@ -1086,13 +1116,15 @@ MonoBehaviour:
   unusedBulletPool: {fileID: 1337067247}
   unusedShotgunBulletPool: {fileID: 69533604}
   unusedLaserBulletPool: {fileID: 701120708}
-  shieldEffectsPool: {fileID: 1211570090}
-  bulletHitEffectPool: {fileID: 684526949}
-  smokeEffectPool: {fileID: 1312070317}
-  explodeEffectPool: {fileID: 1450831731}
+  shieldHitEffectsPool: {fileID: 1211570090}
+  bulletHitEffectsPool: {fileID: 684526949}
+  smokeEffectsPool: {fileID: 1312070317}
+  explodeEffectsPool: {fileID: 1450831731}
   worldBullets: {fileID: 1445374187}
+  worldEffects: {fileID: 61384809}
   score: 0
   scorePerSecond: 10
+  currentWave: 0
 --- !u!4 &1222307427
 Transform:
   m_ObjectHideFlags: 0
@@ -1112,6 +1144,7 @@ Transform:
   - {fileID: 684526949}
   - {fileID: 1312070317}
   - {fileID: 1450831731}
+  - {fileID: 61384809}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1980,6 +2013,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.60876137
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7933534
+      objectReference: {fileID: 0}
+    - target: {fileID: 3031276406974393522, guid: ca461f98536c70243bd998cce66dd2cf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6133696706461602127, guid: ca461f98536c70243bd998cce66dd2cf,
         type: 3}

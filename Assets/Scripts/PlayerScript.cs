@@ -33,11 +33,13 @@ public class PlayerScript : MonoBehaviour
     
     bool isShielding;
     Collider selfCollider;
+    GameManager gameManager;
     private bool is3D = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         health = GameConstants.maxHealth;
         energy = GameConstants.maxEnergy;
 
@@ -156,7 +158,7 @@ public class PlayerScript : MonoBehaviour
     {
         if(health<0)
         {
-            FindObjectOfType<GameManager>().GameOver();
+            gameManager.GameOver();
         }
         TakeInput();
         CheckShield();
@@ -230,8 +232,35 @@ public class PlayerScript : MonoBehaviour
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
 
+            if (!is3D)
+            {
+                // Convert to 2D tangent system
+                collisionNormal = new Vector3(collisionNormal.x, 0f, collisionNormal.z);
+            }
+
+            if (isShielding && !IsFrontShot(collision.transform))
+            {
+                // Get Effect for follow up shots every few frames
+                if (Time.frameCount % GameConstants.BeamDamageRate == 0)
+                {
+                    gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal);
+                }
+            }
+            else
+            {
+                if (Time.frameCount % GameConstants.BeamDamageRate == 0)
+                {
+                    gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal);
+                    TakeDamage(laserBullet.damagePerSecond);
+                }
+            }
             laserBullet.CheckBeamCollisionStay(collisionPoint, collision.ClosestPoint(transform.position));
         }
+    }
+
+    bool IsFrontShot(Transform shotPoint)
+    {
+        return (shipShield.forward - shotPoint.forward).magnitude > GameConstants.ShieldFrontThreshold;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -253,45 +282,53 @@ public class PlayerScript : MonoBehaviour
         }
 
         // Check if the shot is from the front within a threshold 1.7f is north east to north west
-        bool isFrontShot = (shipShield.forward - collision.transform.forward).magnitude > GameConstants.ShieldFrontThreshold;
-
         if (laserBullet != null && laserBullet.isEnemyShot)
         {
-            if(isShielding && !isFrontShot)
+            if(isShielding && !IsFrontShot(collision.transform))
             {
                 // Calculate Normal Differently for laser beam
                 collisionNormal = transform.InverseTransformDirection(selfCollider.ClosestPoint(collision.transform.position) - transform.position).normalized;
+                
+                // Spawn Effect and set its parent as ship
+                gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
+
                 adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
                 laserBullet.OnShieldEnter(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
             }
             else
             {
+                // Get Effect for laser on initial shot
+                gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 TakeDamage(laserBullet.damage);
                 laserBullet.OnHit();
             }
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
-            if (isShielding && !isFrontShot)
+            if (isShielding && !IsFrontShot(collision.transform))
             {
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
+                gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
             }
             else
             {
                 TakeDamage(shotgunBullet.damage);
+                gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnHit();
             }
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
         {
-            if (isShielding && !isFrontShot)
+            if (isShielding && !IsFrontShot(collision.transform))
             {
                 adaptiveShield.OnHit(collisionNormal, normalBullet.damage);
+                gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnShield(transform.TransformDirection(collisionNormal));
             } else
             {
                 TakeDamage(normalBullet.damage);
+                gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnHit();
             }
         }

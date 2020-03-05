@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7896640213597475086}
   - component: {fileID: 2895826528463033185}
   - component: {fileID: 5871972568521229936}
+  - component: {fileID: 5337475719465652746}
   m_Layer: 0
   m_Name: ShieldHit
   m_TagString: Untagged
@@ -104,3 +105,15 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5337475719465652746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777075603935096232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eec3055a56d4948a2b166bcf9b996f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

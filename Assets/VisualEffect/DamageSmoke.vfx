@@ -174,7 +174,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.17924529314041139,"g":0.04911438748240471,"b":0.0,"a":0.0}'
+      m_SerializableObject: '{"r":0.016493849456310273,"g":0.007114993873983622,"b":0.003557496936991811,"a":0.0}'
     min: -Infinity
     max: Infinity
     descendantCount: 0
@@ -724,10 +724,9 @@ VisualEffectResource:
     name: '[System 1]Update'
     source: "#pragma kernel CSMain\r\n#define NB_THREADS_PER_GROUP 64\n#define VFX_USE_VELOCITY_CURRENT
       1\n#define VFX_USE_LIFETIME_CURRENT 1\n#define VFX_USE_POSITION_CURRENT 1\n#define
-      VFX_USE_TEXINDEX_CURRENT 1\n#define VFX_USE_MASS_CURRENT 1\n#define VFX_USE_SIZE_CURRENT
-      1\n#define VFX_USE_SCALEX_CURRENT 1\n#define VFX_USE_SCALEY_CURRENT 1\n#define
-      VFX_USE_ALIVE_CURRENT 1\n#define VFX_USE_AGE_CURRENT 1\n#define VFX_HAS_INDIRECT_DRAW
-      1\n#define VFX_WORLD_SPACE 1\n#include \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/HDRP/VFXDefines.hlsl\"\n\n\r\nCBUFFER_START(parameters)\n
+      VFX_USE_TEXINDEX_CURRENT 1\n#define VFX_USE_MASS_CURRENT 1\n#define VFX_USE_ALIVE_CURRENT
+      1\n#define VFX_USE_AGE_CURRENT 1\n#define VFX_HAS_INDIRECT_DRAW 1\n#define VFX_WORLD_SPACE
+      1\n#include \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/HDRP/VFXDefines.hlsl\"\n\n\r\nCBUFFER_START(parameters)\n
       \   float3 Velocity_b;\n    float deltaTime_a;\nCBUFFER_END\n\n\r\n#include
       \"Packages/com.unity.visualeffectgraph/Shaders/Common/VFXCommonCompute.cginc\"\n#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc\"\n\n\r\n\r\nRWByteAddressBuffer
@@ -738,11 +737,7 @@ VisualEffectResource:
       float texIndex, float FrameRate, float deltaTime) /*mode:Constant */\n{\n    texIndex
       += FrameRate * deltaTime;\n}\nvoid Force_1(inout float3 velocity, float mass,
       float3 Velocity, float Drag, float deltaTime) /*Mode:Relative */\n{\n    velocity
-      += (Velocity - velocity) * min(1.0f,Drag * deltaTime / mass);\n}\nvoid Drag_1(inout
-      float3 velocity, float mass, float size, float scaleX, float scaleY, float dragCoefficient,
-      float deltaTime) /*UseParticleSize:True */\n{\n    \n    float2 side = size
-      * (scaleX, scaleY);\n    dragCoefficient *= side.x * side.y;\n    velocity *=
-      max(0.0,(1.0 - (dragCoefficient * deltaTime) / mass));\n}\nvoid EulerIntegration(inout
+      += (Velocity - velocity) * min(1.0f,Drag * deltaTime / mass);\n}\nvoid EulerIntegration(inout
       float3 position, float3 velocity, float deltaTime)\n{\n    position += velocity
       * deltaTime;\n}\nvoid Age(inout float age, float deltaTime)\n{\n    age += deltaTime;\n}\nvoid
       Reap(float age, float lifetime, inout bool alive)\n{\n    if(age > lifetime)
@@ -756,13 +751,11 @@ VisualEffectResource:
       = asfloat(attributeBuffer.Load((index * 0x1 + 0x1000) << 2));\n\t\t\tfloat3
       position = asfloat(attributeBuffer.Load3((index * 0x4 + 0x1800) << 2));\n\t\t\tfloat
       texIndex = asfloat(attributeBuffer.Load((index * 0x3 + 0x2800) << 2));\n\t\t\tfloat
-      mass = (float)1;\n\t\t\tfloat size = (float)0.100000001;\n\t\t\tfloat scaleX
-      = (float)1;\n\t\t\tfloat scaleY = (float)1;\n\t\t\tfloat age = asfloat(attributeBuffer.Load((index
-      * 0x3 + 0x2802) << 2));\n\t\t\t\n\r\n\t\t\t\r\n#if VFX_USE_OLDPOSITION_CURRENT\r\n\t\t\toldPosition
+      mass = (float)1;\n\t\t\tfloat age = asfloat(attributeBuffer.Load((index * 0x3
+      + 0x2802) << 2));\n\t\t\t\n\r\n\t\t\t\r\n#if VFX_USE_OLDPOSITION_CURRENT\r\n\t\t\toldPosition
       = position;\r\n#endif\r\n\t\t\t\r\n\t\t\t{\n\t\t\t    FlipbookPlay_0( /*inout
       */texIndex, (float)8, deltaTime_a);\n\t\t\t}\n\t\t\t{\n\t\t\t    Force_1( /*inout
-      */velocity, mass, Velocity_b, (float)1, deltaTime_a);\n\t\t\t}\n\t\t\t{\n\t\t\t
-      \   Drag_1( /*inout */velocity, mass, size, scaleX, scaleY, (float)1, deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
+      */velocity, mass, Velocity_b, (float)1, deltaTime_a);\n\t\t\t}\n\t\t\tEulerIntegration(
       /*inout */position, velocity, deltaTime_a);\n\t\t\tAge( /*inout */age, deltaTime_a);\n\t\t\tReap(age,
       lifetime,  /*inout */alive);\n\t\t\t\n\r\n\t\t\tif (alive)\r\n\t\t\t{\r\n\t\t\t\tattributeBuffer.Store3((index
       * 0x4 + 0x0) << 2,asuint(velocity));\n\t\t\t\tattributeBuffer.Store3((index
@@ -776,15 +769,13 @@ VisualEffectResource:
       * 0x4 + 0x0) << 2));\n\t\tfloat lifetime = asfloat(attributeBuffer.Load((index
       * 0x1 + 0x1000) << 2));\n\t\tfloat3 position = asfloat(attributeBuffer.Load3((index
       * 0x4 + 0x1800) << 2));\n\t\tfloat texIndex = asfloat(attributeBuffer.Load((index
-      * 0x3 + 0x2800) << 2));\n\t\tfloat mass = (float)1;\n\t\tfloat size = (float)0.100000001;\n\t\tfloat
-      scaleX = (float)1;\n\t\tfloat scaleY = (float)1;\n\t\tbool alive = (attributeBuffer.Load((index
+      * 0x3 + 0x2800) << 2));\n\t\tfloat mass = (float)1;\n\t\tbool alive = (attributeBuffer.Load((index
       * 0x3 + 0x2801) << 2));\n\t\tfloat age = asfloat(attributeBuffer.Load((index
       * 0x3 + 0x2802) << 2));\n\t\t\n\r\n\t\t\r\n#if VFX_USE_OLDPOSITION_CURRENT\r\n\t\toldPosition
       = position;\r\n#endif\r\n\t\t\r\n\t\t{\n\t\t    FlipbookPlay_0( /*inout */texIndex,
       (float)8, deltaTime_a);\n\t\t}\n\t\t{\n\t\t    Force_1( /*inout */velocity,
-      mass, Velocity_b, (float)1, deltaTime_a);\n\t\t}\n\t\t{\n\t\t    Drag_1( /*inout
-      */velocity, mass, size, scaleX, scaleY, (float)1, deltaTime_a);\n\t\t}\n\t\tEulerIntegration(
-      /*inout */position, velocity, deltaTime_a);\n\t\tAge( /*inout */age, deltaTime_a);\n\t\tReap(age,
+      mass, Velocity_b, (float)1, deltaTime_a);\n\t\t}\n\t\tEulerIntegration( /*inout
+      */position, velocity, deltaTime_a);\n\t\tAge( /*inout */age, deltaTime_a);\n\t\tReap(age,
       lifetime,  /*inout */alive);\n\t\t\n\r\n\t\tattributeBuffer.Store3((index *
       0x4 + 0x0) << 2,asuint(velocity));\n\t\tattributeBuffer.Store3((index * 0x4
       + 0x1800) << 2,asuint(position));\n\t\tattributeBuffer.Store((index * 0x3 +
@@ -801,13 +792,13 @@ VisualEffectResource:
       !defined(VFX_WORLD_SPACE) && !defined(VFX_LOCAL_SPACE)\n\t\t#define VFX_LOCAL_SPACE
       1\n\t\t#endif\n\t\t\n\t\t#define NB_THREADS_PER_GROUP 64\n\t\t#define VFX_USE_LIFETIME_CURRENT
       1\n\t\t#define VFX_USE_ANGLEZ_CURRENT 1\n\t\t#define VFX_USE_POSITION_CURRENT
-      1\n\t\t#define VFX_USE_TEXINDEX_CURRENT 1\n\t\t#define VFX_USE_SIZE_CURRENT
-      1\n\t\t#define VFX_USE_SCALEX_CURRENT 1\n\t\t#define VFX_USE_SCALEY_CURRENT
-      1\n\t\t#define VFX_USE_COLOR_CURRENT 1\n\t\t#define VFX_USE_ALPHA_CURRENT 1\n\t\t#define
-      VFX_USE_ALIVE_CURRENT 1\n\t\t#define VFX_USE_AXISX_CURRENT 1\n\t\t#define VFX_USE_AXISY_CURRENT
-      1\n\t\t#define VFX_USE_AXISZ_CURRENT 1\n\t\t#define VFX_USE_ANGLEX_CURRENT 1\n\t\t#define
-      VFX_USE_ANGLEY_CURRENT 1\n\t\t#define VFX_USE_PIVOTX_CURRENT 1\n\t\t#define
-      VFX_USE_PIVOTY_CURRENT 1\n\t\t#define VFX_USE_PIVOTZ_CURRENT 1\n\t\t#define
+      1\n\t\t#define VFX_USE_TEXINDEX_CURRENT 1\n\t\t#define VFX_USE_COLOR_CURRENT
+      1\n\t\t#define VFX_USE_ALPHA_CURRENT 1\n\t\t#define VFX_USE_ALIVE_CURRENT 1\n\t\t#define
+      VFX_USE_AXISX_CURRENT 1\n\t\t#define VFX_USE_AXISY_CURRENT 1\n\t\t#define VFX_USE_AXISZ_CURRENT
+      1\n\t\t#define VFX_USE_ANGLEX_CURRENT 1\n\t\t#define VFX_USE_ANGLEY_CURRENT
+      1\n\t\t#define VFX_USE_PIVOTX_CURRENT 1\n\t\t#define VFX_USE_PIVOTY_CURRENT
+      1\n\t\t#define VFX_USE_PIVOTZ_CURRENT 1\n\t\t#define VFX_USE_SIZE_CURRENT 1\n\t\t#define
+      VFX_USE_SCALEX_CURRENT 1\n\t\t#define VFX_USE_SCALEY_CURRENT 1\n\t\t#define
       VFX_USE_SCALEZ_CURRENT 1\n\t\t#define VFX_USE_AGE_CURRENT 1\n\t\t#define VFX_COLORMAPPING_DEFAULT
       1\n\t\t#define IS_TRANSPARENT_PARTICLE 1\n\t\t#define USE_SOFT_PARTICLE 1\n\t\t#define
       VFX_BLENDMODE_ALPHA 1\n\t\t#define VFX_HAS_INDIRECT_DRAW 1\n\t\t#define USE_FLIPBOOK
@@ -907,29 +898,29 @@ VisualEffectResource:
       lifetime = asfloat(attributeBuffer.Load((index * 0x1 + 0x1000) << 2));\n\t\t\t\t\t\tfloat
       angleZ = asfloat(attributeBuffer.Load((index * 0x1 + 0x1400) << 2));\n\t\t\t\t\t\tfloat3
       position = asfloat(attributeBuffer.Load3((index * 0x4 + 0x1800) << 2));\n\t\t\t\t\t\tfloat
-      texIndex = asfloat(attributeBuffer.Load((index * 0x3 + 0x2800) << 2));\n\t\t\t\t\t\tfloat
+      texIndex = asfloat(attributeBuffer.Load((index * 0x3 + 0x2800) << 2));\n\t\t\t\t\t\tfloat3
+      color = float3(1, 1, 1);\n\t\t\t\t\t\tfloat alpha = (float)1;\n\t\t\t\t\t\tbool
+      alive = (attributeBuffer.Load((index * 0x3 + 0x2801) << 2));\n\t\t\t\t\t\tfloat3
+      axisX = float3(1, 0, 0);\n\t\t\t\t\t\tfloat3 axisY = float3(0, 1, 0);\n\t\t\t\t\t\tfloat3
+      axisZ = float3(0, 0, 1);\n\t\t\t\t\t\tfloat angleX = (float)0;\n\t\t\t\t\t\tfloat
+      angleY = (float)0;\n\t\t\t\t\t\tfloat pivotX = (float)0;\n\t\t\t\t\t\tfloat
+      pivotY = (float)0;\n\t\t\t\t\t\tfloat pivotZ = (float)0;\n\t\t\t\t\t\tfloat
       size = (float)0.100000001;\n\t\t\t\t\t\tfloat scaleX = (float)1;\n\t\t\t\t\t\tfloat
-      scaleY = (float)1;\n\t\t\t\t\t\tfloat3 color = float3(1, 1, 1);\n\t\t\t\t\t\tfloat
-      alpha = (float)1;\n\t\t\t\t\t\tbool alive = (attributeBuffer.Load((index * 0x3
-      + 0x2801) << 2));\n\t\t\t\t\t\tfloat3 axisX = float3(1, 0, 0);\n\t\t\t\t\t\tfloat3
-      axisY = float3(0, 1, 0);\n\t\t\t\t\t\tfloat3 axisZ = float3(0, 0, 1);\n\t\t\t\t\t\tfloat
-      angleX = (float)0;\n\t\t\t\t\t\tfloat angleY = (float)0;\n\t\t\t\t\t\tfloat
-      pivotX = (float)0;\n\t\t\t\t\t\tfloat pivotY = (float)0;\n\t\t\t\t\t\tfloat
-      pivotZ = (float)0;\n\t\t\t\t\t\tfloat scaleZ = (float)1;\n\t\t\t\t\t\tfloat
+      scaleY = (float)1;\n\t\t\t\t\t\tfloat scaleZ = (float)1;\n\t\t\t\t\t\tfloat
       age = asfloat(attributeBuffer.Load((index * 0x3 + 0x2802) << 2));\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t#else\n\t\t\t\t\t\tbool
       alive = (attributeBuffer.Load((index * 0x3 + 0x2801) << 2));\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\tif
       (!alive)\n\t\t\t\t\t\t\treturn o;\n\t\t\t\t\t\t\t\n\t\t\t\t\t\tfloat lifetime
       = asfloat(attributeBuffer.Load((index * 0x1 + 0x1000) << 2));\n\t\t\t\t\t\tfloat
       angleZ = asfloat(attributeBuffer.Load((index * 0x1 + 0x1400) << 2));\n\t\t\t\t\t\tfloat3
       position = asfloat(attributeBuffer.Load3((index * 0x4 + 0x1800) << 2));\n\t\t\t\t\t\tfloat
-      texIndex = asfloat(attributeBuffer.Load((index * 0x3 + 0x2800) << 2));\n\t\t\t\t\t\tfloat
+      texIndex = asfloat(attributeBuffer.Load((index * 0x3 + 0x2800) << 2));\n\t\t\t\t\t\tfloat3
+      color = float3(1, 1, 1);\n\t\t\t\t\t\tfloat alpha = (float)1;\n\t\t\t\t\t\tfloat3
+      axisX = float3(1, 0, 0);\n\t\t\t\t\t\tfloat3 axisY = float3(0, 1, 0);\n\t\t\t\t\t\tfloat3
+      axisZ = float3(0, 0, 1);\n\t\t\t\t\t\tfloat angleX = (float)0;\n\t\t\t\t\t\tfloat
+      angleY = (float)0;\n\t\t\t\t\t\tfloat pivotX = (float)0;\n\t\t\t\t\t\tfloat
+      pivotY = (float)0;\n\t\t\t\t\t\tfloat pivotZ = (float)0;\n\t\t\t\t\t\tfloat
       size = (float)0.100000001;\n\t\t\t\t\t\tfloat scaleX = (float)1;\n\t\t\t\t\t\tfloat
-      scaleY = (float)1;\n\t\t\t\t\t\tfloat3 color = float3(1, 1, 1);\n\t\t\t\t\t\tfloat
-      alpha = (float)1;\n\t\t\t\t\t\tfloat3 axisX = float3(1, 0, 0);\n\t\t\t\t\t\tfloat3
-      axisY = float3(0, 1, 0);\n\t\t\t\t\t\tfloat3 axisZ = float3(0, 0, 1);\n\t\t\t\t\t\tfloat
-      angleX = (float)0;\n\t\t\t\t\t\tfloat angleY = (float)0;\n\t\t\t\t\t\tfloat
-      pivotX = (float)0;\n\t\t\t\t\t\tfloat pivotY = (float)0;\n\t\t\t\t\t\tfloat
-      pivotZ = (float)0;\n\t\t\t\t\t\tfloat scaleZ = (float)1;\n\t\t\t\t\t\tfloat
+      scaleY = (float)1;\n\t\t\t\t\t\tfloat scaleZ = (float)1;\n\t\t\t\t\t\tfloat
       age = asfloat(attributeBuffer.Load((index * 0x3 + 0x2802) << 2));\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\tAttributeFromCurve_45ABB909(
       /*inout */size, age, lifetime, Size_a);\n\t\t\t\t{\n\t\t\t\t    SetAttribute_39EE3455(
       /*inout */size, (float)4);\n\t\t\t\t}\n\t\t\t\tOrient_0( /*inout */axisX,  /*inout
@@ -1334,7 +1325,7 @@ VisualEffectResource:
       m_Vector4f:
         m_Array:
         - m_ExpressionIndex: 0
-          m_Value: {x: 0.1792453, y: 0.049114387, z: 0, w: 0}
+          m_Value: {x: 0.01649385, y: 0.007114994, z: 0.003557497, w: 0}
       m_Uint:
         m_Array: []
       m_Int:
@@ -3026,7 +3017,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661614595}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   UseParticleSize: 1
 --- !u!114 &8926484042661614595
 MonoBehaviour:
@@ -3369,7 +3360,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.17924529314041139,"g":0.04911438748240471,"b":0.0,"a":0.0}'
+      m_SerializableObject: '{"r":0.016493849456310273,"g":0.007114993873983622,"b":0.003557496936991811,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: o

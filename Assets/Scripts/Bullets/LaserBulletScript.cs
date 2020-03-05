@@ -8,7 +8,8 @@ public class LaserBulletScript : MonoBehaviour
 {
     // Can be part of a "Bullet" Super Class
     public bool isEnemyShot;
-    public float damage;
+    public float damagePerSecond = 0.1f;
+    public float damage = 5f;
     public float bulletSpeed = 0;
     public float aliveForSeconds = 0.25f;
     public float beamLength = 50;
@@ -71,6 +72,7 @@ public class LaserBulletScript : MonoBehaviour
 
     public void CheckBeamCollisionStay(Vector3 hitPoint, Vector3 normal)
     {
+        // TO DO: fix this, reflect the laser only when bool called isShield is true, in this function
         float distanceToBeam = Vector3.Distance(hitPoint, transform.position) + 5f;
         if (distanceToBeam < currBeamLength)
         {
@@ -148,7 +150,6 @@ public class LaserBulletScript : MonoBehaviour
 
         reflectedObject.SetActive(true);
         reflectedLaser.FireLaser();
-        // TO DO  DO LASER REFLECTION BASED ON OBJECT CREATION
     }
 
     internal void FireLaser()

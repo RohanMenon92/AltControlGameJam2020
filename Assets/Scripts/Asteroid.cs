@@ -11,11 +11,15 @@ public class Asteroid : MonoBehaviour
     public int scoreReward = 350;
     private bool accountedFor = false;
 
+    GameManager gameManager;
+
     void Start()
     {
         particle = GetComponent<ParticleSystem>();
         pool = FindObjectOfType<AsteroidPool>();
         renderer = GetComponent<MeshRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
+
         particle.Stop();
     }
 
@@ -68,6 +72,8 @@ public class Asteroid : MonoBehaviour
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
 
+            gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
+
             laserBullet.CheckBeamCollisionStay(collisionPoint, collisionNormal);
         }
     }
@@ -77,6 +83,11 @@ public class Asteroid : MonoBehaviour
         LaserBulletScript laserBullet = other.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = other.gameObject.GetComponent<ShotgunBulletScript>();
         BulletScript normalBullet = other.gameObject.GetComponent<BulletScript>();
+
+        Vector3 collisionPoint = other.ClosestPoint(transform.position);
+        Vector3 collisionNormal = transform.InverseTransformDirection(collisionPoint - transform.position).normalized;
+
+        gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
 
         if (laserBullet != null && !laserBullet.isEnemyShot)
         {

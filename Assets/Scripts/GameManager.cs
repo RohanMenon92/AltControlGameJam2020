@@ -18,12 +18,13 @@ public class GameManager : MonoBehaviour
     public Transform unusedShotgunBulletPool;
     public Transform unusedLaserBulletPool;
 
-    public Transform shieldEffectsPool;
-    public Transform bulletHitEffectPool;
-    public Transform smokeEffectPool;
-    public Transform explodeEffectPool;
+    public Transform shieldHitEffectsPool;
+    public Transform bulletHitEffectsPool;
+    public Transform smokeEffectsPool;
+    public Transform explodeEffectsPool;
 
     public Transform worldBullets;
+    public Transform worldEffects;
 
 
     // public player
@@ -62,24 +63,24 @@ public class GameManager : MonoBehaviour
         }
 
 
-        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        for (int i = 0; i <= GameConstants.ShieldEffectsPoolSize; i++)
         {
-            GameObject newShieldhit = Instantiate(shieldHitPrefab, shieldEffectsPool);
+            GameObject newShieldhit = Instantiate(shieldHitPrefab, shieldHitEffectsPool);
             newShieldhit.SetActive(false);
         }
-        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        for (int i = 0; i <= GameConstants.BulletEffectsPoolSize; i++)
         {
-            GameObject newBulletHit = Instantiate(bulletHitPrefab, bulletHitEffectPool);
+            GameObject newBulletHit = Instantiate(bulletHitPrefab, bulletHitEffectsPool);
             newBulletHit.SetActive(false);
         }
-        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        for (int i = 0; i <= GameConstants.DamageSmokePoolSize; i++)
         {
-            GameObject smokeEffect = Instantiate(damageSmokePrefab, smokeEffectPool);
+            GameObject smokeEffect = Instantiate(damageSmokePrefab, smokeEffectsPool);
             smokeEffect.SetActive(false);
         }
-        for (int i = 0; i <= GameConstants.EffectsPoolSize; i++)
+        for (int i = 0; i <= GameConstants.ExplosionPoolSize; i++)
         {
-            GameObject explodeEffect = Instantiate(explodeEffectPrefab, explodeEffectPool);
+            GameObject explodeEffect = Instantiate(explodeEffectPrefab, explodeEffectsPool);
             explodeEffect.SetActive(false);
         }
 
@@ -88,8 +89,8 @@ public class GameManager : MonoBehaviour
 
     public void IncrementWaves()
     {
+        currentWave++;
         // Code for setting win condition from GameConstants
-        //currentWave++;
         //if(currentWave > GameConstants.WaveWinCondition)
         //{
         //    HasWon();
@@ -108,6 +109,57 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt(GameConstants.HighScorePlayerPref, score);
         }
         // Call GameOver Screen Here
+    }
+
+    public GameObject BeginEffect(GameConstants.EffectTypes effectType, Vector3 position, Vector3 lookAt)
+    {
+        GameObject effectObject = null;
+
+        switch (effectType)
+        {
+            // Get First Child, set parent to gunport (to remove from respective pool)
+            case GameConstants.EffectTypes.BulletHit:
+                effectObject = bulletHitEffectsPool.GetComponentInChildren<BulletHitEffect>(true).gameObject;
+                break;
+            case GameConstants.EffectTypes.ShieldHit:
+                effectObject = shieldHitEffectsPool.GetComponentInChildren<ShieldHitEffect>(true).gameObject;
+                break;
+            case GameConstants.EffectTypes.SmokeEffect:
+                effectObject = smokeEffectsPool.GetComponentInChildren<SmokeEffect>(true).gameObject;
+                break;
+            case GameConstants.EffectTypes.ShipExplosion:
+                effectObject = explodeEffectsPool.GetComponentInChildren<ExplosionEffect>(true).gameObject;
+                break;
+        }
+
+        //bulletObject.transform.SetParent(worldBullets);
+        //bulletObject.transform.position = gunPort.transform.position;
+        //// Return bullet and let GunPort handle how to fire and set initial velocities
+        //return bulletObject;
+        effectObject.transform.SetParent(worldEffects);
+        effectObject.transform.position = new Vector3(position.x, position.y, position.z);
+        effectObject.transform.up = new Vector3(lookAt.x, lookAt.y, lookAt.z);
+
+        effectObject.SetActive(true);
+
+        switch (effectType)
+        {
+            // Get First Child, set parent to gunport (to remove from respective pool)
+            case GameConstants.EffectTypes.BulletHit:
+                effectObject.GetComponent<BulletHitEffect>().FadeIn();
+                break;
+            case GameConstants.EffectTypes.ShieldHit:
+                effectObject.GetComponent<ShieldHitEffect>().FadeIn();
+                break;
+            case GameConstants.EffectTypes.SmokeEffect:
+                effectObject.GetComponent<SmokeEffect>().FadeIn();
+                break;
+            case GameConstants.EffectTypes.ShipExplosion:
+                effectObject.GetComponent<ExplosionEffect>().FadeIn();
+                break;
+        }
+
+        return effectObject;
     }
 
     public GameObject GetBullet(GameConstants.GunTypes gunType, Transform gunPort)
@@ -137,7 +189,7 @@ public class GameManager : MonoBehaviour
     // Returning Normal Bullet to pool
     public void ReturnBulletToPool(GameObject bulletToStore, GameConstants.GunTypes bulletType)
     {
-        if(bulletType == GameConstants.GunTypes.MachineGun)
+        if (bulletType == GameConstants.GunTypes.MachineGun)
         {
             // Return to normal bullet pool
             bulletToStore.transform.SetParent(unusedBulletPool);
@@ -155,6 +207,34 @@ public class GameManager : MonoBehaviour
         bulletToStore.gameObject.SetActive(false);
         bulletToStore.transform.localScale = Vector3.one;
         bulletToStore.transform.position = Vector3.zero;
+    }
+
+    public void ReturnEffectToPool(GameObject effectToStore, GameConstants.EffectTypes effectType)
+    {
+        if (effectType == GameConstants.EffectTypes.BulletHit)
+        {
+            // Return to normal bullet pool
+            effectToStore.transform.SetParent(bulletHitEffectsPool);
+        }
+        else if (effectType == GameConstants.EffectTypes.ShieldHit)
+        {
+            // Return to shotgun bullet pool
+            effectToStore.transform.SetParent(shieldHitEffectsPool);
+        }
+        else if (effectType == GameConstants.EffectTypes.ShipExplosion)
+        {
+            // Return to laser bullet pool
+            effectToStore.transform.SetParent(explodeEffectsPool);
+        }
+        else if (effectType == GameConstants.EffectTypes.SmokeEffect)
+        {
+            // Return to laser bullet pool
+            effectToStore.transform.SetParent(smokeEffectsPool);
+        }
+        
+        effectToStore.gameObject.SetActive(false);
+        effectToStore.transform.localScale = Vector3.one;
+        effectToStore.transform.position = Vector3.zero;
     }
 
     // Update is called once per frame

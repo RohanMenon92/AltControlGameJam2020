@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6850528434621353448}
   - component: {fileID: 5541031854931751399}
   - component: {fileID: 1886837316439278826}
+  - component: {fileID: 5967636267078921015}
   m_Layer: 0
   m_Name: ShipHit
   m_TagString: Untagged
@@ -104,3 +105,15 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5967636267078921015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189869602976398410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc462d53157bae44db290725a07d6601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
