@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
             gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
+            GetComponentInParent<EnemyPool>().enemyPool.Add(gameObject);
             GetComponentInParent<EnemyPool>().activeEnemy.Remove(gameObject);
             musicPlayer.clip = deathSound;
             if (!musicPlayer.isPlaying)
