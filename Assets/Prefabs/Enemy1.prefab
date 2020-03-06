@@ -1019,7 +1019,7 @@ MonoBehaviour:
   scoreReward: 1150
   gunPorts:
   - {fileID: 1377467500843564963}
-  deathSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
+  deathSound: {fileID: 8300000, guid: 10a627377172b6b4387a05423cf177ea, type: 3}
   hitSound: {fileID: 0}
 --- !u!54 &5771578879474945222
 Rigidbody:
@@ -2568,11 +2568,6 @@ PrefabInstance:
       propertyPath: gunType
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
-      objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2627,6 +2622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 074e769daf2241142b493ab61b73e31d, type: 3}

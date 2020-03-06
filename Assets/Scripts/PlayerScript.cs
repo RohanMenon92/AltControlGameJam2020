@@ -172,6 +172,8 @@ public class PlayerScript : MonoBehaviour
     {
         if(health<0 && !gameOver)
         {
+            musicPlayer.clip = deathSound;
+            musicPlayer.Play();
             gameOver = true;
             gameManager.GameOver();
             thrustSource.Stop();

@@ -62,4 +62,8 @@ public class UIGame : MonoBehaviour
         yield return new WaitForSeconds(GameConstants.GameOverScreenTime);
         SceneManager.LoadScene(0);
     }
+
+    public void restartButton() {
+        SceneManager.LoadScene(0);
+    }
 }

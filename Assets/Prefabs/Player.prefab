@@ -62,10 +62,12 @@ MonoBehaviour:
   energy: 0
   turretSpecificRotate: 0
   engineEffect: {fileID: 1008872983579618293}
-  deathSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
-  thrustSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
+  deathSound: {fileID: 8300000, guid: 10a627377172b6b4387a05423cf177ea, type: 3}
+  thrustSound: {fileID: 8300000, guid: 9c381224f0b74e041b2cbd2a96db5aca, type: 3}
   hitShieldSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
   hitPlayerSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
+  shieldOnSound: {fileID: 8300000, guid: e251f01610d2af943aa6761d397efa8d, type: 3}
+  shieldOffSound: {fileID: 8300000, guid: e251f01610d2af943aa6761d397efa8d, type: 3}
   thrustSource: {fileID: 538716454834251786}
   musicPlayer: {fileID: 4116459021626346654}
 --- !u!54 &3031276405639178026
