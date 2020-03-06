@@ -54,7 +54,7 @@ public class GameConstants
     public static float maxEnergy = 300;
 
     // Thrust consumes energy (is multiplied by rate of thrust)
-    internal static float EnergyConsumptionThrust = 0.5f;
+    internal static float EnergyConsumptionThrust = 0.75f;
 
     // Speed at which rudder turns ship
     public static float RotateRudderRate = 90f;
@@ -89,5 +89,5 @@ public class GameConstants
     // Beam damage rate
     public static float BeamDamageRate = 10.0f;
 
-    public static float GameOverScreenTime = 5.0f;
+    public static float GameOverScreenTime = 15.0f;
 }
