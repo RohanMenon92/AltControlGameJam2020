@@ -7,6 +7,8 @@ public class GunPort : MonoBehaviour
     public GameConstants.GunTypes gunType = GameConstants.GunTypes.MachineGun;
     // Start is called before the first frame update
     GameManager gameManager;
+    public AudioClip bulletSound;
+    public AudioClip shotgunSound;
     public AudioClip laserSound;
     AudioSource musicPlayer;
 
@@ -40,7 +42,7 @@ public class GunPort : MonoBehaviour
                     newBullet.GetComponent<Rigidbody>().velocity = firedShip.GetComponent<Rigidbody>().velocity;
                     newBullet.gameObject.SetActive(true);
                     newBullet.FireBullet();
-                    musicPlayer.clip = laserSound;
+                    musicPlayer.clip = bulletSound;
                     if (!musicPlayer.isPlaying) 
                     {
                         musicPlayer.Play();
@@ -60,7 +62,7 @@ public class GunPort : MonoBehaviour
                         newShoutgunBullet.gameObject.SetActive(true);
                         newShoutgunBullet.FireShotgun();
                     }
-                    musicPlayer.clip = laserSound;
+                    musicPlayer.clip = shotgunSound;
                     if (!musicPlayer.isPlaying)
                     {
                         musicPlayer.Play();

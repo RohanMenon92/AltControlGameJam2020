@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 0
+  bulletSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
+  shotgunSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
   laserSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
   firePerSeconds: 0
 --- !u!82 &8673565165577599757

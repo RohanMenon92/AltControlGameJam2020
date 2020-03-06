@@ -27,7 +27,9 @@ public class PlayerScript : MonoBehaviour
     public bool turretSpecificRotate = false;
 
     public VisualEffect engineEffect;
-
+    public AudioClip deathSound;
+    public AudioClip thrustSound;
+    AudioSource musicPlayer;
     ShieldScript shieldScript;
     AdaptiveShieldScript adaptiveShield;
     
@@ -44,7 +46,11 @@ public class PlayerScript : MonoBehaviour
         energy = GameConstants.maxEnergy;
 
         InitializeShieldColliders();
-
+        musicPlayer = GetComponent<AudioSource>();
+        musicPlayer.loop = true;
+        musicPlayer.volume = 0;
+        musicPlayer.clip = thrustSound;
+        musicPlayer.Play();
         selfCollider = GetComponent<Collider>();
     }
 
@@ -127,6 +133,8 @@ public class PlayerScript : MonoBehaviour
                 currAimAngle -= 0.001f;
             }
         }
+
+        musicPlayer.volume = currThrust;
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
@@ -159,6 +167,11 @@ public class PlayerScript : MonoBehaviour
         if(health<0)
         {
             gameManager.GameOver();
+            musicPlayer.Pause();
+            musicPlayer.volume = 1;
+            musicPlayer.clip = deathSound;
+            musicPlayer.loop = false;
+            musicPlayer.Play();
         }
         TakeInput();
         CheckShield();

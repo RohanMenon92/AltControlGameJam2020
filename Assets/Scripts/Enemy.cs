@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour
     public float shootingRange;
     public int scoreReward = 500;
     Rigidbody rb;
-
     public List<GunPort> gunPorts;
+    public AudioClip deathSound;
+    AudioSource musicPlayer;
 
     GameManager gameManager;
     private void Start()
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody>();
         currentHealth = enemyHealth;
+        musicPlayer = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -60,6 +62,11 @@ public class Enemy : MonoBehaviour
             gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
             GetComponentInParent<EnemyPool>().activeEnemy.Remove(gameObject);
+            musicPlayer.clip = deathSound;
+            if (!musicPlayer.isPlaying)
+            {
+                musicPlayer.Play();
+            }
         }
     }
 
