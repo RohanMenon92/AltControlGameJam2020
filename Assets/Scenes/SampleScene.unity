@@ -709,6 +709,7 @@ MonoBehaviour:
   baudRate: 115200
   timeout: 100
   pingPerFrames: 5
+  inputType: 1
   hasError: 0
 --- !u!4 &1129421500
 Transform:
@@ -2195,6 +2196,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f3e25e183838944db87964bae0630b7, type: 3}
+--- !u!1 &7026991616942781313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2988609116804062755, guid: 8f3e25e183838944db87964bae0630b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026991616942781312}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7026991616942781314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7026991617144076979, guid: 8f3e25e183838944db87964bae0630b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026991616942781312}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &7026991616942781315
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026991616942781313}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &7026991616942781316
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026991616942781314}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!4 &8094037607732082986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5700244587939898444, guid: b43e7286900d2b146a5f3504f8074944,

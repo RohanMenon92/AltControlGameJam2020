@@ -13,7 +13,16 @@ public class InputListener : MonoBehaviour
     public int timeout;
     public float pingPerFrames;
 
+    public enum InputListenerType {
+        MainMenu,
+        GamePlay
+    }; 
+
+    public InputListenerType inputType;
+
     GameManager gameManager;
+
+    MainMenu mainMenu;
     PlayerScript playerScript;
     SerialPort stream;
 
@@ -21,7 +30,13 @@ public class InputListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        if(inputType == InputListenerType.GamePlay)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        } else if(inputType == InputListenerType.MainMenu)
+        {
+            mainMenu = FindObjectOfType<MainMenu>();
+        }
         playerScript = FindObjectOfType<PlayerScript>();
         stream = new SerialPort(comPort, baudRate);
         stream.ReadTimeout = 10000;
@@ -61,58 +76,63 @@ public class InputListener : MonoBehaviour
     void OnGetValue(GameConstants.InputSignals signal, float val)
     {
         //Debug.Log(signal.ToString() + " " + val);
-        switch (signal)
+        if (inputType == InputListenerType.GamePlay)
         {
-            case GameConstants.InputSignals.P1:
-                gameManager.UpdateThrustInput(val);
-                // Call control 1 with val
-                break;
+            switch (signal)
+            {
+                case GameConstants.InputSignals.P1:
+                    gameManager.UpdateThrustInput(val);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.P2:
-                gameManager.UpdateRudderAngle(val);
-                // Call control 1 with val
-                break;
+                case GameConstants.InputSignals.P2:
+                    gameManager.UpdateRudderAngle(val);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.P3:
-                gameManager.UpdateAimAngle(val);
-                // Call control 1 with val
-                break;
+                case GameConstants.InputSignals.P3:
+                    gameManager.UpdateAimAngle(val);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.P4:
-                gameManager.UpdatePreciseAimAngle(val);
-                // Call control 1 with val
-                break;
+                case GameConstants.InputSignals.P4:
+                    gameManager.UpdatePreciseAimAngle(val);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.B1:
-                gameManager.UpdateRechargeButton(val == 1.0f);
-                // Call control 1 with val
-                break;
+                case GameConstants.InputSignals.B1:
+                    gameManager.UpdateRechargeButton(val == 1.0f);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.B2:
-                gameManager.UpdateFireButton(val == 1.0f);
-                // Call control 1 with val
-                break;
+                case GameConstants.InputSignals.B2:
+                    gameManager.UpdateFireButton(val == 1.0f);
+                    // Call control 1 with val
+                    break;
 
-            case GameConstants.InputSignals.B3:
-                gameManager.UpdateShieldButton(val == 1.0f);
-                // Call control 1 with val
-                break;
-
-                //case ProcessSignals.C3:
-                //    Debug.Log(signal.ToString() + " " + val);
-                //    // Call control 1 with val
-                //    break;
-
-                //case ProcessSignals.C4:
-                //    Debug.Log(signal.ToString() + " " + val);
-                //    // Call control 1 with val
-                //    break;
-
-                //case ProcessSignals.C5:
-                //    Debug.Log(signal.ToString() + " " + val);
-                //    // Call control 1 with val
-                //    break;
-
+                case GameConstants.InputSignals.B3:
+                    gameManager.UpdateShieldButton(val == 1.0f);
+                    // Call control 1 with val
+                    break;
+            }
+        }
+        else if (inputType == InputListenerType.MainMenu)
+        {
+            switch (signal)
+            {
+                case GameConstants.InputSignals.B1:
+                    mainMenu.StartGame();
+                    // Call control 1 with val
+                    break;
+                case GameConstants.InputSignals.B2:
+                    mainMenu.OpenSettings();
+                    // Call control 1 with val
+                    break;
+                case GameConstants.InputSignals.B3:
+                    //mainMenu.ExitGame();
+                    // Call control 1 with val
+                    break;
+            }
         }
     }
 

@@ -88,4 +88,6 @@ public class GameConstants
 
     // Beam damage rate
     public static float BeamDamageRate = 10.0f;
+
+    public static float GameOverScreenTime = 5.0f;
 }
