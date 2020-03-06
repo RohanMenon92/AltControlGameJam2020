@@ -2084,6 +2084,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2988609116804062755, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7026991616467329339, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_Name
@@ -2217,8 +2222,8 @@ CanvasGroup:
   m_GameObject: {fileID: 7026991616942781313}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!225 &7026991616942781316
 CanvasGroup:
@@ -2229,8 +2234,8 @@ CanvasGroup:
   m_GameObject: {fileID: 7026991616942781314}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!4 &8094037607732082986 stripped
 Transform:

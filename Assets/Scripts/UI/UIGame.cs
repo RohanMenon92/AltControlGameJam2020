@@ -42,17 +42,20 @@ public class UIGame : MonoBehaviour
         }
 
         gameOverScore.text = newText;
-        
+
+        CanvasGroup gameplayCanvas = gameplayScreen.GetComponent<CanvasGroup>();
         // Fade Out Gameplay
-        gameplayScreen.GetComponent<CanvasGroup>().DOFade(0.0f, 1.0f).OnComplete(() => {
+        DOTween.To(() => gameplayCanvas.alpha, x => gameplayCanvas.alpha = x, 0.0f, 1.0f).OnComplete(() => {
             gameplayScreen.SetActive(false);
         });
 
+        CanvasGroup gameOverCanvas = gameOverScreen.GetComponent<CanvasGroup>();
         // Fade in GameOver
-        gameOverScreen.GetComponent<CanvasGroup>().alpha = 0;
+        gameOverCanvas.alpha = 0;
         gameOverScreen.SetActive(true);
-        gameplayScreen.GetComponent<CanvasGroup>().DOFade(1.0f, 1.0f);
-        StartCoroutine(Restart());
+        DOTween.To(() => gameOverCanvas.alpha, x => gameOverCanvas.alpha = x, 1.0f, 1.0f).OnComplete(() => {
+            StartCoroutine(Restart());
+        });
     }
 
     IEnumerator Restart() {

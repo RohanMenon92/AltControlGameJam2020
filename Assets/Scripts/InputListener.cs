@@ -121,16 +121,24 @@ public class InputListener : MonoBehaviour
             switch (signal)
             {
                 case GameConstants.InputSignals.B1:
-                    mainMenu.StartGame();
+                    if(val == 1.0f)
+                    {
+                        mainMenu.StartGame();
+                    }
                     // Call control 1 with val
                     break;
                 case GameConstants.InputSignals.B2:
-                    mainMenu.OpenSettings();
+                    if (val == 1.0f)
+                    {
+                        mainMenu.OpenSettings();
+                    }
                     // Call control 1 with val
                     break;
                 case GameConstants.InputSignals.B3:
-                    //mainMenu.ExitGame();
-                    // Call control 1 with val
+                    if (val == 1.0f)
+                    {
+                        //mainMenu.ExitGame();
+                    }
                     break;
             }
         }

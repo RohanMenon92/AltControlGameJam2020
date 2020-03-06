@@ -128,7 +128,6 @@ public class GameManager : MonoBehaviour
         }
         FindObjectOfType<UIGame>().gameOver(false);
         return;
-
     }
     
     
