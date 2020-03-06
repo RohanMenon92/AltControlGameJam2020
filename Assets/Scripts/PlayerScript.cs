@@ -180,7 +180,7 @@ public class PlayerScript : MonoBehaviour
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up)
                 .transform.DOScale(5f, 1.5f).OnComplete(() => {
                     // Hide ship
-                    this.GetComponent<MeshRenderer>().enabled = false;
+                    this.enabled = false;
                 });
         }
         TakeInput();
