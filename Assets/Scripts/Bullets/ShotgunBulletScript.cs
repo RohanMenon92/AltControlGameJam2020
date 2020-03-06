@@ -54,7 +54,6 @@ public class ShotgunBulletScript : MonoBehaviour
     // Called when player refelects a shot
     internal void OnShield(Vector3 normalVector)
     {
-        Debug.Log("OnShield " + gameObject);
         // When HitByShield, reverseBullet according to normal Vector
         isEnemyShot = !isEnemyShot;
         timeAlive = 0;
