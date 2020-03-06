@@ -8,7 +8,6 @@ public class Asteroid : MonoBehaviour
     private MeshRenderer renderer;
     private AsteroidPool pool;
     public int scoreReward = 350;
-
     GameManager gameManager;
 
     void Start()
@@ -17,7 +16,6 @@ public class Asteroid : MonoBehaviour
         pool = FindObjectOfType<AsteroidPool>();
         renderer = GetComponent<MeshRenderer>();
         gameManager = FindObjectOfType<GameManager>();
-
         particle.Stop();
     }
 
@@ -29,7 +27,6 @@ public class Asteroid : MonoBehaviour
     public void OnHit()
     {
         // play explosion animation
-
         particle.Play();
         StartCoroutine(waitForAnimation());
         GetComponent<MeshCollider>().enabled = false;
