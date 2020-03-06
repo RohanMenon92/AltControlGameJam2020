@@ -26,7 +26,7 @@ LedControl lc=LedControl(DIN,CLK,CS,DevMax);    // Call the LED Control function
 void setup(){
   Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 
-  for(int i = 0; i < DevMax; i++) {
+  for(int i = 0; i < DevMax-1; i++) {
     lc.shutdown(i,false);               // Turning the display on
     lc.setIntensity(i,Brightness);      // Adjust the brightness
     lc.clearDisplay(i);                 // Clear the display
