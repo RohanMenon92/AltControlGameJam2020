@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    public bool testHit;
     private ParticleSystem particle;
     private MeshRenderer renderer;
     private AsteroidPool pool;
     public int scoreReward = 350;
-    private bool accountedFor = false;
 
     GameManager gameManager;
 
@@ -26,11 +24,6 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(testHit)
-        {
-            OnHit();
-            testHit = false;
-        }
     }
 
     public void OnHit()
@@ -41,14 +34,10 @@ public class Asteroid : MonoBehaviour
         StartCoroutine(waitForAnimation());
         GetComponent<MeshCollider>().enabled = false;
         // added for a possibility to count asteroid score
-        /*if (!accountedFor)
+        if (renderer.isVisible)
         {
-            FindObjectOfType<GameManager>().score += scoreReward;
-            accountedFor = true;
-        }*/
-        
-        
-
+            FindObjectOfType<GameManager>().IncrementScore(scoreReward);
+        }
     }
 
     IEnumerator waitForAnimation()

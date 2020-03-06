@@ -96,7 +96,7 @@ MonoBehaviour:
   isEnemyShot: 0
   damage: 5
   bulletSpeed: 15
-  aliveForSeconds: 1
+  aliveForSeconds: 0.5
 --- !u!54 &6291998831014552011
 Rigidbody:
   m_ObjectHideFlags: 0

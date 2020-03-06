@@ -7,13 +7,13 @@ public class GameConstants
     // Input Interface
     public enum InputSignals
     {
+        P1,
         P2,
         P3,
         P4,
         B1,
         B2,
-        B3,
-        P1
+        B3
     }
 
     // Effect Type for ships

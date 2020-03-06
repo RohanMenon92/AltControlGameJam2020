@@ -9,9 +9,9 @@
 
 // ---- DEFINES ----------------------------------------------
     char incomingByte;                  // for incoming serial data from host
-    int  Potentiometers[] = {0,1,2};      // Set the analog pins for the potentiometers
-    int  Buttons[] = {2,9,12};       // Set the digital pins for the buttons
-    int  LinearPots[] = {3};       // Set the digital pins for the buttons
+    int  Potentiometers[] = {0,1,2,3};      // Set the analog pins for the potentiometers
+    int  Buttons[] = {2,9,11};       // Set the digital pins for the buttons
+    int  LinearPots[] = {};       // Set the digital pins for the buttons
 	  bool DebugMode = false;              // Enable or disable the debug mode
 
     int  TotalPots = (sizeof(Potentiometers) / sizeof(Potentiometers[0]));   // Calculate total Potentiometers

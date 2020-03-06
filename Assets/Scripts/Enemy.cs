@@ -10,16 +10,19 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float shootingRange;
     public int scoreReward = 500;
-
+    Rigidbody rb;
     public List<GunPort> gunPorts;
+    public AudioClip deathSound;
+    AudioSource musicPlayer;
 
     GameManager gameManager;
     private void Start()
     {
         player = FindObjectOfType<PlayerScript>();
         gameManager = FindObjectOfType<GameManager>();
-
+        rb = GetComponent<Rigidbody>();
         currentHealth = enemyHealth;
+        musicPlayer = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -37,10 +40,16 @@ public class Enemy : MonoBehaviour
     public void Move()
     {
         transform.LookAt(player.transform.position);
-        if (Vector3.Distance(player.transform.position, transform.position) > shootingRange)
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (distance > shootingRange && distance < shootingRange * 3)
         {
-           
+            rb.isKinematic = false;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        if (distance >= shootingRange * 3)
+        {
+            rb.isKinematic = true;
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * 5 * Time.deltaTime);
         }
     }
 
@@ -50,8 +59,14 @@ public class Enemy : MonoBehaviour
         {
             currentHealth = enemyHealth;
             gameObject.SetActive(false);
-            gameManager.score += scoreReward;
+            gameManager.IncrementScore(scoreReward);
             gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up);
+            GetComponentInParent<EnemyPool>().activeEnemy.Remove(gameObject);
+            musicPlayer.clip = deathSound;
+            if (!musicPlayer.isPlaying)
+            {
+                musicPlayer.Play();
+            }
         }
     }
 

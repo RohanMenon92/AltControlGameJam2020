@@ -46,6 +46,8 @@ public class InputListener : MonoBehaviour
     GameManager gameManager;
     PlayerScript playerScript;
     SerialPort stream;
+
+    public bool hasError = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,13 +55,20 @@ public class InputListener : MonoBehaviour
         playerScript = FindObjectOfType<PlayerScript>();
         stream = new SerialPort(comPort, baudRate);
         stream.ReadTimeout = 10000;
-        stream.Open();
+        try
+        {
+            stream.Open();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.frameCount % pingPerFrames == 0)
+        if(Time.frameCount % pingPerFrames == 0 && !hasError)
         {
             // Ask for data
             RequestArduino();
@@ -87,7 +96,7 @@ public class InputListener : MonoBehaviour
 
     void OnGetValue(GameConstants.InputSignals signal, float val)
     {
-        Debug.Log(signal.ToString() + " " + val);
+        //Debug.Log(signal.ToString() + " " + val);
         switch (signal)
         {
             case GameConstants.InputSignals.P1:
@@ -292,9 +301,15 @@ public class InputListener : MonoBehaviour
 
     public void RequestArduino()
     {
-        // Send the render calls
-        stream.Write(CreateMessageToSend());
-        stream.BaseStream.Flush();
+        try
+        {
+            stream.Write(CreateMessageToSend());
+            stream.BaseStream.Flush();
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
     }
 
     public IEnumerator AsynchronousReadFromArduino(Action<string> callback, Action fail = null, float timeout = float.PositiveInfinity)
