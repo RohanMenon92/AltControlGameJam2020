@@ -29,7 +29,12 @@ public class PlayerScript : MonoBehaviour
     public VisualEffect engineEffect;
     public AudioClip deathSound;
     public AudioClip thrustSound;
-    AudioSource musicPlayer;
+    public AudioClip hitShieldSound;
+    public AudioClip hitPlayerSound;
+    public AudioClip shieldOnSound;
+    public AudioClip shieldOffSound;
+    public AudioSource thrustSource;
+    public AudioSource musicPlayer;
     ShieldScript shieldScript;
     AdaptiveShieldScript adaptiveShield;
     
@@ -46,11 +51,10 @@ public class PlayerScript : MonoBehaviour
         energy = GameConstants.maxEnergy;
 
         InitializeShieldColliders();
-        musicPlayer = GetComponent<AudioSource>();
-        musicPlayer.loop = true;
-        musicPlayer.volume = 0;
-        musicPlayer.clip = thrustSound;
-        musicPlayer.Play();
+        thrustSource.loop = true;
+        thrustSource.volume = 0;
+        thrustSource.clip = thrustSound;
+        thrustSource.Play();
         selfCollider = GetComponent<Collider>();
     }
 
@@ -134,7 +138,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        musicPlayer.volume = currThrust;
+        thrustSource.volume = currThrust;
     }
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
@@ -167,11 +171,7 @@ public class PlayerScript : MonoBehaviour
         if(health<0)
         {
             gameManager.GameOver();
-            musicPlayer.Pause();
-            musicPlayer.volume = 1;
-            musicPlayer.clip = deathSound;
-            musicPlayer.loop = false;
-            musicPlayer.Play();
+            thrustSource.Stop();
         }
         TakeInput();
         CheckShield();
@@ -307,6 +307,8 @@ public class PlayerScript : MonoBehaviour
 
                 adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
                 laserBullet.OnShieldEnter(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
+                musicPlayer.clip = hitShieldSound;
+                musicPlayer.Play();
             }
             else
             {
@@ -314,6 +316,8 @@ public class PlayerScript : MonoBehaviour
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 TakeDamage(laserBullet.damage);
                 laserBullet.OnHit();
+                musicPlayer.clip = hitPlayerSound;
+                musicPlayer.Play();
             }
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
@@ -325,12 +329,16 @@ public class PlayerScript : MonoBehaviour
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
+                musicPlayer.clip = hitShieldSound;
+                musicPlayer.Play();
             }
             else
             {
                 TakeDamage(shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnHit();
+                musicPlayer.clip = hitPlayerSound;
+                musicPlayer.Play();
             }
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
@@ -340,11 +348,15 @@ public class PlayerScript : MonoBehaviour
                 adaptiveShield.OnHit(collisionNormal, normalBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnShield(transform.TransformDirection(collisionNormal));
+                musicPlayer.clip = hitShieldSound;
+                musicPlayer.Play();
             } else
             {
                 TakeDamage(normalBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnHit();
+                musicPlayer.clip = hitPlayerSound;
+                musicPlayer.Play();
             }
         }
     }
@@ -360,9 +372,13 @@ public class PlayerScript : MonoBehaviour
         if (isShielding)
         {
             shieldScript.TurnOnShield();
+            musicPlayer.clip = shieldOnSound;
+            musicPlayer.Play();
         } else
         {
             shieldScript.TurnOffShield();
+            musicPlayer.clip = shieldOffSound;
+            musicPlayer.Play();
         }
         
         adaptiveShield.shieldOn = isShielding;

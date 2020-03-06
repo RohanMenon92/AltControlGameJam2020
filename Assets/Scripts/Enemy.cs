@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     Rigidbody rb;
     public List<GunPort> gunPorts;
     public AudioClip deathSound;
+    public AudioClip hitSound;
     AudioSource musicPlayer;
 
     GameManager gameManager;
@@ -105,16 +106,31 @@ public class Enemy : MonoBehaviour
         {
             HitByBullet(laserBullet.damage);
             laserBullet.OnHit();
+            musicPlayer.clip = hitSound;
+            if (!musicPlayer.isPlaying)
+            {
+                musicPlayer.Play();
+            }
         }
         else if (shotgunBullet != null && !shotgunBullet.isEnemyShot)
         {
             HitByBullet(shotgunBullet.damage);
             shotgunBullet.OnHit();
+            musicPlayer.clip = hitSound;
+            if (!musicPlayer.isPlaying)
+            {
+                musicPlayer.Play();
+            }
         }
         else if (normalBullet != null && !normalBullet.isEnemyShot)
         {
             HitByBullet(normalBullet.damage);
             normalBullet.OnHit();
+            musicPlayer.clip = hitSound;
+            if (!musicPlayer.isPlaying)
+            {
+                musicPlayer.Play();
+            }
         }
     }
 
