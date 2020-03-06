@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,7 @@ public class PlayerScript : MonoBehaviour
     Collider selfCollider;
     GameManager gameManager;
     private bool is3D = false;
+    bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -168,10 +170,18 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health<0)
+        if(health<0 && !gameOver)
         {
+            gameOver = true;
             gameManager.GameOver();
             thrustSource.Stop();
+            
+            // Create and glow particle effect
+            gameManager.BeginEffect(GameConstants.EffectTypes.ShipExplosion, transform.position, transform.up)
+                .transform.DOScale(5f, 1.5f).OnComplete(() => {
+                    // Hide ship
+                    this.GetComponent<MeshRenderer>().enabled = false;
+                });
         }
         TakeInput();
         CheckShield();
