@@ -75,12 +75,12 @@ public class GameConstants
     // Area in front where shield is not active
     public static float ShieldFrontThreshold = 1.7f;
     // Number of waves to win
-    public static int WaveWinCondition = 5;
+    //public static int WaveWinCondition = 5;
 
     // Bullet hit Lifetime
-    public static float BulletHitLife = 2.0f;
+    public static float BulletHitLife = 1.0f;
     // Shield hit Lifetime
-    public static float ShieldHitLife = 2.0f;
+    public static float ShieldHitLife = 1.0f;
     // Smoke Damage Fade in
     public static float SmokeDamageFade = 1.0f;
     // Explosion Lifetime
