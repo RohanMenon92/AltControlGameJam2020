@@ -963,8 +963,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537583667342675441}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.9659259, z: 0, w: 0.25881907}
+  m_LocalPosition: {x: 39.999996, y: 0, z: 69.282036}
   m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
   m_Children:
   - {fileID: 1211078327460241135}
@@ -1020,6 +1020,7 @@ MonoBehaviour:
   gunPorts:
   - {fileID: 1377467500843564963}
   deathSound: {fileID: 8300000, guid: 7c614f4f1e88dde40a8b426cabd12ed8, type: 3}
+  hitSound: {fileID: 0}
 --- !u!54 &5771578879474945222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2560,12 +2561,17 @@ PrefabInstance:
     - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: firePerSeconds
-      value: 5
+      value: 3.6857944
       objectReference: {fileID: 0}
     - target: {fileID: 382819334340714600, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: gunType
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
       objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
@@ -2621,11 +2627,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 074e769daf2241142b493ab61b73e31d, type: 3}

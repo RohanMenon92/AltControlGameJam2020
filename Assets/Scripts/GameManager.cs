@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore(int scoreVal)
     {
-        score += scoreVal;
+        if(!hasFinished)
+        {
+            score += scoreVal;
+        }
     }
 
     public int GetScore()

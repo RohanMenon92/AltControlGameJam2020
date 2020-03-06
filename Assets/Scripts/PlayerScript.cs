@@ -322,10 +322,8 @@ public class PlayerScript : MonoBehaviour
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
         {
-            Debug.Log("Checking Shotun Shield");
             if (isShielding && !IsFrontShot(collision.transform))
             {
-                Debug.Log("Checking Shotun Shield");
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
