@@ -219,7 +219,7 @@ void SetRudderMatrix()
 
 void SetAimMatrix()
 {
-    float aimValue = Potentiometer(potentiometerAim);
+    float aimValue = (1.0f - Potentiometer(potentiometerAim));
     if (aimValue < 0.1f)
     {
         printByte(aimMinus3, 3);

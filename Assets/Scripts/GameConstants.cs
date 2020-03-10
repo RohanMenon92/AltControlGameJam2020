@@ -54,7 +54,7 @@ public class GameConstants
     public static float maxEnergy = 300;
 
     // Thrust consumes energy (is multiplied by rate of thrust)
-    internal static float EnergyConsumptionThrust = 0.75f;
+    internal static float EnergyConsumptionThrust = 1f;
 
     // Speed at which rudder turns ship
     public static float RotateRudderRate = 90f;
@@ -62,13 +62,12 @@ public class GameConstants
     // Speed at which rotate aiming works
     public static float RotateAimRate = 120f;
     
-    
     public static string HighScorePlayerPref = "HighScore";
 
     // Amount of recharge gained when pressing Recharge
-    public static float RechargeGain = 30f;
+    public static float RechargeGain = 10f;
     // Energy that shield uses
-    public static float ShieldEnergyUsage = 0.2f;
+    public static float ShieldEnergyUsage = 0.35f;
 
     // Fade In time for shield (still refelects bullets as soon as it is pressed)
     public static float ShieldAppearTime = 0.75f;
@@ -89,5 +88,5 @@ public class GameConstants
     // Beam damage rate
     public static float BeamDamageRate = 10.0f;
 
-    public static float GameOverScreenTime = 15.0f;
+    public static float GameOverScreenTime = 7.0f;
 }
