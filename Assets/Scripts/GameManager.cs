@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     // public player
     PlayerScript player;
-
     bool isRechargePressed;
     bool isFiring;
     bool isShielding;
@@ -45,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void IncrementScore(int scoreVal)
     {
         if(!hasFinished)
-        {
+        {            
             score += scoreVal;
         }
     }

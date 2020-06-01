@@ -265,6 +265,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 188406746}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &319936347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7038480146099603766, guid: 8f3e25e183838944db87964bae0630b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026991616942781312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &391578227
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +624,12 @@ Transform:
   m_Father: {fileID: 1222307427}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &823707463 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5171997851860226914, guid: 8f3e25e183838944db87964bae0630b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026991616942781312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &866812282
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,7 +1267,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 504d7ce61c5eff843b00b42afe57a07f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.509
+  m_Volume: 0.361
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1690,6 +1708,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1822142783}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &2027149306 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3788768352492797024, guid: 8f3e25e183838944db87964bae0630b7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7026991616942781312}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3031276406556459462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2084,6 +2108,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3219334364838081592, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219334364838081592, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219334364838081592, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7026991616467329339, guid: 8f3e25e183838944db87964bae0630b7,
         type: 3}
       propertyPath: m_Name
@@ -2199,6 +2238,21 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8109357846630731650, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: thrustImage
+      value: 
+      objectReference: {fileID: 319936347}
+    - target: {fileID: 8109357846630731650, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: aimRect
+      value: 
+      objectReference: {fileID: 2027149306}
+    - target: {fileID: 8109357846630731650, guid: 8f3e25e183838944db87964bae0630b7,
+        type: 3}
+      propertyPath: rudderRect
+      value: 
+      objectReference: {fileID: 823707463}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f3e25e183838944db87964bae0630b7, type: 3}
 --- !u!4 &8094037607732082986 stripped

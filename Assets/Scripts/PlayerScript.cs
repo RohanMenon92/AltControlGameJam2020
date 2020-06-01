@@ -79,11 +79,11 @@ public class PlayerScript : MonoBehaviour
             FireCannons();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             ShieldOn();
         }
-        else if (Input.GetKeyUp(KeyCode.Q))
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             ShieldOff();
         }
@@ -111,33 +111,41 @@ public class PlayerScript : MonoBehaviour
                 currThrust -= 0.01f;
             }
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             if (currRudderAngle > -0.5f)
             {
-                currRudderAngle -= 0.001f;
+                currRudderAngle -= 0.001f * (GameConstants.rudderRate + Mathf.Abs(currRudderAngle));
             }
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             if (currRudderAngle < 0.5f)
             {
-                currRudderAngle += 0.001f;
+                currRudderAngle += 0.001f * (GameConstants.rudderRate + Mathf.Abs(currRudderAngle));
             }
+        } else
+        {
+            currRudderAngle *= GameConstants.rudderDecay;
         }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (currAimAngle < 0.5f)
+            if (currAimAngle < 0.45f)
             {
-                currAimAngle += 0.001f;
+                currAimAngle += 0.001f * (GameConstants.aimRate + Mathf.Abs(currAimAngle));
             }
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (currAimAngle > -0.5f)
+            if (currAimAngle > -0.45f)
             {
-                currAimAngle -= 0.001f;
+                currAimAngle -= 0.001f * (GameConstants.aimRate + Mathf.Abs(currAimAngle));
             }
+        } else
+        {
+            //currAimAngle *= GameConstants.aimDecay;
         }
 
         thrustSource.volume = currThrust;
@@ -290,7 +298,6 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        // TODO: Create COmmon BulletClass
         // HitLogic
         LaserBulletScript laserBullet = collision.gameObject.GetComponent<LaserBulletScript>();
         ShotgunBulletScript shotgunBullet = collision.gameObject.GetComponent<ShotgunBulletScript>();

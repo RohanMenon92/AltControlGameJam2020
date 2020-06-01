@@ -15,6 +15,11 @@ public class UIGame : MonoBehaviour
     public GameObject gameplayScreen;
     public GameObject gameOverScreen;
     public Text gameOverScore;
+
+    public Image thrustImage;
+    public RectTransform rudderRect;
+    public RectTransform aimRect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,9 @@ public class UIGame : MonoBehaviour
         scoreBoard.text = newText;
         healthImage.fillAmount = player.health / GameConstants.maxHealth;
         energyImage.fillAmount = player.energy / GameConstants.maxEnergy;
+        thrustImage.fillAmount = player.currThrust;
+        rudderRect.localRotation = Quaternion.Euler(0, 0, player.currRudderAngle * -180f);
+        aimRect.localRotation = Quaternion.Euler(0, 0, player.currAimAngle * -180f);
     }
     public void gameOver(bool newHighScore) {
         string newText;

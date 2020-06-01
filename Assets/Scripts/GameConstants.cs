@@ -51,7 +51,7 @@ public class GameConstants
     // Maximum health
     public static float maxHealth = 300;
     // Maximum energy
-    public static float maxEnergy = 300;
+    public static float maxEnergy = 600;
 
     // Thrust consumes energy (is multiplied by rate of thrust)
     internal static float EnergyConsumptionThrust = 1f;
@@ -89,4 +89,11 @@ public class GameConstants
     public static float BeamDamageRate = 10.0f;
 
     public static float GameOverScreenTime = 7.0f;
+
+    // Control Constants
+    public static float rudderDecay = 0.9f;
+    public static float aimDecay = 0.9f;
+    public static float aimRate = 2.5f;
+    public static float rudderRate = 2.5f;
+
 }
