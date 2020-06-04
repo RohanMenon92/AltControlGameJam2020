@@ -25,7 +25,6 @@ public class PlayerScript : MonoBehaviour
     [Header("Game Play")]
     public List<GunPort> gunPorts;
     public float health, energy;
-    public bool turretSpecificRotate = false;
 
     public VisualEffect engineEffect;
     public AudioClip deathSound;
@@ -35,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     public AudioClip shieldOnSound;
     public AudioClip shieldOffSound;
     public AudioSource thrustSource;
-    public AudioSource musicPlayer;
+    public AudioSource soundPlayer;
     ShieldScript shieldScript;
     AdaptiveShieldScript adaptiveShield;
     
@@ -44,6 +43,9 @@ public class PlayerScript : MonoBehaviour
     GameManager gameManager;
     private bool is3D = false;
     bool gameOver = false;
+
+    Plane aimPlane;
+    float aimAngle;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,8 @@ public class PlayerScript : MonoBehaviour
         thrustSource.clip = thrustSound;
         thrustSource.Play();
         selfCollider = GetComponent<Collider>();
+
+        aimPlane = new Plane(Vector3.up, transform.position.y);
     }
 
     void InitializeShieldColliders()
@@ -74,16 +78,16 @@ public class PlayerScript : MonoBehaviour
 
     void TakeInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             FireCannons();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetMouseButtonDown(1))
         {
             ShieldOn();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        else if (Input.GetMouseButtonUp(1))
         {
             ShieldOff();
         }
@@ -130,26 +134,24 @@ public class PlayerScript : MonoBehaviour
             currRudderAngle *= GameConstants.rudderDecay;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            if (currAimAngle < 0.45f)
-            {
-                currAimAngle += 0.001f * (GameConstants.aimRate + Mathf.Abs(currAimAngle));
-            }
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            if (currAimAngle > -0.45f)
-            {
-                currAimAngle -= 0.001f * (GameConstants.aimRate + Mathf.Abs(currAimAngle));
-            }
-        } else
-        {
-            //currAimAngle *= GameConstants.aimDecay;
+
+        // Find ray intersection with aim plane
+        float distance;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (aimPlane.Raycast(ray, out distance)) {
+            Vector3 aimPoint = ray.GetPoint(distance);
+            // set aim angle to target
+            aimAngle = AngleBetweenTwoPoints(aimPoint, transform.position);
         }
 
         thrustSource.volume = currThrust;
     }
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.x - b.x, a.z - b.z) * Mathf.Rad2Deg;
+    }
+
 
     Vector3 AngleLerp(Vector3 StartAngle, Vector3 FinishAngle, float t)
     {
@@ -175,13 +177,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    void PlaySound(AudioClip clip)
+    {
+        soundPlayer.clip = clip;
+        soundPlayer.Play();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(health<0 && !gameOver)
         {
-            musicPlayer.clip = deathSound;
-            musicPlayer.Play();
+            PlaySound(deathSound);
             gameOver = true;
             gameManager.GameOver();
             thrustSource.Stop();
@@ -204,16 +211,18 @@ public class PlayerScript : MonoBehaviour
         // Rotate Ship
         transform.localEulerAngles = AngleLerp(transform.localEulerAngles, new Vector3(0f, transform.localEulerAngles.y + (GameConstants.RotateRudderRate * currRudderAngle), 0f), Time.deltaTime);
 
-        if (turretSpecificRotate)
-        {
-            // Rotate Ship to specific amount
-            shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 359, 0f), Time.deltaTime);
-        }
-        else
-        {
-            // Rotate Ship by rate
-            shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
-        }
+        shipShield.eulerAngles = AngleLerp(shipShield.eulerAngles, new Vector3(0f, aimAngle, 0f), Time.deltaTime);
+
+        //if (turretSpecificRotate)
+        //{
+        // Rotate Ship to specific amount
+        //shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, currAimAngle * 359, 0f), Time.deltaTime);
+        //}
+        //else
+        //{
+        //    // Rotate Ship by rate
+        //    shipShield.localEulerAngles = AngleLerp(shipShield.localEulerAngles, new Vector3(0f, shipShield.localEulerAngles.y + (GameConstants.RotateAimRate * currAimAngle), 0f), Time.deltaTime);
+        //}
     }
 
     private void FixedUpdate()
@@ -326,8 +335,8 @@ public class PlayerScript : MonoBehaviour
 
                 adaptiveShield.OnHit(collisionNormal, laserBullet.damage);
                 laserBullet.OnShieldEnter(transform.TransformDirection(collisionNormal), collision.ClosestPoint(transform.position));
-                musicPlayer.clip = hitShieldSound;
-                musicPlayer.Play();
+
+                PlaySound(hitShieldSound);
             }
             else
             {
@@ -335,8 +344,7 @@ public class PlayerScript : MonoBehaviour
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 TakeDamage(laserBullet.damage);
                 laserBullet.OnHit();
-                musicPlayer.clip = hitPlayerSound;
-                musicPlayer.Play();
+                PlaySound(hitPlayerSound);
             }
         }
         else if (shotgunBullet != null && shotgunBullet.isEnemyShot)
@@ -346,16 +354,14 @@ public class PlayerScript : MonoBehaviour
                 adaptiveShield.OnHit(collisionNormal, shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnShield(transform.TransformDirection(collisionNormal));
-                musicPlayer.clip = hitShieldSound;
-                musicPlayer.Play();
+                PlaySound(hitShieldSound);
             }
             else
             {
                 TakeDamage(shotgunBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 shotgunBullet.OnHit();
-                musicPlayer.clip = hitPlayerSound;
-                musicPlayer.Play();
+                PlaySound(hitPlayerSound);
             }
         }
         else if (normalBullet != null && normalBullet.isEnemyShot)
@@ -365,15 +371,13 @@ public class PlayerScript : MonoBehaviour
                 adaptiveShield.OnHit(collisionNormal, normalBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.ShieldHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnShield(transform.TransformDirection(collisionNormal));
-                musicPlayer.clip = hitShieldSound;
-                musicPlayer.Play();
+                PlaySound(hitShieldSound);
             } else
             {
                 TakeDamage(normalBullet.damage);
                 gameManager.BeginEffect(GameConstants.EffectTypes.BulletHit, collisionPoint, collisionNormal).transform.SetParent(transform);
                 normalBullet.OnHit();
-                musicPlayer.clip = hitPlayerSound;
-                musicPlayer.Play();
+                PlaySound(hitPlayerSound);
             }
         }
     }
@@ -389,13 +393,11 @@ public class PlayerScript : MonoBehaviour
         if (isShielding)
         {
             shieldScript.TurnOnShield();
-            musicPlayer.clip = shieldOnSound;
-            musicPlayer.Play();
+            PlaySound(shieldOnSound);
         } else
         {
             shieldScript.TurnOffShield();
-            musicPlayer.clip = shieldOffSound;
-            musicPlayer.Play();
+            PlaySound(shieldOffSound);
         }
         
         adaptiveShield.shieldOn = isShielding;

@@ -488,7 +488,8 @@ AudioSource:
   m_GameObject: {fileID: 2702446253115025482}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3612676340419549510, guid: 5d570fc6971b1254487003a566b66e71,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1225,6 +1226,11 @@ PrefabInstance:
       propertyPath: gunType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
+        type: 3}
+      propertyPath: m_Name
+      value: GunPort
+      objectReference: {fileID: 0}
     - target: {fileID: 382819334340714615, guid: 074e769daf2241142b493ab61b73e31d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1279,11 +1285,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 382819334340714614, guid: 074e769daf2241142b493ab61b73e31d,
-        type: 3}
-      propertyPath: m_Name
-      value: GunPort
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 074e769daf2241142b493ab61b73e31d, type: 3}
