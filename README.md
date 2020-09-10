@@ -29,13 +29,13 @@ Left Click to fire
 Right Click to shield
 
 ## Screenshots
-![Shield](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_1.PNG)
-![Shield2](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_2.PNG)
-![Screen3](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_3.PNG)
-![Screen4](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_4.PNG)
+![Shield](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_1.jpg)
+![Shield2](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_2.jpg)
+![Screen3](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_3.jpg)
+![Screen4](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Screen_4.jpg)
 
 ## Controller
-![Control1](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_1.PNG)
-![Control2](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_2.PNG)
-![Control3](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_3.PNG)
+![Control1](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_1.jpg)
+![Control2](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_2.jpg)
+![Control3](https://github.com/RohanMenon92/AltControlGameJam2020/blob/master/Screenshots/Controls_3.jpg)
 
